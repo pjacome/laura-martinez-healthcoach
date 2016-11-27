@@ -5,8 +5,8 @@
 </ul>
 
 <ul id="dropdown2" class="dropdown-content">
-  <li><a class="selectedEnglish" href="#"><span class="flags-icon"><img src="images/flags-usa.png"></span>English</a></li>
-  <li><a class="selectedSpanish" href="#"><span class="flags-icon"><img src="images/flags-mexico.png"></span>Espa&ntilde;ol</a></li>
+  <li><a class="selectedEnglish" href="#"><span class="flags-icon"><img src="images/flags-usa-sm.png"></span>English</a></li>
+  <li><a class="selectedSpanish" href="#"><span class="flags-icon"><img src="images/flags-mexico-sm.png"></span>Espa&ntilde;ol</a></li>
 </ul>
 <!-- Dropdown Structure - End -->
 
@@ -24,10 +24,11 @@
             <li><a href="/blog">Blog</a></li>
             <li><a href="/contact">Contact</a></li>
             <!-- Language Selection - Desktop -->
-            <li><a class="dropdown-button example" href="#" data-activates="dropdown2">English<i class="material-icons right">language</i>
+            <li><a class="dropdown-button" data-activates="dropdown2">English<i class="material-icons right">language</i>
             <!-- [if lte IE 11]><i class="material-icons">&#xE894;</i><![endif]-->
             </a></li>
             <!-- Language Selection - Desktop - End -->
+            <li><a href=""></a></li>
         </ul>
 
         <!-- Side Nav Structure -->
@@ -53,12 +54,12 @@
             <!-- Language Selection -->
             <li class="no-padding">
                 <ul class="collapsible collapsible-accordion">
-                    <li class="example">
+                    <li>
                         <a class="collapsible-header">English<i class="material-icons right">language</i></a>
                         <div class="collapsible-body thin">
                             <ul>
-                                <li><a class="selectedEnglish" href="#"><span class="flags-icon"><img src="images/flags-usa.png"></span>English</a></li>
-                                <li><a class="selectedSpanish" href="#"><span class="flags-icon"><img src="images/flags-mexico.png"></span>Espa&ntilde;ol</a></li>
+                                <li><a class="selectedEnglish" href="/"><span class="flags-icon"><img src="images/flags-usa-sm.png"></span>English</a></li>
+                                <li><a class="selectedSpanish" href="https://www.google.com"><span class="flags-icon"><img src="images/flags-mexico-sm.png"></span>Espa&ntilde;ol</a></li>
                             </ul>
                         </div>
                     </li>
@@ -74,15 +75,10 @@
 <script type="text/javascript">
 $(document).ready(function() {
     $('.dropdown-button').dropdown({
-        belowOrigin: true
+        belowOrigin: true,
+        alignment: 'right'
     });
     $('.button-collapse').sideNav();
-    $('.selectedEnglish').click(function() {
-        window.location.replace('/');
-    });
-    $('.selectedSpanish').click(function() {
-        window.location.replace('https://www.google.com');
-    });
 });
 </script>
 
