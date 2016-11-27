@@ -3,9 +3,45 @@
 var express = require('express');
 var router  = express.Router();
 
+/* Language = English - Routes */
+
 router.get('/', function(req, res) {
+    res.render('home');
+});
+
+router.get('/home', function(req, res) {
+    res.render('home');
+});
+
+router.get('/about', function(req, res) {
+    res.render('about');
+});
+
+router.get('/recipes', function(req, res) {
+    res.render('recipes');
+});
+
+router.get('/healthcoaching', function(req, res) {
+    res.render('healthcoaching');
+});
+
+router.get('/forms', function(req, res) {
+    res.render('forms');
+});
+
+router.get('/events', function(req, res) {
     res.render('events');
 });
+
+router.get('/blog', function(req, res) {
+    res.render('blog');
+});
+
+router.get('/contact', function(req, res) {
+    res.render('contact');
+});
+
+/* Idioma = Espanol - Rutas */
 
 /*
     Catch 400 Errors

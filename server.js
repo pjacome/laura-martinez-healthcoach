@@ -29,10 +29,7 @@ app.set('port', process.env.PORT || 5000);
 app.use('/', express.static(__dirname + '/public'));
 
 // routes
-// app.use('/', require('./routes/routes'));
-app.get('/', function(req, res) {
-    res.render('home');
-});
+app.use('/', require('./routes/routes'));
 
 // for localhost
 // app.listen(app.get('port'), function() {
