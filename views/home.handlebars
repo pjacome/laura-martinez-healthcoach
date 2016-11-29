@@ -1,72 +1,102 @@
 <div class="container">
-    <div class="card medium">
-        <h5 class="center" style="padding-top: 10px">Being Healthy doesn't have to be hard!</h5>
-        <p class="center">
-            Sign up for my free cleanse cheat sheet to find out how + to get more updates from me!
-        </p>
-        <div class="row">
-            <form class="col s12">
-                <div class="row">
-                    <div class="input-field col s6">
-                        <input id="first_name" class="validate" name="firstName" type="text" required="" aria-required="true">
-                        <label for="first_name">First Name</label>
-                    </div>
-                    <div class="input-field col s6">
-                        <input id="last_name" class="validate" name="lastName" type="text" required="" aria-required="true">
-                        <label for="last_name">Last Name</label>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="input-field col s12">
-                        <input id="email" class="validate" type="email" required="" aria-required="true">
-                        <label for="email">Email</label>
-                    </div>
-                </div>
-                <button class="btn waves-effect waves-light" type="submit" name="action">
-                    Submit<i class="material-icons right">send</i>
-                </button>
-            </form>
-        </div>
+    <div class="carousel carousel-slider">
+        <a class="carousel-item" href="#1"><img src="images/board-640x426.jpg"></a>
+        <a class="carousel-item" href="#2"><img src="images/kale-640x479.jpg"></a>
+        <a class="carousel-item" href="#3"><img src="images/board-640x426.jpg"></a>
+        <a class="carousel-item" href="#4"><img src="images/kale-640x479.jpg"></a>
     </div>
+</div>
 
-    <div class="parallax-container">
-      <div class="parallax"><img src="images/vegetables-1280x875.jpg"></div>
-    </div>
+<!-- Parallax -->
+<div class="parallax-container"><div class="parallax"><img src="images/vegetables-1280x875.jpg"></div></div>
+<!-- Parallax - End -->
 
+<div class="container">
     <div class="row">
-        <div class="col s12 m4">
-            <div class="card small">
+        <div class="col s12 m6 l4">
+            <div class="card medium">
                 <div class="card-content">
-                    <span class="card-title">Recipes</span>
+                    <span class="card-title">Latest Recipe!</span>
+                    <h5>Chicken Soup</h5>
+                    <ul>
+                        <li>Spinach</li>
+                        <li>Carrots</li>
+                        <li>Onion</li>
+                    </ul>
+                </div>
+                <div class="card-action" style="background-color: white;">
+                    View all <a href="/recipe">Recipes</a>
                 </div>
             </div>
         </div>
-        <div class="col s12 m4">
-            <div class="card small">
+        <div class="col s12 m6 l4">
+            <div class="card medium">
                 <div class="card-content">
                     <span class="card-title">Promotions</span>
                 </div>
+                <div class="card-action" style="background-color: white;">  
+                    <a href="#subscribe-form">Subscribe Today</a>
+                </div>
             </div>
         </div>
-        <div class="col s12 m4">
-            <div class="card small">
+        <div class="col s12 m12 l4">
+            <div class="card medium">
                 <div class="card-content">
-                    <span class="card-title">Deals</span>
+                    <span class="card-title">Latest Youtube Video</span>
+                    <div class="video-container"><iframe width="560" height="315" src="https://www.youtube.com/embed/lXwqTO3TDag" frameborder="0" allowfullscreen></iframe></div>
+                </div>
+                <div class="card-action" style="background-color: white;">
+                    Subscribe to my  
+                    <a href="https://www.youtube.com/channel/UCeCmn8A8uT42dRw-NKjOBcw" target="_blank">Channel</a>
                 </div>
             </div>
         </div>
     </div>    
-
+</div>
     <style type="text/css">
         .card {
             padding-left: 20px;
             padding-right: 20px;
+        }
+
+        .card-background-image {
+            background-size: cover;
+            background: url('images/board-640x426.jpg') no-repeat;
+        }
+
+        .video-container {
+            /*position: relative;*/
+            padding-top: 30px;
+            height: 0;
+        }
+
+        .carousel-slider {
+            height: 400px !important;
+            margin: 10px auto;
+        }
+
+        @media only screen 
+        and (min-width: 768px)
+        and (max-width: 1024px) 
+        and (orientation: portrait) {
+            /* For tablets: */
+            .video-container {
+                padding-bottom: 39%;
+            }
+        }
+
+        @media only screen and (max-width: 768px) {
+            /* For mobile phones: */
+            .carousel-slider {
+                height: 200px !important;
+            }
         }
     </style>
 
     <script type="text/javascript">
         $(document).ready(function() {
             $('.parallax').parallax();
+            $('.carousel.carousel-slider').carousel({full_width: true});
         });
     </script>
 </div>
