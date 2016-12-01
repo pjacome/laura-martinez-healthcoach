@@ -1,18 +1,23 @@
 <!-- Dropdown Structure -->
 <ul id="dropdown1" class="dropdown-content">
-  <li><a href="/healthcoaching">Health Coaching</a></li>
-  <li><a href="/forms">Forms</a></li>
+  <li><a class="black-text" href="/healthcoaching">Health Coaching</a></li>
+  <li><a class="black-text" href="/forms">Forms</a></li>
 </ul>
 
-<ul id="dropdown2" class="dropdown-content">
-  <li><a class="selectedEnglish" href="#"><span class="flags-icon"><img src="images/flags-usa-sm.png"></span>English</a></li>
-  <li><a class="selectedSpanish" href="#"><span class="flags-icon"><img src="images/flags-mexico-sm.png"></span>Espa&ntilde;ol</a></li>
+<ul id="dropdown2" class="dropdown-content black-text">
+  <li><a class="selectedEnglish black-text" href="#"><span class="flags-icon"><img src="images/flags-usa-sm.png"></span>English</a></li>
+  <li><a class="selectedSpanish black-text" href="#"><span class="flags-icon"><img src="images/flags-mexico-sm.png"></span>Espa&ntilde;ol</a></li>
 </ul>
 <!-- Dropdown Structure - End -->
 
 <nav>
-    <div class="nav-wrapper green lighten-1">
-        <a href="/home" class="brand-logo">Logo</a>
+    <div class="nav-wrapper white lighten-1">
+        <a href="/home" class="brand-logo black-text" 
+        style=" font-family: 'Times New Roman';
+                font-variant: small-caps; 
+                padding-left: 5px;
+                font-weight: bold !important;">
+        Laura Martinez</a>
         <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
         <ul class="right hide-on-med-and-down">
             <li><a href="/about">About</a></li>
@@ -32,8 +37,12 @@
         </ul>
 
         <!-- Side Nav Structure -->
-        <ul id="mobile-demo" class="side-nav green lighten-1">
-            <li class="center" style="background-color: #e8f5e9;  border-bottom: 1px #e0e0e0 solid; padding-top: 10px; padding-bottom: 10px;"><h5 class="black-text" style="font-family: 'Times New Roman'; font-variant: small-caps;">Laura Martinez<br><h6 class="black-text" style="font-family: 'Times New Roman'; font-variant: small-caps;">Health Coach</h6></h5></li>
+        <ul id="mobile-demo" class="side-nav white lighten-1">
+            <li class="center" style="border-bottom: 1px #e0e0e0 solid; padding-top: 10px; padding-bottom: 10px;">
+                <h5 class="black-text" style="font-family: 'Times New Roman'; font-variant: small-caps;">Laura Martinez<br>
+                    <h6 class="black-text" style="font-family: 'Times New Roman'; font-variant: small-caps;">Health Coach</h6>
+                </h5>
+            </li>
             <li><a href="/about">About</a></li>
             <li><a href="/recipes">Recipes</a></li>
             <li class="no-padding">
@@ -41,7 +50,7 @@
                     <li>
                         <a class="collapsible-header">Work With Me<i class="material-icons right">arrow_drop_down</i></a>
                         <div class="collapsible-body thin">
-                            <ul class="green darken-2">
+                            <ul class="grey lighten-2">
                                 <li><a href="/healthcoaching">Health Coaching</a></li>
                                 <li><a href="/forms">Forms</a></li>
                             </ul>
@@ -58,7 +67,7 @@
                     <li>
                         <a class="collapsible-header">English<i class="material-icons right">language</i></a>
                         <div class="collapsible-body thin">
-                            <ul class="green darken-2">
+                            <ul class="grey lighten-2">
                                 <li><a class="selectedEnglish" href="/"><span class="flags-icon"><img src="images/flags-usa-sm.png"></span>English</a></li>
                                 <li><a class="selectedSpanish" href="https://www.google.com"><span class="flags-icon"><img src="images/flags-mexico-sm.png"></span>Espa&ntilde;ol</a></li>
                             </ul>
@@ -90,5 +99,10 @@ $(document).ready(function() {
         max-width: auto;
         vertical-align: middle;
         margin-right: 10px;
+    }
+
+    nav ul li a,
+    nav div a {
+        color: black;
     }
 </style>

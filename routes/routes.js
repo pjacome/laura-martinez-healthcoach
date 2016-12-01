@@ -13,6 +13,10 @@ router.get('/home', function(req, res) {
     res.render('home');
 });
 
+router.get('/home-test', function(req, res) {
+    res.render('home-test');
+});
+
 router.get('/about', function(req, res) {
     res.render('about');
 });
