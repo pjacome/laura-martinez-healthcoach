@@ -32,11 +32,12 @@ app.use('/', express.static(__dirname + '/public'));
 app.use('/', require('./routes/routes'));
 
 // for localhost
-// app.listen(app.get('port'), function() {
+app.listen(app.get('port'), function() {
 // for wifi
-var ipv4 = '192.168.1.64';
-app.listen(app.get('port'), ipv4, function() {
-    console.log("listening on port " + ipv4 + ':' + app.get('port'));
+// var ipv4 = '192.168.1.64';
+// app.listen(app.get('port'), ipv4, function() {
+    // console.log("listening on port " + ipv4 + ':' + app.get('port'));
+    console.log("listening on port " + app.get('port'));
 });
 
 // for the use of the routes folder
