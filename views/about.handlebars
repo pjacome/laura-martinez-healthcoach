@@ -197,16 +197,11 @@
     .custom-4-col-wrapper .col {
         height: 400px;
         margin-bottom: 1px;
-        /*margin-right: 1px !important;*/
-    }
-
-    .custom-4-col-wrapper .l3 span/*:not(:last-child)*/ {
     }
 
     /* mobile (s6) - orientation: portrait */
     @media (max-width: 800px) 
     and (orientation: portrait) {
-        /*body {background-color: grey;}*/
         .custom-list-indent {
             margin-left: 0px;
             margin-right: 0px;
@@ -220,13 +215,11 @@
     /* mobile (s6) - orientation: landscape */
     @media (max-width: 800px) 
     and (orientation: landscape) {
-        /*body {background-color: yellow;}*/
     }
 
     /* tablet (ipad mini 1) - orientation: portrait */
     @media (min-device-width: 768px)
     and (max-device-width: 1000px) { 
-        /*body {background-color: blue;}*/
     }
 
     /* tablet (ipad mini 1) - orientation: landscape*/
@@ -234,39 +227,37 @@
     and (min-device-width: 768px) 
     and (max-device-width: 1100px)
     and (orientation: landscape) {
-        /*body {background-color: green;}*/
     }
 
     /* tablet (galaxy tab 4) - orientation: portrait */
     @media (min-width: 800px) 
     and (max-width: 900px) {
-        /*body {background-color: red;}*/
     }
 
-    /* MISSING MEDIA QUERY HERE */
+    /* WHAT IS THIS? */
+    @media (min-width: 901px) 
+    and (max-width: 1999px)
+    and (orientation: portrait) {
+        body{background-color: white;}
+        .custom-4-col-wrapper .col {
+            height: 430px;
+            margin-bottom: 1px;
+        }
+    }
 
     /* tablet (galaxy tab 4) - orientation: landscape */
     @media (min-width: 1100px) 
     and (max-width: 1399px)
     and (orientation: landscape) {
-        /*body {background-color: purple;}*/
     }
 
     /* desktop */
     @media (min-width: 1400px) {
-        /*body {background-color: orange;}*/
+        body{background-color: white;}
     }
 </style>
 
 <script type="text/javascript">
-    // $("#footerForm").click(function() {
-    //     $('html, body').animate({
-    //         scrollTop: $("#first_name").offset().top
-    //     }, 3000, function() {
-    //         $('#first_name').focus();            
-    //     });
-    // });
-
     $(document).ready(function() {
         $('.parallax').parallax();
     });
