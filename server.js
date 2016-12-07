@@ -1,18 +1,7 @@
 'use strict';
 
 var express = require('express');
-// var mongo   = require('mongodb');
 var handlebars = require('express-handlebars');
-// var MongoClient = mongo.MongoClient;
-// MongoClient.connect('mongodb://localhost:27017/test', function(err, db) {
-//     if(err) {
-//         console.log("> Could not connect to Mongo Client.\n"+
-//             "> Try running 'mongodb.exe' in 'Git Bash' to start the Mongo Client.");
-//         return;
-//     } else {
-//         console.log("Connected successfully to Mongo Client.");
-//     }
-// });
 
 var app = express();
 
@@ -33,10 +22,6 @@ app.use('/', require('./routes/routes'));
 
 // for localhost
 app.listen(app.get('port'), function() {
-// for wifi
-// var ipv4 = '192.168.1.64';
-// app.listen(app.get('port'), ipv4, function() {
-    // console.log("listening on port " + ipv4 + ':' + app.get('port'));
     console.log("listening on port " + app.get('port'));
 });
 
