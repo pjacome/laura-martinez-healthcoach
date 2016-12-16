@@ -33,6 +33,38 @@ router.get('/forms', function(req, res) {
     res.render('forms');
 });
 
+/////////////////////////////////////////////////
+
+router.get('/forms/p1', function(req, res) {
+    res.render('forms-p1');
+});
+
+router.get('/forms/p2', function(req, res) {
+    res.render('forms-p2');
+});
+
+router.get('/forms/p3', function(req, res) {
+    res.render('forms-p3');
+});
+
+router.get('/forms/p4', function(req, res) {
+    res.render('forms-p4');
+});
+
+router.get('/forms/p5', function(req, res) {
+    res.render('forms-p5');
+});
+
+router.get('/forms/p6', function(req, res) {
+    res.render('forms-p6');
+});
+
+router.get('/forms/p7', function(req, res) {
+    res.render('forms-p7');
+});
+
+/////////////////////////////////////////////////
+
 router.get('/events', function(req, res) {
     res.render('events');
 });
