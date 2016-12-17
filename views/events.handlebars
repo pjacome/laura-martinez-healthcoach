@@ -409,7 +409,6 @@
         if(today.year % 4 === 0) {
             n_DaysInEachMonth[1] = 29;
         }
-        console.log("Total days in this Year:", sumArray(n_DaysInEachMonth));
 
         var firstDayOfCurrMonth = SumDaysWithinMonths(n_DaysInEachMonth, firstDayOfTheYear.month, today.month) + 1; // +1 for 1st of month
         console.log('first day of current month:', firstDayOfCurrMonth);
@@ -544,15 +543,6 @@
         return (treatAsUTC(endDate) - treatAsUTC(startDate)) / millisecondsPerDay;
     }
     ///////////////////////////////////////////////////////////////////////
-
-    // This function is not important - can be DELETED
-    function sumArray(arr) {
-        let sum = 0;
-        for(let i = 0; i < arr.length; ++i) {
-            sum += arr[i];
-        }
-        return sum;
-    }
 
     function GetMonthString(index) {
         var monthsOfTheYear = [
