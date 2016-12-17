@@ -33,6 +33,10 @@ router.get('/forms', function(req, res) {
     res.render('forms');
 });
 
+router.get('/forms/mujeres', function(req, res) {
+    res.render('mujeres');
+});
+
 /////////////////////////////////////////////////
 
 router.get('/forms/p1', function(req, res) {
@@ -84,7 +88,7 @@ router.get('/contact', function(req, res) {
 */
 
 router.use(function(req, res) {
-    console.log("Looking for URL: '" + req.url + "'");
+    console.log("\nLooking for URL: '" + req.url + "'");
     res.type('text/html');
     res.status(404);
     res.render('404');
@@ -95,6 +99,7 @@ router.use(function(req, res) {
 */
 
 router.use(function(err, req, res, next) {
+    console.log('\nTried to access ' + req.url);
     console.error(err.stack);
     res.status(500);
     res.render('500');

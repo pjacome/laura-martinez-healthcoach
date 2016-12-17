@@ -1,704 +1,79 @@
 <br>
-<div class="container z-depth-5">
-    <form id="printableForm">
-        <h5>Historia M&eacute;dica Confidencial de Mujeres</h5>
-        <hr>
-        <br>
-        {{!-- <div class="divider"></div> --}}
-        <br>
-        <span class="flow-text">Escriba claramente o en letra de molde. Toda su informaci&oacute;n ser&aacute; guardada de manera confidencial entre usted y el Consultor de Salud.</span>
-        <br>
-
-        <div class="sections section-1">
-            <span class="inner-title allcaps bold"><h5>Informaci&oacute;n Personal</h5></span>
-            <div class="inner-content">
-                <div class="row">
-                    <div class="col s6 m6 l6">
-                        <div class="input-field">
-                            * Primer Nombre:
-                            <input id="first_name" name="firstName" type="text" class="validate">
-                        </div>
-                    </div>
-
-                    <div class="col s6 m6 l6">
-                        <div class="input-field">
-                            * Apellido:
-                            <input id="last_name" name="lastName" type="text" class="validate">
-                        </div>
-                    </div>
-                </div>
-
-                <div class="input-field">
-                    * Email:
-                    <input id="email" name="email" type="email" class="validate">
-                </div>
-
-                <div class="input-field">
-                    &iquest;Con cuanta frecuencia revisa su correo electr&oacute;nico?
-                    <input id="email_frequency" name="emailFrequency" type="text">
-                </div>
-
-                <div class="row">
-                    <div class="col s12 m4 l4">
-                        <div class="input-field">
-                            Tel&eacute;fono de Casa:
-                            <input id="email" name="email" type="tel" class="validate">
-                        </div>
-                    </div>
-                    <div class="col s12 m4 l4">
-                        <div class="input-field">
-                            Tel&eacute;fono de Trabajo:
-                            <input id="email" name="email" type="tel" class="validate">
-                        </div>
-                    </div>
-                    <div class="col s12 m4 l4">
-                        <div class="input-field">
-                            Tel&eacute;fono de Celular:
-                            <input id="email" name="email" type="tel" class="validate">
-                        </div>
-                    </div>
-                </div>
-
-                <div class="row">
-                    <div class="col s6 m4 l4">
-                        <div class="input-field">
-                            Edad:
-                            <input id="email" name="email" type="number" class="validate">
-                        </div>
-                    </div>
-                    <div class="col s6 m4 l4">
-                        <div class="input-field">
-                            Estatura:
-                            <input id="email" name="email" type="email" class="validate">
-                        </div>
-                    </div>
-                    <div class="col s12 m4 l4">
-                        <div class="input-field">
-                            Fecha de nacimiento:
-                            <input id="email" placeholder="dd/mm/aaaa" name="email" type="email" class="validate">
-                        </div>
-                    </div>
-                    <div class="col s12 m12 l4">
-                        <div class="input-field">
-                            Lugar de nacimiento
-                            <input id="email" name="email" type="email" class="validate">
-                        </div>
-                    </div>
-                </div>
-
-                <div class="row">
-                    <div class="col s12 m4 l4">
-                        <div class="input-field">
-                            Peso actual:
-                            <input id="email" name="email" type="number" class="validate">
-                        </div>
-                    </div>
-                    <div class="col s12 m4 l4">
-                        <div class="input-field">
-                            Peso hace seis meses:
-                            <input id="email" name="email" type="number" class="validate">
-                        </div>
-                    </div>
-                    <div class="col s12 m4 l4">
-                        <div class="input-field">
-                            Hace un a&ntilde;o:
-                            <input id="email" name="email" type="number" class="validate">
-                        </div>
-                    </div>
-                </div>
-
-                <div class="row">
-                    <div class="col s12">
-                        &iquest;Le gustar&iacute;a que su peso fuera diferente?
-                        <div class="input-field inline">
-                            <input id="email" type="text" class="validate">
-                        </div>
-                    </div>
-                </div>
-
-                <div class="row">
-                    <div class="col s12">
-                        Si es as&iacute;, &iquest;qu&eacute; tanto?
-                        <div class="input-field inline">
-                            <input id="email" type="text" class="validate">
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-        </div>  <!-- section-1 End -->
-
-        <div class="sections section-2">
-            <span class="inner-title allcaps bold"><h5>Informaci&oacute;n Social</h5></span>
-            <div class="inner-content">
-                <div class="row">
-                    <div class="col s12">
-                        <div class="input-field">
-                            Estado civil:
-                            <input id="email" name="email" type="number" class="validate">
-                        </div>
-                    </div>
-                </div>
-
-                <div class="row">
-                    <div class="col s12 m12 l12">
-                        &iquest;D&oacute;nde vive actualmente?
-                        <div class="input-field inline">
-                            <input id="email" type="text" class="validate">
-                        </div>
-                    </div>
-                </div>
-
-                <div class="row">
-                    <div class="col s2 m2 l1">
-                        <div class="input-field">
-                            &iquest;Hijos?
-                            <select>
-                                <option disabled selected></option>
-                                <option value="0">No</option>
-                                <option value="1">Si</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="col s10 m4 l4">
-                        <div class="input-field">
-                            Si es as&iacute;, Describe, por favor:
-                            <input id="email" name="email" type="email" class="validate">
-                        </div>
-                    </div>
-                    <div class="col s2 m2 l1">
-                        <div class="input-field">
-                            &iquest;Mascotas?
-                            <select>
-                                <option disabled selected></option>
-                                <option value="0">No</option>
-                                <option value="1">Si</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="col s10 m4 l5">
-                        <div class="input-field">
-                            Si es as&iacute;, Describe, por favor:
-                            <input id="email" name="email" type="email" class="validate">
-                        </div>
-                    </div>
-                </div>
-
-                <div class="row">
-                    <div class="col s8 m8 l8">
-                        <div class="input-field">
-                            Profesi&oacute;n:
-                            <input id="email" name="email" type="text" class="validate">
-                        </div>
-                    </div>
-                    <div class="col s4 m4 l4">
-                        <div class="input-field">
-                            <span class="truncate">Horas laborales por semana:</span>
-                            <input id="email" name="email" type="number" class="validate">
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>  <!-- section-2 End -->
-
-        <div class="sections section-3">
-            <span class="inner-title allcaps bold"><h5>Informaci&oacute;n de Salud</h5></span>
-            <div class="inner-content">
-                <div class="row">
-                    <div class="input-field col s12 line-1">
-                        Por favor, haga una lista de sus principales preocupaciones en materia de salud:
-                        <textarea class="materialize-textarea" rows="3" form="printableForm"></textarea>
-                    </div>
-                </div>
-
-                <div class="row">
-                    <div class="input-field col s12">
-                        &iquest;Otras preocupaciones y/o metas?
-                        <textarea class="materialize-textarea" rows="3" form="printableForm"></textarea>
-                    </div>
-                </div>
-
-                <div class="row">
-                    <div class="input-field col s12">
-                        &iquest;En qu&eacute; etapa de su vida se ha sentido mejor?
-                        <textarea class="materialize-textarea" rows="3" form="printableForm"></textarea>
-                    </div>
-                </div>
-
-                <div class="row">
-                    <div class="input-field col s12">
-                        &iquest;Ha tenido alguna enfermedad grave, hospitalizaci&oacute;n o lesi&oacute;n?
-                        <textarea class="materialize-textarea" rows="3" form="printableForm"></textarea>
-                    </div>
-                </div>
-
-                <div class="row">
-                    <div class="input-field col s12">
-                        &iquest;C&oacute;mo es/fue la salud de su madre?
-                        <textarea class="materialize-textarea" rows="3" form="printableForm"></textarea>
-                    </div>
-                </div>
-
-                <div class="row">
-                    <div class="input-field col s12">
-                        &iquest;C&oacute;mo es/fue la salud de su padre?
-                        <textarea class="materialize-textarea" rows="3" form="printableForm"></textarea>
-                    </div>
-                </div>
-
-                <div class="row">
-                    <div class="col s8 m8 l6">
-                        <div class="input-field">
-                            &iquest;Cu&aacute;les son sus antecedentes &eacute;tnicos?
-                            <input id="email" name="email" type="text" class="validate">
-                        </div>
-                    </div>
-                    <div class="col s4 m4 l6">
-                        <div class="input-field">
-                            &iquest;Cu&aacute; es su grupo sangu&iacute;neo?
-                            <input id="email" name="email" type="number" class="validate">
-                        </div>
-                    </div>
-                </div>
-
-                <div class="row">
-                    <div class="col l4">
-                        <div class="input-field">
-                            &iquest;C&oacute;mo duerme?
-                            <input id="" class="" name="" type="text">
-                        </div>
-                    </div>
-
-                    <div class="col l4">
-                        <div class="input-field">
-                            &iquest;Cu&aacute;ntas horas?
-                            <input id="" class="" name="" type="text">
-                        </div>
-                    </div>
-
-                    <div class="col l4">
-                        <div class="input-field">
-                            &iquest;Se despierta durante la noche?
-                            <input id="" class="" name="" type="text">
-                        </div>
-                    </div>
-                </div>
-
-                <div class="row">
-                    <div class="input-field col s12 line-1">
-                        &iquest;Por qu&eacute;?
-                        <textarea class="materialize-textarea" rows="3" form="printableForm"></textarea>
-                    </div>
-                </div>
-
-                <div class="row">
-                    <div class="input-field col s12 line-1">
-                        &iquest;Alg&uacute;n dolor, rigidez, hinchaz&oacute;n?
-                        <textarea class="materialize-textarea" rows="3" form="printableForm"></textarea>
-                    </div>
-                </div>
-
-                <div class="row">
-                    <div class="input-field col s12 line-1">
-                        &iquest;Estre&ntilde;imiento/diarrea/gases?
-                        <textarea class="materialize-textarea" rows="3" form="printableForm"></textarea>
-                    </div>
-                </div>
-
-                <div class="row">
-                    <div class="input-field col s12 line-1">
-                        &iquest;Alergias o sensibilidad? Por favor explique:
-                        <textarea class="materialize-textarea" rows="3" form="printableForm"></textarea>
-                    </div>
-                </div>
-            </div>
-        </div>  <!-- section-3 End -->
-
-        <div class="sections section-4">
-            <span class="inner-title allcaps bold"><h5>Women's Health</h5></span>
-            <div class="inner-content">
-                <div class="row">
-                    <div class="col l4">
-                        <div class="input-field">
-                            &iquest;Es reuglar su menstruaci&oacute;n?
-                            <select>
-                                <option disabled selected></option>
-                                <option value="0">No</option>
-                                <option value="1">Si</option>
-                            </select>
-                        </div>
-                    </div>
-
-                    <div class="col l4">
-                        <div class="input-field">
-                            &iquest;Cu&aacute;tos d&iacute;as le dura?
-                            <input id="" class="" name="" type="number">
-                        </div>
-                    </div>
-
-                    <div class="col l4">
-                        <div class="input-field">
-                            &iquest;Con cu&aacute;nta frecuencia?
-                            <input id="" class="" name="" type="number">
-                        </div>
-                    </div>
-                </div>
-
-                <div class="row">
-                    <div class="input-field col s12 line-1">
-                        &iquest;Tiene o est&aacute; cerca de la menopausia? Por favor explique:
-                        <textarea class="materialize-textarea" rows="3" form="printableForm"></textarea>
-                    </div>
-                </div>
-
-                <div class="row">
-                    <div class="input-field col s12 line-1">
-                        &iquest;Le dan infecciones de hongos o de vi&iacute;a urinaria? Por favor explique:
-                        <textarea class="materialize-textarea" rows="3" form="printableForm"></textarea>
-                    </div>
-                </div>
-
-                <div class="row">
-                    <div class="col l12">
-                        <div class="input-field">
-                            &iquest;Con cu&aacute;nta frecuencia?
-                            <input id="" class="" name="" type="text">
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>  <!-- section-4 End -->
-
-        <div class="sections section-5">
-            <span class="inner-title allcaps bold"><h5>Informaci&oacute;n M&eacute;dica</h5></span>
-            <div class="inner-content">
-                <div class="row">
-                    <div class="input-field col s12">
-                        &iquest;Toma alg&uacute;n suplemento o medicamento? Por favor haga una lista:
-                        <textarea class="materialize-textarea" rows="3" form="printableForm"></textarea>
-                    </div>
-                </div>
-
-                <div class="row">
-                    <div class="input-field col s12">
-                        &iquest;Alg&uacute;n curador, ayudante o terapia con el cual est&eacute; involucrado? Por favor, ind&iacute;quelos:
-                        <textarea class="materialize-textarea" rows="3" form="printableForm"></textarea>
-                    </div>
-                </div>
-
-                <div class="row">
-                    <div class="input-field col s12">
-                        &iquest;Qu&eacute; papel juegan los deportes y el ejecicio en su vida?
-                        <textarea class="materialize-textarea" rows="3" form="printableForm"></textarea>
-                    </div>
-                </div>
-            </div>
-        </div>  <!-- section-5 End -->
-
-        <div class="sections section-6">
-            <span class="inner-title allcaps bold"><h5>Informaci&oacute;n de Alimentos</h5></span>
-            <div class="inner-content">
-                <div class="row">
-                    &iquest;Qu&eacute; alimentos com&iacute;a con frecuencia de ni&ntilde;a?<br><br>
-                    <div class="col l2">
-                        <span class="underline">Desayuno:</span>
-                        <input type="text">
-                        <input type="text">
-                        <input type="text">
-                    </div>
-                    <div class="col l2">
-                        <span class="underline">Almuerzo:</span>
-                        <input type="text">
-                        <input type="text">
-                        <input type="text">
-                    </div>
-                    <div class="col l2">
-                        <span class="underline">Cena:</span>
-                        <input type="text">
-                        <input type="text">
-                        <input type="text">
-                    </div>
-                    <div class="col l2">
-                        <span class="underline">Meriendas:</span>
-                        <input type="text">
-                        <input type="text">
-                        <input type="text">
-                    </div>
-                    <div class="col l2">
-                        <span class="underline">L&iacute;quidos:</span>
-                        <input type="text">
-                        <input type="text">
-                        <input type="text">
-                    </div>
-                </div>
-
-                <div class="row">
-                    &iquest;Qu&eacute; tipo de alimentos come d&iacute;a?<br><br>
-                    <div class="col l2">
-                        <span class="underline">Desayuno:</span>
-                        <input type="text">
-                        <input type="text">
-                        <input type="text">
-                    </div>
-                    <div class="col l2">
-                        <span class="underline">Almuerzo:</span>
-                        <input type="text">
-                        <input type="text">
-                        <input type="text">
-                    </div>
-                    <div class="col l2">
-                        <span class="underline">Cena:</span>
-                        <input type="text">
-                        <input type="text">
-                        <input type="text">
-                    </div>
-                    <div class="col l2">
-                        <span class="underline">Meriendas:</span>
-                        <input type="text">
-                        <input type="text">
-                        <input type="text">
-                    </div>
-                    <div class="col l2">
-                        <span class="underline">L&iacute;quidos:</span>
-                        <input type="text">
-                        <input type="text">
-                        <input type="text">
-                    </div>
-                </div>
-
-                <div class="row">
-                    <div class="input-field col s12">
-                        &iquest;Su familia y/o amistades la apoyar&iacute;an en su deseo de hacer cambios en su manera de comer y/o estilo de vida?
-                        <textarea class="materialize-textarea" rows="3" form="printableForm"></textarea>
-                    </div>
-                </div>
-
-                <div class="row">
-                    <div class="col l2">
-                        <div class="input-field">
-                            &iquest;Usted cocina?
-                            <select>
-                                <option disabled selected></option>
-                                <option value="0">No</option>
-                                <option value="1">Si</option>
-                            </select>
-                        </div>
-                    </div>
-
-                    <div class="col l10">
-                        <div class="input-field">
-                            &iquest;Qu&eacute; porcentaje de su comida est&aacute; hecha en casa?
-                            <input id="" class="" name="" type="text">
-                        </div>
-                    </div>
-                </div>
-
-                <div class="row">
-                    <div class="col l12">
-                        <div class="input-field">
-                            &iquest;D&oacute;nde consigue el resto?
-                            <input id="" class="" name="" type="text">
-                        </div>
-                    </div>
-                </div>
-
-                <div class="row">
-                    <div class="col l12">
-                        <div class="input-field">
-                            &iquest;Le dan antojos de az&uacute;car, cafe, cigarros o tiene alguna adicci&oacute;n fuerte?
-                            <input id="" class="" name="" type="text">
-                        </div>
-                    </div>
-                </div>
-
-                <div class="row">
-                    <div class="col l12">
-                        <div class="input-field">
-                            Lo m&aacute;s importante que deber&iacute;a hacer para mejorar mi salud es:
-                            <input id="" class="" name="" type="text">
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>  <!-- section-6 End -->
-
-        <div class="sections section-7">
-            <span class="inner-title allcaps bold"><h5>Comentarios Adicionales</h5></span>
-            <div class="inner-content">
-                <div class="row">
-                    <div class="input-field col s12 line-1">
-                        &iquest;Hay algo m&aacute;s que quisiera compartir?
-                        <textarea class="materialize-textarea" rows="3" form="printableForm"></textarea>
-                    </div>
-                </div>
-            </div>
-        </div>  <!-- section-7 End -->
-
-        <div class="row"><!-- To create a margin at the bottom of the page --></div>
-    </form>
-
-    <a id="printButton" class="btn right" href="#">Impremir</a>
-    <a id="saveButton" class="btn right" href="#">Guardar</a>
+<div class="container">
+    <div class="center flow-text">Click on <i>Revist Form</i> to continue a form you were previously filling out. Otherwise click on the form based on your gender.</div>
+    <br>
+    <div class="row hoverable continue-box">
+        <span class="custom-font">Revisit Form</span>
+    </div>
+    <div class="row hoverable women-box">
+        <span class="right custom-font">Women</span>
+    </div>
+    <div class="row hoverable men-box">
+        <span class="right custom-font">Men</span>
+    </div>
 </div>
 
 <style type="text/css">
-    /*textarea {
-        height: auto;
-        margin-top: 1.2em;
-        line-height: 41px;
-        background-attachment: local;
-        background-image:
-            linear-gradient(to right, black 0px, transparent 0px),
-            linear-gradient(to left, black 0px, transparent 0px),
-            repeating-linear-gradient(
-                white, white 40px, 
-                rgb(158, 158, 158) 40px, rgb(158, 158, 158) 41px,
-                white 41px
-            )
-        ;
-
-        padding: 0;
-        resize: none;
-        outline:none !important;
-        border: none !important;
-        box-shadow: none;
-        -moz-box-shadow: none;
-        -webkit-box-shadow: none;
-        -webkit-appearance:none;
-    }*/
-
-    /*textarea.focusin {
-        background-image:
-            linear-gradient(to right, black 0px, transparent 0px),
-            linear-gradient(to left, black 0px, transparent 0px),
-            repeating-linear-gradient(
-                white, white 40px, 
-                #009688 40px, #009688 42px, 
-                white 41px
-            )
-        ;
+    .continue-box,
+    .women-box,
+    .men-box {
+        height: 250px;
+        position: relative;
+        -webkit-transition: opacity .25s ease-in-out;
+        -moz-transition: opacity .25s ease-in-out;
+        -ms-transition: opacity .25s ease-in-out;
+        -o-transition: opacity .25s ease-in-out;
+        transition: opacity .25s ease-in-out;
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: cover;
     }
 
-    textarea.focusout {
-        background-image:
-            linear-gradient(to right, black 0px, transparent 0px),
-            linear-gradient(to left, black 0px, transparent 0px),
-            repeating-linear-gradient(
-                white, white 40px, 
-                rgb(158, 158, 158) 40px, rgb(158, 158, 158) 41px, 
-                white 41px
-            )
-        ;
+    .continue-box:hover,
+    .women-box:hover,
+    .men-box:hover {
+        opacity: 0.5;
     }
 
-    textarea.hasText {
-        background-image:
-            linear-gradient(to right, black 0px, transparent 0px),
-            linear-gradient(to left, black 0px, transparent 0px),
-            repeating-linear-gradient(
-                white, white 40px, 
-                rgb(76, 175, 80) 40px, rgb(76, 175, 80) 42px, 
-                white 41px
-            )
-        ;
-    }*/
-
-    .line-1, .line-2 {
-        margin-bottom: 0;
+    .continue-box {
+        background-image: url('images/mother-daughter-1280x440.jpg');
     }
 
-    .line-2, .line-3 {
-        margin-top: 0;
+    .women-box {
+        background-image: url('images/happy-lady-1275x415.jpg');
     }
 
-    .myTextarea {
+    .men-box {
+        background-image: url('images/man-basketball-1280x380.jpg');
     }
 
-    .container {
-        padding-top: 40px;
-        padding-left: 40px;
-        padding-right: 40px;
-    }
-
-    .allcaps {
-        font-variant: small-caps;
-    }
-
-    .bold h5 {
-        font-weight: bold !important;
-    }
-
-    .underline {
-        text-decoration: underline;
-    }
-
-    .inner-title {
-        color: red;
-    }
-
-    #saveButton,
-    #printButton {
-        margin-top: 20px;
-        margin-right: 10px;
-    }
-
-    .inner-content {
-        padding-left: 40px;
-        padding-right: 40px;
-    }
-
-    @media print {
-        body * {
-            visibility: hidden;
-        }
-
-        #printableForm,
-        #printableForm * {
-            visibility: visible;
-        }
-
-        #printableForm {
-            position: absolute;
-            left: 0;
-            top: 0;
-        }
+    .custom-font {
+        z-index: 1;
+        color: white;
+        font-size: 2.8em;
+        font-family: 'Times New Roman';
+        font-variant-caps: small-caps;
+        padding-right: 10px;
+        right: 0;
+        bottom: 0;
+        position: absolute;
+        opacity: 1 !important;
     }
 </style>
 
 <script type="text/javascript">
-    $('#printButton').click(function() {
-        window.print();
+    $('.continue-box').click(function() {
+        window.location.href = './continue';
+    });
+
+    $('.women-box').click(function() {
+        window.location.href = './women';
+    });
+
+    $('.women-box').click(function() {
+        window.location.href = './men';
     });
 
     $(document).ready(function() {
-        $('select').material_select();
-        $('textarea').height($('textarea').height() + 6);
-        $('textarea[data-limit-rows=true]').on('keypress', function (e) {
-            var textarea = $(this),
-                numberOfLines = (textarea.val().match(/\n/g) || []).length + 1,
-                maxRows = parseInt(textarea.attr('rows'));
-            
-            if (e.which === 13 && numberOfLines === maxRows ) {
-                return false;
-            }
-        });
-    });
-
-    $('textarea').focusout(function() {
-        $(this).removeClass('focusin').addClass('focusout');
-        if($(this).val()) {
-            $(this).addClass('hasText');
-        } else {
-            $(this).removeClass('hasText');
-        }
-    });
-
-    $('textarea').focusin(function() {
-        $(this).removeClass('focusout').addClass('focusin');
-        if($(this).val()) {
-            $(this).addClass('hasText');
-        } else {
-            $(this).removeClass('hasText');
-        }
     });
 </script>
