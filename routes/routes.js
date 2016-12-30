@@ -70,7 +70,7 @@ router.get('/forms/p7', function(req, res) {
 /////////////////////////////////////////////////
 
 router.get('/events', function(req, res) {
-    res.render('events');
+    res.render('events', {layout: 'events.handlebars'});
 });
 
 router.get('/blog', function(req, res) {
