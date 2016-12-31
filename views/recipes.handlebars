@@ -8,58 +8,119 @@
             </tr>
         </table>        
     </div>
+    
     <div class="row center">
-        <span class="flow-text">... because healthy living must be correctly studied, fun to make, and delicious for the plates ... </span>
+        <span class="flow-text">
+            ... because healthy living must be correctly
+            studied, fun to make, and delicious for 
+            the plates ...
+        </span>
     </div>
 
-    <div class="custom-cards">
-        <table class="custom-cards-table">
-            <tr class="custom-cards-tr">
-                <td class="green lighten-2 hoverable">
-                    <a href="recipes/breakfast">
-                        <div class="photo photo1"></div>
-                        <div class="custom-cards-heading">Breakfast</div>
-                    </a>
-                </td>
-                <td class="green lighten-2 hoverable">
+    <div class="row">
+        <div class="custom-cards">
+            <a href="./breakfast">
+                <div class="custom-inner-card center green lighten-2 hoverable">
+                    <div class="photo photo1"></div>
+                    <div class="custom-cards-heading">Breakfast</div>
+                </div>
+            </a>
+        </div>
+        <div class="custom-cards">
+            <a href="./entrees">
+                <div class="custom-inner-card center green lighten-2 hoverable">
                     <div class="photo photo2"></div>
                     <div class="custom-cards-heading">Entrees</div>
-                </td>
-                <td class="green lighten-2 hoverable">
+                </div>
+            </a>
+        </div>
+        <div class="custom-cards">
+            <a href="./desserts">
+                <div class="custom-inner-card center green lighten-2 hoverable">
                     <div class="photo photo3"></div>
                     <div class="custom-cards-heading">Desserts</div>
-                </td>
-            </tr>
-            <tr class="custom-cards-tr">
-                <td class="green lighten-2 hoverable">
+                </div>
+            </a>
+        </div>
+        <div class="custom-cards">
+            <a href="./drinks">
+                <div class="custom-inner-card center green lighten-2 hoverable">
                     <div class="photo photo4"></div>
                     <div class="custom-cards-heading">Drinks</div>
-                </td>
-                <td class="green lighten-2 hoverable">
+                </div>
+            </a>
+        </div>
+        <div class="custom-cards">
+            <a href="./snacks">
+                <div class="custom-inner-card center green lighten-2 hoverable">
                     <div class="photo photo5"></div>
                     <div class="custom-cards-heading">Snacks</div>
-                </td>
-                <td class="green lighten-2 hoverable">
+                </div>
+            </a>
+        </div>
+        <div class="custom-cards">
+            <a href="./salads">
+                <div class="custom-inner-card center green lighten-2 hoverable">
                     <div class="photo photo6"></div>
                     <div class="custom-cards-heading">Salads</div>
-                </td>
+                </div>
+            </a>
+        </div>
+    </div>
+
+    <div class="row">
+        <table class="custom-header-table">
+            <tr>
+                <td class="leftright"><hr></td>
+                <td class="theMiddle"><h2 class="custom-title-font">Search</h2></td>
+                <td class="leftright"><hr></td>
             </tr>
         </table>
+    </div>
+
+    <div class="row center">
+        <span class="flow-text">
+            Or, simply search through the recipes to find what you're looking for!
+        </span>
+    </div>
+
+    <div class="row green lighten-2 custom-search-wrapper">
+        <form class="custom-search-form white">
+            <div class="row">
+                <div class="input-field">
+                    <input id="last_name" type="text" placeholder="breakfast, entrees, dessserts, drinks, snacks, salads">
+                    <label for="last_name">Category</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="input-field">
+                    <input id="last_name" type="text" placeholder="banana, apple, spinach, avocado, etc">
+                    <label for="last_name">Foods/Ingredients</label>
+                </div>
+            </div>
+            <div class="row">
+                <button class="btn waves-effect waves-light" type="submit" name="action">
+                    Submit
+                    <i class="material-icons right">send</i>
+                </button>
+            </div>
+        </form>
     </div>
 </div>
 
 <style type="text/css">
-    body {
-        /*background-color: #E8DA58;*/
-    }
-
     .custom-header-table {
         margin: 0;
         padding: 0;
         height: 100%;
     }
 
-    .theMiddle {
+    .custom-header-table .leftright {
+        padding-top: 5px;
+        padding-bottom: 1px;
+    }
+
+    .custom-header-table .theMiddle {
         width: 200px;
         text-align: center;
     }
@@ -70,29 +131,29 @@
     }
 
     .custom-cards {
-        margin-bottom: 100px;
+        width: 100%;
+        display: inline-block;
+        margin: 0 !important;
+        padding: 0 !important;
     }
 
-    .custom-cards-table,
-    .custom-cards-tr,
-    .custom-cards-tr td {
-        text-align: center;
-    }
-
-    .custom-cards-table {
-        border-spacing: 10px;
-        border-collapse: separate;
-    }
-
-    .custom-cards-tr td {
-        width: 33%;
-        height: auto;
-        padding: 0;
-    }
-
-    .custom-cards-tr a {
+    .custom-cards a {
+        margin: 0 !important;
+        padding: 0 !important;
         color: initial;
         text-decoration: none;
+    }
+
+    .custom-inner-card {
+        margin: 4px 2px;
+        padding-top: 35px;
+    }
+
+    .custom-inner-card .photo {
+        height: 260px;
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: contain;
     }
 
     .custom-cards-heading {
@@ -102,23 +163,59 @@
         font-variant-caps: small-caps;
     }
 
-    .photo {
-        height: 260px;
-        margin-top: 40px;
-        background-repeat: no-repeat;
-        background-position: center;
-        background-size: contain;
-    }
-
     .photo1 {
-        background-image: url('images/breakfast-1280x923.jpg');
+        background-image: url('images/breakfast-1-921x922.jpg');
     }
 
     .photo2 {
-        background-image: url('images/bellpepper-640x640.jpg');
+        background-image: url('images/entree-1-1080x1080.jpg');
+    }
+
+    .photo3 {
+        background-image: url('images/dessert-1-1080x1080.jpg');
+    }
+
+    .photo4 {
+        background-image: url('images/drink-1-1080x1080.jpg');
+    }
+
+    .photo5 {
+        background-image: url('images/snack-1-1080x1080.jpg');
     }
 
     .photo6 {
-        background-image: url('images/kale-640x479.jpg');
+        background-image: url('images/salad-1-959x951.jpg');
+    }
+
+    .custom-search-wrapper {
+        padding: 20px;
+        border-radius: 2px;
+    }
+
+    .custom-search-form {
+        padding: 15px 40px 1px 40px;
+    }
+
+    body {background-color: red;}
+
+    /* small */
+    @media (min-width: 768px) {
+        body {background-color: green;}
+        .custom-cards {
+            width: 49%;
+        }
+    }
+
+    /* medium */
+    @media (min-width: 992px) {
+        body {background-color: blue;}
+    }
+
+    /* desktop */
+    @media (min-width: 1200px) {
+        body {background-color: yellow;}
+        .custom-cards {
+            width: 33%;
+        }
     }
 </style>

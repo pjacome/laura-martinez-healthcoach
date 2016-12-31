@@ -1,9 +1,16 @@
 <div class="container">
     <div class="center custom-header-wrapper">
-        <h2 class="custom-title-font-family">As a Coach I put the Power back in YOUR hands.</h2>
+        <h2 class="custom-title-font-family">
+            As a Coach I put the Power back in YOUR hands
+        </h2>
         <br>
         <span class="flow-text">
-        Learn more about my training and my unique appraoch to health coaching. If you are curious about how health coaching can help you, then Let's talk. Schedule an <a id="footerForm" class="orange-text" href="#first_name">inital consultation</a> with me today.
+            Learn more about my training and my unique appraoch
+            to health coaching. If you are curious about how health
+            coaching can help you, then Let's talk. Schedule an
+            <a id="footerForm" class="orange-text" href="#first_name">
+                inital consultation
+            </a> with me today.
         </span>
     </div> <!-- custom-header-wrapper - End -->
     <br>
@@ -171,8 +178,6 @@
     }
 
     .custom-list-indent {
-        margin-left: 80px;
-        margin-right: 80px;
         padding-top: 10px;
         padding-bottom: 10px;
         border-top: black solid 1px;
@@ -197,76 +202,50 @@
     .custom-4-col-wrapper .col {
         height: 400px;
         margin-bottom: 1px;
-        /*margin-right: 1px !important;*/
     }
 
-    .custom-4-col-wrapper .l3 span/*:not(:last-child)*/ {
+    body {background-color: red;}
+
+    /* small */
+    @media (min-width: 768px) {
+        body {background-color: green;}
     }
 
-    /* mobile (s6) - orientation: portrait */
-    @media (max-width: 800px) 
-    and (orientation: portrait) {
-        /*body {background-color: grey;}*/
-        .custom-list-indent {
-            margin-left: 0px;
-            margin-right: 0px;
-            padding-top: 10px;
-            padding-bottom: 10px;
-            border-top: black solid 1px;
-            border-bottom: black solid 1px;
+    /* medium */
+    @media (min-width: 992px) {
+        body {background-color: blue;}
+        .custom-4-col-wrapper .col {
+            width: 50% !important;
+            height: 320px;
         }
     }
 
-    /* mobile (s6) - orientation: landscape */
-    @media (max-width: 800px) 
-    and (orientation: landscape) {
-        /*body {background-color: yellow;}*/
-    }
-
-    /* tablet (ipad mini 1) - orientation: portrait */
-    @media (min-device-width: 768px)
-    and (max-device-width: 1000px) { 
-        /*body {background-color: blue;}*/
-    }
-
-    /* tablet (ipad mini 1) - orientation: landscape*/
-    @media only screen
-    and (min-device-width: 768px) 
-    and (max-device-width: 1100px)
-    and (orientation: landscape) {
-        /*body {background-color: green;}*/
-    }
-
-    /* tablet (galaxy tab 4) - orientation: portrait */
-    @media (min-width: 800px) 
-    and (max-width: 900px) {
-        /*body {background-color: red;}*/
-    }
-
-    /* MISSING MEDIA QUERY HERE */
-
-    /* tablet (galaxy tab 4) - orientation: landscape */
-    @media (min-width: 1100px) 
-    and (max-width: 1399px)
-    and (orientation: landscape) {
-        /*body {background-color: purple;}*/
-    }
-
     /* desktop */
-    @media (min-width: 1400px) {
-        /*body {background-color: orange;}*/
+    @media (min-width: 1200px) {
+        body {background-color: yellow;}
+
+        @media (max-width: 1400px) {
+            .custom-4-col-wrapper .col {
+                height: 300px;
+            }
+        }
+
+        @media (min-width: 1400px) {
+            .custom-4-col-wrapper .col {
+                width: 25% !important;
+                height: 500px;
+            }
+        }
+
+        @media (min-width: 1600px) {
+            .custom-4-col-wrapper .col {
+                height: 420px;
+            }
+        }
     }
 </style>
 
 <script type="text/javascript">
-    // $("#footerForm").click(function() {
-    //     $('html, body').animate({
-    //         scrollTop: $("#first_name").offset().top
-    //     }, 3000, function() {
-    //         $('#first_name').focus();            
-    //     });
-    // });
-
     $(document).ready(function() {
         $('.parallax').parallax();
     });
