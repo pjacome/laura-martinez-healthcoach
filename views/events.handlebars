@@ -24,15 +24,15 @@
             </div>
         </div>
 
-        <div class="custom-events-wrapper">
+        <div class="custom-events-wrapper green lighten-1">
             <div class="calendar-ui-wrapper">
                 <div class="row center valign-wrapper">
-                    <div class="col s2 m2 l2 valign">
+                    <div class="col s3 m2 l2 valign">
                         <a class="prev-month-btn btn-floating btn waves-effect waves-light teal">
                             <i class="material-icons">keyboard_arrow_left</i>
                         </a>
                     </div>
-                    <div class="col s8 m8 l8">
+                    <div class="col s6 m8 l8">
                         <h4 class="todaysDate">
                             <span class="header-day-of-the-week"></span><br />
                             <span class="header-month"></span>
@@ -40,7 +40,7 @@
                             <span class="header-year"></span>
                         </h4>
                     </div>
-                    <div class="col s2 m2 l2">
+                    <div class="col s3 m2 l2">
                         <a class="next-month-btn btn-floating btn waves-effect waves-light teal">
                             <i class="material-icons">keyboard_arrow_right</i>
                         </a>
@@ -59,6 +59,9 @@
                         </tr>
                     </thead>
                     <tbody class="calendar-months">
+                        <tr class="fake_week">
+                            <td colspan="7"></td>
+                        </tr>
                         <tr class="row_1 week_1 calendar-weeks">
                             <td class="col_1 Sunday calendar-days">
                                 <div class="calendar-days-wrapper">
@@ -301,12 +304,11 @@
 
     .custom-events-wrapper:first-child {
         width: 100%;
-        /*background-color: purple;*/
     }
 
     .custom-events-wrapper:last-child {
+        padding: 20px;
         width: 100%;
-        /*background-color: orange;*/
     }
 
     /************************************/
@@ -319,20 +321,11 @@
     .th6:after { content: attr(data-sm); }
     .th7:after { content: attr(data-sm); }
     
-    .todaysDate {
-        font-size: 1.22em;
-    }
-
-    .current-day {
-        /* green darken-2 */
-        background-color: #388e3c;
-        color: white;
-    }
-
     .calendar-ui-wrapper {
         width: 100%;
         height: 100%;
-        padding: 0 5px;
+        padding: 5px 5px;
+        background-color: white;
     }
 
     .calendar-table {
@@ -341,21 +334,47 @@
         border-collapse: collapse;
     }
 
-    .calendar-table,
+    .todaysDate {
+        font-size: 1.22em;
+    }
+
+    .current-day .dayNumberOfMonth {
+        position: relative;
+    }
+
+    .current-day .dayNumberOfMonth:after {
+        position: absolute;
+        top: -6.5px;
+        left: -7px;
+        content: attr(data-after);
+        height: 30px;
+        width:  30px;
+        color: white;
+        border-radius: 100px;
+        background-color: #388e3c;
+        border: 5px #388e3c solid;
+    }
+
     .calendar-days,
     .calendar-weeks {
-        border: 1px solid black;
+        text-align: center;
+        vertical-align: middle;
+    }
+
+    .calendar-table th {
+        border-bottom: 1px solid black;
+        color: grey;
+    }
+
+    .calendar-months tr:first-child,
+    .calendar-months tr:first-child td {
+        height: 5px;
+        padding: 0;
     }
 
     .calendar-days-wrapper {
         width: 100%;
         height: 100%;
-    }
-
-    .calendar-days:hover {
-        /* teal lighten-1 */
-        background-color: #26a69a;
-        color: white;
     }
 
     .next-month,
@@ -392,12 +411,34 @@
             padding-left: 100px;
             padding-right: 100px;
         }
+
+        .calendar-weeks {
+            height: 70px !important;
+        }
+
+        .current-day .dayNumberOfMonth:after {
+            top: -6px;
+            left: -7.5px;
+            height: 30px;
+            width:  30px;
+        }
     }
 
     /* medium */
     @media (min-width: 992px) {
         body {
             background-color: blue;
+        }
+
+        .calendar-weeks {
+            height: 85px !important;
+        }
+
+        .current-day .dayNumberOfMonth:after {
+            top: -6.5px;
+            left: -7.5px;
+            height: 35px;
+            width:  35px;
         }
     }
 
@@ -426,12 +467,14 @@
             padding-right: 0px;
             margin-top: 100px;
             margin-right: 10px;
-            /*background-color: purple;*/
         }
 
         .custom-events-wrapper:last-child {
             width: 59%;
-            /*background-color: orange;*/
+        }
+
+        .current-day .dayNumberOfMonth:after {
+            left: -7.5px;
         }
     }
 
@@ -711,6 +754,7 @@
                         today.month === g_CurrMonthObj.month &&
                         today.year === g_CurrMonthObj.year) {
                         $(calendarCell).addClass('current-day');
+                        $(calendarCell + ' .dayNumberOfMonth').attr('data-after', currMonthIterator);
                     }
                     ++currMonthIterator;
                 }
