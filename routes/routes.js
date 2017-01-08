@@ -13,8 +13,6 @@ router.get('/about', function(req, res) {
     res.render('about');
 });
 
-<<<<<<< HEAD
-=======
 router.get('/recipes', function(req, res) {
     res.render('recipes');
 });
@@ -104,13 +102,10 @@ router.get('/events', function(req, res) {
     res.render('events');
 });
 
->>>>>>> fontend
 router.get('/blog', function(req, res) {
     res.render('blog');
 });
 
-<<<<<<< HEAD
-=======
 router.get('/contact', function(req, res) {
     res.render('contact');
 });
@@ -162,7 +157,6 @@ router.get('/forms/mujeres', function (req, res) {
     res.render('mujeres');
 });
 
->>>>>>> fontend
 /*
     Catch 400 Errors
 */
