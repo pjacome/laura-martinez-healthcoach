@@ -1,0 +1,52 @@
+﻿<div class="container">
+    <h4>Choose a Blog to update</h4>
+    <ul>
+        <li>
+            <a class="waves-effect waves-light btn red space-right space-top space-bottom" href="#modal1">Delete</a>
+            <a href="./edit/exedit">Welcome to my Blog!</a>
+        </li>
+        <li class="divider"></li>
+        <li>
+            <a class="waves-effect waves-light btn red space-right space-top space-bottom" href="#modal1">Delete</a>
+            <a>Latest News on Website!</a>
+        </li>
+        <li class="divider"></li>
+        <li>
+            <a class="waves-effect waves-light btn red space-right space-top space-bottom" href="#modal1">Delete</a>
+            <a>Holiday Recipe - Fruit Salad</a>
+        </li>
+    </ul>
+</div>
+
+<!-- Modal Structure -->
+<div id="modal1" class="modal">
+    <div class="modal-content">
+        <h4>Last Chance!</h4>
+        <p>Once this is deleted it will be gone forever. Are you sure you want to delete this permanently?</p>
+    </div>
+    <div class="modal-footer">
+        <a href="" class="modal-action modal-close waves-effect waves-green btn-flat">Yes</a>
+        <a href="" class="modal-action modal-close waves-effect waves-green btn-flat left">No</a>
+    </div>
+</div>
+
+<style>
+    .space-right {
+        margin-right: 20px;
+    }
+
+    .space-top {
+        margin-bottom: 10px;
+    }
+
+    .space-bottom {
+        margin-bottom: 10px;
+    }
+</style>
+
+<script>
+    $(document).ready(function () {
+        // the "href" attribute of .modal-trigger must specify the modal ID that wants to be triggered
+        $('.modal').modal();
+    });
+</script>

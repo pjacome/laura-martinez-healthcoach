@@ -1,0 +1,187 @@
+<br>
+<div class="container z-depth-5">
+    <nav>
+        <div class="nav-wrapper" style="padding-left:10px;">
+            <div class="col s12">
+                <a href="./p1" class="breadcrumb">Personal</a>
+                <a href="./p2" class="breadcrumb">Social</a>
+                <a href="" class="breadcrumb">Salud</a>
+            </div>
+        </div>
+    </nav>
+
+    <form id="printableForm">
+        <div class="sections section-3">
+            <span class="inner-title allcaps bold"><h5>Informaci&oacute;n de Salud</h5></span>
+            <div class="inner-content">
+                <div class="row">
+                    <div class="input-field col s12 line-1">
+                        Por favor, haga una lista de sus principales preocupaciones en materia de salud:
+                        <textarea class="materialize-textarea" rows="3" form="printableForm"></textarea>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="input-field col s12">
+                        &iquest;Otras preocupaciones y/o metas?
+                        <textarea class="materialize-textarea" rows="3" form="printableForm"></textarea>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="input-field col s12">
+                        &iquest;En qu&eacute; etapa de su vida se ha sentido mejor?
+                        <textarea class="materialize-textarea" rows="3" form="printableForm"></textarea>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="input-field col s12">
+                        &iquest;Ha tenido alguna enfermedad grave, hospitalizaci&oacute;n o lesi&oacute;n?
+                        <textarea class="materialize-textarea" rows="3" form="printableForm"></textarea>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="input-field col s12">
+                        &iquest;C&oacute;mo es/fue la salud de su madre?
+                        <textarea class="materialize-textarea" rows="3" form="printableForm"></textarea>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="input-field col s12">
+                        &iquest;C&oacute;mo es/fue la salud de su padre?
+                        <textarea class="materialize-textarea" rows="3" form="printableForm"></textarea>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col s8 m8 l6">
+                        <div class="input-field">
+                            &iquest;Cu&aacute;les son sus antecedentes &eacute;tnicos?
+                            <input id="email" name="email" type="text" class="validate">
+                        </div>
+                    </div>
+                    <div class="col s4 m4 l6">
+                        <div class="input-field">
+                            &iquest;Cu&aacute; es su grupo sangu&iacute;neo?
+                            <input id="email" name="email" type="number" class="validate">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col l4">
+                        <div class="input-field">
+                            &iquest;C&oacute;mo duerme?
+                            <input id="" class="" name="" type="text">
+                        </div>
+                    </div>
+
+                    <div class="col l4">
+                        <div class="input-field">
+                            &iquest;Cu&aacute;ntas horas?
+                            <input id="" class="" name="" type="text">
+                        </div>
+                    </div>
+
+                    <div class="col l4">
+                        <div class="input-field">
+                            &iquest;Se despierta durante la noche?
+                            <input id="" class="" name="" type="text">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="input-field col s12 line-1">
+                        &iquest;Por qu&eacute;?
+                        <textarea class="materialize-textarea" rows="3" form="printableForm"></textarea>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="input-field col s12 line-1">
+                        &iquest;Alg&uacute;n dolor, rigidez, hinchaz&oacute;n?
+                        <textarea class="materialize-textarea" rows="3" form="printableForm"></textarea>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="input-field col s12 line-1">
+                        &iquest;Estre&ntilde;imiento/diarrea/gases?
+                        <textarea class="materialize-textarea" rows="3" form="printableForm"></textarea>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="input-field col s12 line-1">
+                        &iquest;Alergias o sensibilidad? Por favor explique:
+                        <textarea class="materialize-textarea" rows="3" form="printableForm"></textarea>
+                    </div>
+                </div>
+            </div>
+        </div>  <!-- section-3 End -->
+    </form>
+</div>
+
+<div class="container">
+    <div class="row">
+        <button id="nextSectionButton" class="btn waves-effect waves-light right" type="submit" name="action"><i class="material-icons right">arrow_forward</i>Siguente</button>
+        <button id="printButton" class="btn waves-effect waves-light right" type="submit" name="action">Impremir<i class="material-icons right">print</i></button>
+        <button id="saveButton" class="btn waves-effect waves-light right" type="submit" name="action">Submit<i class="material-icons right">save</i></button>
+        <button id="prevSectionButton" class="btn waves-effect waves-light right" type="submit" name="action"><i class="material-icons left">arrow_back</i>Atras</button>
+    </div>
+</div>
+<style type="text/css">
+    .container {
+        padding-top: 40px;
+        padding-left: 40px;
+        padding-right: 40px;
+    }
+
+    .inner-title {
+        color: red;
+    }
+
+    .container > .row > .btn {
+        margin-right: 10px;
+    }
+
+    .inner {
+        padding-left: 40px;
+        padding-right: 40px;
+    }
+
+    @media print {
+        body * {
+            visibility: hidden;
+        }
+
+        #printableForm,
+        #printableForm * {
+            visibility: visible;
+        }
+
+        #printableForm {
+            position: absolute;
+            left: 0;
+            top: 0;
+        }
+    }
+</style>
+
+<script type="text/javascript">
+    document.getElementById('printButton').onclick = function() {
+        window.print();
+    }
+
+    $('#prevSectionButton').click(function() {
+        window.location = '/forms/p2';
+    });
+
+    $('#nextSectionButton').click(function() {
+        window.location = '/forms/p4';
+    });
+</script>

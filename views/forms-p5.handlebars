@@ -1,0 +1,102 @@
+<br>
+<div class="container z-depth-5">
+    <nav>
+        <div class="nav-wrapper" style="padding-left:10px;">
+            <div class="col s12">
+                <a href="./p1" class="breadcrumb">Personal</a>
+                <a href="./p2" class="breadcrumb">Social</a>
+                <a href="./p3" class="breadcrumb">Salud</a>
+                <a href="./p4" class="breadcrumb">Women's Health</a>
+                <a href="" class="breadcrumb">M&eacute;dica</a>
+            </div>
+        </div>
+    </nav>
+
+    <form id="printableForm">
+        <div class="sections section-5">
+            <span class="inner-title allcaps bold"><h5>Informaci&oacute;n M&eacute;dica</h5></span>
+            <div class="inner-content">
+                <div class="row">
+                    <div class="input-field col s12">
+                        &iquest;Toma alg&uacute;n suplemento o medicamento? Por favor haga una lista:
+                        <textarea class="materialize-textarea" rows="3" form="printableForm"></textarea>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="input-field col s12">
+                        &iquest;Alg&uacute;n curador, ayudante o terapia con el cual est&eacute; involucrado? Por favor, ind&iacute;quelos:
+                        <textarea class="materialize-textarea" rows="3" form="printableForm"></textarea>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="input-field col s12">
+                        &iquest;Qu&eacute; papel juegan los deportes y el ejecicio en su vida?
+                        <textarea class="materialize-textarea" rows="3" form="printableForm"></textarea>
+                    </div>
+                </div>
+            </div>
+        </div>  <!-- section-5 End -->
+    </form>
+</div>
+
+<div class="container">
+    <div class="row">
+        <button id="nextSectionButton" class="btn waves-effect waves-light right" type="submit" name="action"><i class="material-icons right">arrow_forward</i>Siguente</button>
+        <button id="printButton" class="btn waves-effect waves-light right" type="submit" name="action">Impremir<i class="material-icons right">print</i></button>
+        <button id="saveButton" class="btn waves-effect waves-light right" type="submit" name="action">Submit<i class="material-icons right">save</i></button>
+        <button id="prevSectionButton" class="btn waves-effect waves-light right" type="submit" name="action"><i class="material-icons left">arrow_back</i>Atras</button>
+    </div>
+</div>
+<style type="text/css">
+    .container {
+        padding-top: 40px;
+        padding-left: 40px;
+        padding-right: 40px;
+    }
+
+    .inner-title {
+        color: red;
+    }
+
+    .container > .row > .btn {
+        margin-right: 10px;
+    }
+
+    .inner {
+        padding-left: 40px;
+        padding-right: 40px;
+    }
+
+    @media print {
+        body * {
+            visibility: hidden;
+        }
+
+        #printableForm,
+        #printableForm * {
+            visibility: visible;
+        }
+
+        #printableForm {
+            position: absolute;
+            left: 0;
+            top: 0;
+        }
+    }
+</style>
+
+<script type="text/javascript">
+    document.getElementById('printButton').onclick = function() {
+        window.print();
+    }
+
+    $('#prevSectionButton').click(function() {
+        window.location = '/forms/p4';
+    });
+
+    $('#nextSectionButton').click(function() {
+        window.location = '/forms/p6';
+    });
+</script>

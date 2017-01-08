@@ -1,0 +1,80 @@
+﻿<div class="container">
+    <div class="outer-card z-depth-2 blue lighten-100">
+        <h5 class="white-text center">New Blog</h5>
+        <form class="white">
+            <div class="row">
+                <div class="input-field col s12">
+                    <input id="title" type="text" class="validate" value="Welcome to my Blog!">
+                    <label for="title">Title</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="input-field col s12">
+                    <input id="subheading" type="text" class="validate" value="A little about what the plan is">
+                    <label for="subheading">Subheading</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="input-field col s12">
+                    <input type="date" class="datepicker" value="12 December, 2016">
+                    <label for="date">Date</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="input-field col s12">
+                    <textarea id="textarea1" class="materialize-textarea">Lorem ipsum faucibus potenti tincidunt himenaeos elementum donec senectus, nec ultricies volutpat ante gravida class sodales lectus et, a torquent class at vivamus praesent arcu id consequat conubia ut auctor eleifend inceptos curabitur felis, vulputate pharetra amet blandit quisque faucibus quam quisque vehicula, gravida id mi auctor phasellus consectetur potenti amet duis integer conubia dictumst interdum fusce pretium ornare orci egestas, erat himenaeos class tortor pretium posuere ornare auctor vehicula cras, habitasse commodo euismod tristique et luctus nunc curabitur porttitor per et platea metus habitasse elementum senectus aenean.
+
+Lectus donec velit rutrum nam aptent curabitur condimentum inceptos tincidunt lorem sapien risus velit, diam ut orci fringilla ipsum nostra donec molestie eu aptent conubia at ut, nam quis potenti egestas libero faucibus pellentesque nunc feugiat eros convallis tellus sapien facilisis convallis vivamus justo lacinia cras tempus, luctus in aliquet ornare suspendisse etiam diam, ornare porta eget sollicitudin suscipit bibendum dapibus urna interdum condimentum quisque nec vivamus ut hac morbi, et justo lacinia dolor conubia sit class quisque, dapibus sed ad praesent donec phasellus sed faucibus inceptos tempus non imperdiet quisque quis.
+
+Consectetur vehicula ac malesuada pulvinar porta scelerisque aliquam ac mi hendrerit sagittis, dolor leo bibendum sociosqu dolor nec hendrerit id senectus himenaeos facilisis praesent leo nam dapibus curabitur congue dolor, pharetra rutrum adipiscing vestibulum turpis urna dictumst nullam, tellus a himenaeos tempus feugiat in vivamus porttitor ut ultricies accumsan hendrerit sed laoreet rutrum, faucibus fringilla ullamcorper adipiscing lacus nibh orci sociosqu, aliquet lacinia praesent per tellus bibendum maecenas porttitor consectetur nisi sem eleifend ut senectus, placerat hendrerit elit quisque aliquam dapibus, ultrices eleifend quisque vitae varius tincidunt gravida fames himenaeos tempor etiam morbi venenatis cubilia magna massa curabitur fusce.</textarea>
+                    <label for="textarea1">Blog Text</label>
+                </div>
+            </div>
+            <button class="btn waves-effect waves-light login" type="submit" name="action">
+                Update
+                <i class="material-icons right">update</i>
+            </button>
+        </form>
+    </div>
+</div>
+
+<style>
+    .outer-card {
+        width: 300px;
+        padding: 20px;
+        margin: 0 auto;
+    }
+
+        .outer-card form {
+            padding-top: 10px;
+            padding-left: 10px;
+            padding-right: 10px;
+            padding-bottom: 40px;
+        }
+
+    /* small */
+    @media (min-width: 768px) {
+    }
+
+    /* medium */
+    @media (min-width: 992px) {
+    }
+
+    /* desktop */
+    @media (min-width: 1200px) {
+        .outer-card {
+            width: 100%;
+        }
+    }
+</style>
+
+<script>
+    $('.login.btn').click(function (e) {
+        e.preventDefault();
+    });
+
+    $('.datepicker').pickadate({
+        selectMonths: true, // Creates a dropdown to control month
+        selectYears: 15 // Creates a dropdown of 15 years to control year
+    });
+</script>

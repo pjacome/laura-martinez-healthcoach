@@ -1,0 +1,60 @@
+﻿<div class="container">
+    <div class="outer-card z-depth-2 blue lighten-100">
+        <h5 class="white-text center">Login</h5>
+        <form class="white">
+            <div class="row">
+                <div class="input-field col s12">
+                    <input id="last_name" type="text" class="validate">
+                    <label for="last_name">Username</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="input-field col s12">
+                    <input id="last_name" type="password" class="validate">
+                    <label for="last_name">Password</label>
+                </div>
+            </div>
+            <button class="btn waves-effect waves-light login" type="submit" name="action">
+                Submit
+                <i class="material-icons right">send</i>
+            </button>
+        </form>
+    </div>
+</div>
+
+<style>
+    .outer-card {
+        width: 300px;
+        padding: 20px;
+        margin: 0 auto;
+    }
+
+    .outer-card form {
+        padding-top: 10px;
+        padding-left: 10px;
+        padding-right: 10px;
+        padding-bottom: 40px;
+    }
+
+    /* small */
+    @media (min-width: 768px) {
+    }
+
+    /* medium */
+    @media (min-width: 992px) {
+    }
+
+    /* desktop */
+    @media (min-width: 1200px) {
+        .outer-card {
+            width: 400px;
+        }
+    }
+</style>
+
+<script>
+    $('.login.btn').click(function (e) {
+        e.preventDefault();
+        window.location.href = './dashboard';
+    });
+</script>
