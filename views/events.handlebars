@@ -24,7 +24,7 @@
             </div>
         </div>
 
-        <div class="custom-events-wrapper green lighten-1">
+        <div class="custom-events-wrapper green lighten-1 z-depth-2">
             <div class="calendar-ui-wrapper">
                 <div class="row center valign-wrapper">
                     <div class="col s3 m2 l2 valign">
@@ -338,21 +338,27 @@
         font-size: 1.22em;
     }
 
+    .current-day {
+        color: white;
+    }
+
     .current-day .dayNumberOfMonth {
         position: relative;
+        z-index: 1;
     }
 
     .current-day .dayNumberOfMonth:after {
         position: absolute;
-        top: -6.5px;
-        left: -7px;
-        content: attr(data-after);
+        top: -7px;
+        left: -11px;
+        content: '';
         height: 30px;
         width:  30px;
         color: white;
         border-radius: 100px;
         background-color: #388e3c;
         border: 5px #388e3c solid;
+        z-index: -1;
     }
 
     .calendar-days,
@@ -415,8 +421,8 @@
         }
 
         .current-day .dayNumberOfMonth:after {
-            top: -6px;
-            left: -7.5px;
+            top: -7px;
+            left: -11px;
             height: 30px;
             width:  30px;
         }
@@ -431,8 +437,8 @@
         }
 
         .current-day .dayNumberOfMonth:after {
-            top: -6.5px;
-            left: -7.5px;
+            top: -7.5px;
+            left: -13px;
             height: 35px;
             width:  35px;
         }
@@ -468,7 +474,7 @@
         }
 
         .current-day .dayNumberOfMonth:after {
-            left: -7.5px;
+            left: -12px;
         }
     }
 
@@ -748,7 +754,6 @@
                         today.month === g_CurrMonthObj.month &&
                         today.year === g_CurrMonthObj.year) {
                         $(calendarCell).addClass('current-day');
-                        $(calendarCell + ' .dayNumberOfMonth').attr('data-after', currMonthIterator);
                     }
                     ++currMonthIterator;
                 }

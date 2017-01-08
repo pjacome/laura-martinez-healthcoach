@@ -2,15 +2,24 @@
 <div class="container">
     <div class="center flow-text">Click on <i>Revist Form</i> to continue a form you were previously filling out. Otherwise click on the form based on your gender.</div>
     <br>
-    <div class="row hoverable continue-box">
-        <span class="custom-font">Revisit Form</span>
-    </div>
-    <div class="row hoverable women-box">
-        <span class="right custom-font">Women</span>
-    </div>
-    <div class="row hoverable men-box">
-        <span class="right custom-font">Men</span>
-    </div>
+    
+    <a href="./forms/revisit">
+        <div class="row hoverable continue-box">
+            <span class="custom-font">Revisit Form</span>
+        </div>
+    </a>
+
+    <a href="./forms/women">
+        <div class="row hoverable women-box">
+            <span class="right custom-font">Women</span>
+        </div>
+    </a>
+
+    <a href="./forms/men">
+        <div class="row hoverable men-box">
+            <span class="right custom-font">Men</span>
+        </div>
+    </a>
 </div>
 
 <style type="text/css">
@@ -60,20 +69,3 @@
         opacity: 1 !important;
     }
 </style>
-
-<script type="text/javascript">
-    $('.continue-box').click(function() {
-        window.location.href = './continue';
-    });
-
-    $('.women-box').click(function() {
-        window.location.href = './women';
-    });
-
-    $('.women-box').click(function() {
-        window.location.href = './men';
-    });
-
-    $(document).ready(function() {
-    });
-</script>

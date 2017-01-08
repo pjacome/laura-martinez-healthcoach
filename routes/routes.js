@@ -25,6 +25,34 @@ router.get('/recipes', function(req, res) {
     res.render('recipes');
 });
 
+/////////////////// recipes ////////////////////
+
+router.get('/recipes/breakfast', function(req, res) {
+    res.render('comingsoon');
+});
+
+router.get('/recipes/entrees', function (req, res) {
+    res.render('comingsoon');
+});
+
+router.get('/recipes/desserts', function (req, res) {
+    res.render('comingsoon');
+});
+
+router.get('/recipes/drinks', function (req, res) {
+    res.render('comingsoon');
+});
+
+router.get('/recipes/snacks', function (req, res) {
+    res.render('comingsoon');
+});
+
+router.get('/recipes/salads', function (req, res) {
+    res.render('comingsoon');
+});
+
+//////////////////// end ///////////////////////
+
 router.get('/healthcoaching', function(req, res) {
     res.render('healthcoaching');
 });
@@ -33,11 +61,19 @@ router.get('/forms', function(req, res) {
     res.render('forms');
 });
 
-router.get('/forms/mujeres', function(req, res) {
-    res.render('mujeres');
+router.get('/forms/revisit', function (req, res) {
+    res.render('comingsoon');
 });
 
-/////////////////////////////////////////////////
+router.get('/forms/women', function(req, res) {
+    res.render('women');
+});
+
+router.get('/forms/men', function (req, res) {
+    res.render('comingsoon');
+});
+
+/////////////////// forms //////////////////////
 
 router.get('/forms/p1', function(req, res) {
     res.render('forms-p1');
@@ -67,7 +103,7 @@ router.get('/forms/p7', function(req, res) {
     res.render('forms-p7');
 });
 
-/////////////////////////////////////////////////
+//////////////////// end ///////////////////////
 
 router.get('/events', function(req, res) {
     //res.render('events', {layout: 'events.handlebars'});
@@ -82,7 +118,52 @@ router.get('/contact', function(req, res) {
     res.render('contact');
 });
 
+/////////////////// admin //////////////////////
+
+router.get('/admin/login', function (req, res) {
+    res.render('alogin');
+});
+
+router.get('/admin/dashboard', function (req, res) {
+    res.render('adash');
+});
+
+router.get('/admin/blog', function (req, res) {
+    res.render('ablog');
+});
+
+    router.get('/admin/blog/add', function (req, res) {
+        res.render('ablogadd');
+    });
+
+    router.get('/admin/blog/edit', function (req, res) {
+        res.render('ablogedit');
+    });
+
+        router.get('/admin/blog/edit/exedit', function (req, res) {
+            res.render('exedit');
+        });
+
+router.get('/admin/events', function (req, res) {
+    res.render('aevents');
+});
+
+router.get('/admin/forms', function (req, res) {
+    res.render('aforms');
+});
+
+router.get('/admin/recipes', function (req, res) {
+    res.render('arecipes');
+});
+
+
+//////////////////// end ///////////////////////
+
 /* Idioma = Espanol - Rutas */
+
+router.get('/forms/mujeres', function (req, res) {
+    res.render('mujeres');
+});
 
 /*
     Catch 400 Errors
