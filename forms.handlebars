@@ -1,0 +1,71 @@
+<br>
+<div class="container">
+    <div class="center flow-text">Click on <i>Revist Form</i> to continue a form you were previously filling out. Otherwise click on the form based on your gender.</div>
+    <br>
+    
+    <a href="./forms/revisit">
+        <div class="row hoverable continue-box">
+            <span class="custom-font">Revisit Form</span>
+        </div>
+    </a>
+
+    <a href="./forms/women">
+        <div class="row hoverable women-box">
+            <span class="right custom-font">Women</span>
+        </div>
+    </a>
+
+    <a href="./forms/men">
+        <div class="row hoverable men-box">
+            <span class="right custom-font">Men</span>
+        </div>
+    </a>
+</div>
+
+<style type="text/css">
+    .continue-box,
+    .women-box,
+    .men-box {
+        height: 250px;
+        position: relative;
+        -webkit-transition: opacity .25s ease-in-out;
+        -moz-transition: opacity .25s ease-in-out;
+        -ms-transition: opacity .25s ease-in-out;
+        -o-transition: opacity .25s ease-in-out;
+        transition: opacity .25s ease-in-out;
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: cover;
+    }
+
+    .continue-box:hover,
+    .women-box:hover,
+    .men-box:hover {
+        opacity: 0.5;
+    }
+
+    .continue-box {
+        background-image: url('images/mother-daughter-1280x440.jpg');
+    }
+
+    .women-box {
+        background-image: url('images/happy-lady-1275x415.jpg');
+    }
+
+    .men-box {
+        background-image: url('images/man-basketball-1280x380.jpg');
+    }
+
+    .custom-font {
+        z-index: 1;
+        color: white;
+        font-size: 2.8em;
+        font-family: 'Times New Roman';
+        font-variant-caps: small-caps;
+        padding-right: 10px;
+        right: 0;
+        bottom: 0;
+        position: absolute;
+        opacity: 1 !important;
+    }
+</style>

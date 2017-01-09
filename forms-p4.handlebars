@@ -1,0 +1,134 @@
+<br>
+<div class="container z-depth-5">
+    <nav>
+        <div class="nav-wrapper" style="padding-left:10px;">
+            <div class="col s12">
+                <a href="./p1" class="breadcrumb">Personal</a>
+                <a href="./p2" class="breadcrumb">Social</a>
+                <a href="./p3" class="breadcrumb">de Salud</a>
+                <a href="" class="breadcrumb">Women's Health</a>
+            </div>
+        </div>
+    </nav>
+
+    <form id="printableForm">
+        <div class="sections section-4">
+            <span class="inner-title allcaps bold"><h5>Women's Health</h5></span>
+            <div class="inner-content">
+                <div class="row">
+                    <div class="col l4">
+                        <div class="input-field">
+                            &iquest;Es reuglar su menstruaci&oacute;n?
+                            <select>
+                                <option disabled selected></option>
+                                <option value="0">No</option>
+                                <option value="1">Si</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="col l4">
+                        <div class="input-field">
+                            &iquest;Cu&aacute;tos d&iacute;as le dura?
+                            <input id="" class="" name="" type="number">
+                        </div>
+                    </div>
+
+                    <div class="col l4">
+                        <div class="input-field">
+                            &iquest;Con cu&aacute;nta frecuencia?
+                            <input id="" class="" name="" type="number">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="input-field col s12 line-1">
+                        &iquest;Tiene o est&aacute; cerca de la menopausia? Por favor explique:
+                        <textarea class="materialize-textarea" rows="3" form="printableForm"></textarea>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="input-field col s12 line-1">
+                        &iquest;Le dan infecciones de hongos o de vi&iacute;a urinaria? Por favor explique:
+                        <textarea class="materialize-textarea" rows="3" form="printableForm"></textarea>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col l12">
+                        <div class="input-field">
+                            &iquest;Con cu&aacute;nta frecuencia?
+                            <input id="" class="" name="" type="text">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>  <!-- section-4 End -->
+    </form>
+</div>
+
+<div class="container">
+    <div class="row">
+        <button id="nextSectionButton" class="btn waves-effect waves-light right" type="submit" name="action"><i class="material-icons right">arrow_forward</i>Siguente</button>
+        <button id="printButton" class="btn waves-effect waves-light right" type="submit" name="action">Impremir<i class="material-icons right">print</i></button>
+        <button id="saveButton" class="btn waves-effect waves-light right" type="submit" name="action">Submit<i class="material-icons right">save</i></button>
+        <button id="prevSectionButton" class="btn waves-effect waves-light right" type="submit" name="action"><i class="material-icons left">arrow_back</i>Atras</button>
+    </div>
+</div>
+<style type="text/css">
+    .container {
+        padding-top: 40px;
+        padding-left: 40px;
+        padding-right: 40px;
+    }
+
+    .inner-title {
+        color: red;
+    }
+
+    .container > .row > .btn {
+        margin-right: 10px;
+    }
+
+    .inner {
+        padding-left: 40px;
+        padding-right: 40px;
+    }
+
+    @media print {
+        body * {
+            visibility: hidden;
+        }
+
+        #printableForm,
+        #printableForm * {
+            visibility: visible;
+        }
+
+        #printableForm {
+            position: absolute;
+            left: 0;
+            top: 0;
+        }
+    }
+</style>
+
+<script type="text/javascript">
+    document.getElementById('printButton').onclick = function() {
+        window.print();
+    }
+
+    $('#prevSectionButton').click(function() {
+        window.location = '/forms/p3';
+    });
+
+    $('#nextSectionButton').click(function() {
+        window.location = '/forms/p5';
+    });
+
+    $(document).ready(function() {
+        $('select').material_select();
+    });
+</script>
