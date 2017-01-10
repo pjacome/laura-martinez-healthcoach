@@ -6,7 +6,11 @@ var router  = express.Router();
 /* Language = English - Routes */
 
 router.get('/', function(req, res) {
-    res.render('blog');
+    res.render('home');
+});
+
+router.get('/home', function(req, res) {
+    res.render('home');
 });
 
 router.get('/about', function(req, res) {
