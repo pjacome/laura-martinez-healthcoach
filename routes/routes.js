@@ -18,55 +18,55 @@ router.get('/home', function (req, res) { res.redirect('en/home'); });
 router.get('/en/home', function(req, res) {res.render('en/home');});
 router.get('/en/about', function(req, res) {res.render('en/about');});
 router.get('/en/recipes', function(req, res) {res.render('en/recipes/recipes');});
-router.get('/healthcoaching', function (req, res) { res.render('en/healthcoaching'); });
-router.get('/events', function (req, res) { res.render('en/events'); });
-router.get('/blog', function (req, res) { res.render('en/blog'); });
-router.get('/contact', function (req, res) { res.render('en/contact'); });
+router.get('/en/healthcoaching', function (req, res) { res.render('en/healthcoaching'); });
+router.get('/en/events', function (req, res) { res.render('en/events'); });
+router.get('/en/blog', function (req, res) { res.render('en/blog'); });
+router.get('/en/contact', function (req, res) { res.render('en/contact'); });
 
 /////////////////// recipes ////////////////////
-router.get('/recipes/breakfast', function(req, res) {res.render('en/comingsoon');});
-router.get('/recipes/entrees', function (req, res) {res.render('en/comingsoon');});
-router.get('/recipes/desserts', function (req, res) {res.render('en/comingsoon');});
-router.get('/recipes/drinks', function (req, res) {res.render('en/comingsoon');});
-router.get('/recipes/snacks', function (req, res) {res.render('en/comingsoon');});
-router.get('/recipes/salads', function (req, res) { res.render('en/comingsoon'); });
+router.get('/en/recipes/breakfast', function(req, res) {res.render('en/comingsoon');});
+router.get('/en/recipes/entrees', function (req, res) {res.render('en/comingsoon');});
+router.get('/en/recipes/desserts', function (req, res) {res.render('en/comingsoon');});
+router.get('/en/recipes/drinks', function (req, res) {res.render('en/comingsoon');});
+router.get('/en/recipes/snacks', function (req, res) {res.render('en/comingsoon');});
+router.get('/en/recipes/salads', function (req, res) { res.render('en/comingsoon'); });
 
 /////////////////// forms //////////////////////
-router.get('/forms', function (req, res) { res.render('en/forms/forms'); });
-router.get('/forms/revisit', function (req, res) { res.render('en/comingsoon'); });
+router.get('/en/forms', function (req, res) { res.render('en/forms/forms'); });
+router.get('/en/forms/revisit', function (req, res) { res.render('en/comingsoon'); });
 
-router.get('/forms/women', function (req, res) { res.render('en/women'); });
-/*
-router.get('/forms/women/page1', function(req, res) {res.render('en/forms/women/p1');});
-router.get('/forms/women/page2', function(req, res) {res.render('en/forms/women/p2');});
-router.get('/forms/women/page3', function(req, res) {res.render('en/forms/women/p3');});
-router.get('/forms/women/page4', function(req, res) {res.render('en/forms/women/p4');});
-router.get('/forms/women/page5', function(req, res) {res.render('en/forms/women/p5');});
-router.get('/forms/women/page6', function(req, res) {res.render('en/forms/women/p6');});
-router.get('/forms/women/page7', function(req, res) {res.render('en/forms/women/p7');});
-*/
+router.get('/en/forms/women', function (req, res) { res.render('en/forms/women/women'); });
+router.get('/en/forms/women/page1', function(req, res) {res.render('en/forms/women/p1', {layout: 'formpages.handlebars'});});
+router.get('/en/forms/women/page2', function(req, res) {res.render('en/forms/women/p2', {layout: 'formpages.handlebars'});});
+router.get('/en/forms/women/page3', function(req, res) {res.render('en/forms/women/p3', {layout: 'formpages.handlebars'});});
+router.get('/en/forms/women/page4', function(req, res) {res.render('en/forms/women/p4', {layout: 'formpages.handlebars'});});
+router.get('/en/forms/women/page5', function(req, res) {res.render('en/forms/women/p5', {layout: 'formpages.handlebars'});});
+router.get('/en/forms/women/page6', function(req, res) {res.render('en/forms/women/p6', {layout: 'formpages.handlebars'});});
+router.get('/en/forms/women/page7', function(req, res) {res.render('en/forms/women/p7', {layout: 'formpages.handlebars'});});
+
 
 // '/forms/men' is just a placeholder endpoint. first page starts at p1
-router.get('/forms/men', function (req, res) { res.render('en/comingsoon'); });
-router.get('/forms/p1', function(req, res) {res.render('en/forms/forms-p1');});
-router.get('/forms/p2', function(req, res) {res.render('en/forms/forms-p2');});
-router.get('/forms/p3', function(req, res) {res.render('en/forms/forms-p3');});
-router.get('/forms/p4', function(req, res) {res.render('en/forms/forms-p4');});
-router.get('/forms/p5', function(req, res) {res.render('en/forms/forms-p5');});
-router.get('/forms/p6', function(req, res) {res.render('en/forms/forms-p6');});
-router.get('/forms/p7', function(req, res) {res.render('en/forms/forms-p7');});
+// -> same applies for the '/women' routes
+router.get('/en/forms/men', function (req, res) { res.render('en/comingsoon'); });
+router.get('/en/forms/p1', function(req, res) {res.render('en/forms/forms-p1');});
+router.get('/en/forms/p2', function(req, res) {res.render('en/forms/forms-p2');});
+router.get('/en/forms/p3', function(req, res) {res.render('en/forms/forms-p3');});
+router.get('/en/forms/p4', function(req, res) {res.render('en/forms/forms-p4');});
+router.get('/en/forms/p5', function(req, res) {res.render('en/forms/forms-p5');});
+router.get('/en/forms/p6', function(req, res) {res.render('en/forms/forms-p6');});
+router.get('/en/forms/p7', function(req, res) {res.render('en/forms/forms-p7');});
 
 /////////////////// admin //////////////////////
-router.get('/admin/login', function (req, res) {res.render('en/admin/alogin');});
-router.get('/admin/dashboard', function (req, res) {res.render('en/admin/adash');});
-router.get('/admin/blog', function (req, res) {res.render('en/admin/ablog');});
-    router.get('/admin/blog/add', function (req, res) {res.render('en/admin/ablogadd');});
-    router.get('/admin/blog/edit', function (req, res) {res.render('en/admin/ablogedit');});
-        router.get('/admin/blog/edit/exedit', function (req, res) {res.render('en/admin/exedit');});
+router.get('/en/admin/login', function (req, res) {res.render('en/admin/alogin');});
+router.get('/en/admin/dashboard', function (req, res) {res.render('en/admin/adash');});
+router.get('/en/admin/blog', function (req, res) {res.render('en/admin/ablog');});
+    router.get('/en/admin/blog/add', function (req, res) {res.render('en/admin/ablogadd');});
+    router.get('/en/admin/blog/edit', function (req, res) {res.render('en/admin/ablogedit');});
+        router.get('/en/admin/blog/edit/exedit', function (req, res) {res.render('en/admin/exedit');});
 
-router.get('/admin/events', function (req, res) {res.render('en/admin/aevents');});
-router.get('/admin/forms', function (req, res) {res.render('en/admin/aforms');});
-router.get('/admin/recipes', function (req, res) {res.render('en/admin/arecipes');});
+router.get('/en/admin/events', function (req, res) {res.render('en/admin/aevents');});
+router.get('/en/admin/forms', function (req, res) {res.render('en/admin/aforms');});
+router.get('/en/admin/recipes', function (req, res) {res.render('en/admin/arecipes');});
 
 // ###########################################################################
 // The following endpoints manipulate data and are responsible for CRUD
@@ -129,7 +129,7 @@ router.use(function(req, res) {
     console.log("\nLooking for URL: '" + req.url + "'");
     res.type('text/html');
     res.status(404);
-    res.render('404');
+    res.render('en/404');
 });
 
 /*
@@ -140,7 +140,7 @@ router.use(function(err, req, res, next) {
     console.log('\nTried to access ' + req.url);
     console.error(err.stack);
     res.status(500);
-    res.render('500');
+    res.render('en/500');
 });
 
 module.exports = router;

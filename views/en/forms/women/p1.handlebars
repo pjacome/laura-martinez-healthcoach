@@ -1,0 +1,174 @@
+<br>
+<div class="">
+    <form id="printableForm">
+        <h5>Women's Health History</h5>
+        <hr>
+        <br>
+        {{!-- <div class="divider"></div> --}}
+        <br>
+        <span class="flow-text">
+            Please write or print clearly. All of your information will remain confidential
+            between you and the Helath Coach.
+        </span>
+        <br>
+
+        <div class="sections section-1">
+            <span class="inner-title allcaps bold"><h5>Informaci&oacute;n Personal</h5></span>
+            <div class="inner-content">
+                <div class="row">
+                    <div class="col s6 m6 l6">
+                        <div class="input-field">
+                            * First Name:
+                            <input id="first_name" name="firstName" type="text" class="validate">
+                        </div>
+                    </div>
+
+                    <div class="col s6 m6 l6">
+                        <div class="input-field">
+                            * Last Name:
+                            <input id="last_name" name="lastName" type="text" class="validate">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="input-field">
+                    * Email:
+                    <input id="email" name="email" type="email" class="validate">
+                </div>
+
+                <div class="input-field">
+                    How often do you check email?
+                    <input id="email_frequency" name="emailFrequency" type="text">
+                </div>
+
+                <div class="row">
+                    <div class="col s12 m4 l4">
+                        <div class="input-field">
+                            Phone Number:
+                            <input id="email" name="email" type="tel" class="validate">
+                        </div>
+                    </div>
+                    <div class="col s12 m4 l4">
+                        <div class="input-field">
+                            Work:
+                            <input id="email" name="email" type="tel" class="validate">
+                        </div>
+                    </div>
+                    <div class="col s12 m4 l4">
+                        <div class="input-field">
+                            Mobile:
+                            <input id="email" name="email" type="tel" class="validate">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col s6 m4 l4">
+                        <div class="input-field">
+                            Age:
+                            <input id="email" name="email" type="number" class="validate">
+                        </div>
+                    </div>
+                    <div class="col s6 m4 l4">
+                        <div class="input-field">
+                            Height:
+                            <input id="email" name="email" type="email" class="validate">
+                        </div>
+                    </div>
+                    <div class="col s12 m4 l4">
+                        <div class="input-field">
+                            Birthdate:
+                            <input id="email" placeholder="dd/mm/aaaa" name="email" type="email" class="validate">
+                        </div>
+                    </div>
+                    <div class="col s12 m12 l4">
+                        <div class="input-field">
+                            Place of Birth:
+                            <input id="email" name="email" type="email" class="validate">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col s12 m4 l4">
+                        <div class="input-field">
+                            Current weight:
+                            <input id="email" name="email" type="number" class="validate">
+                        </div>
+                    </div>
+                    <div class="col s12 m4 l4">
+                        <div class="input-field">
+                            Weight six months ago:
+                            <input id="email" name="email" type="number" class="validate">
+                        </div>
+                    </div>
+                    <div class="col s12 m4 l4">
+                        <div class="input-field">
+                            One year ago:
+                            <input id="email" name="email" type="number" class="validate">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col s12">
+                        Would you like your weight to be different?
+                        <div class="input-field inline">
+                            <input id="email" type="text" class="validate">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col s12">
+                        If so, what?
+                        <div class="input-field inline">
+                            <input id="email" type="text" class="validate">
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>  <!-- section-1 End -->
+
+        <div class="row"></div>
+    </form>
+</div>
+
+<style type="text/css">
+    .container {
+        padding-top: 40px;
+        padding-left: 40px;
+        padding-right: 40px;
+    }
+
+    .inner-title {
+        color: red;
+    }
+
+    .container > .row > .btn {
+        margin-right: 10px;
+    }
+
+    .inner {
+        padding-left: 40px;
+        padding-right: 40px;
+    }
+
+    @media print {
+        body * {
+            visibility: hidden;
+        }
+
+        #printableForm,
+        #printableForm * {
+            visibility: visible;
+        }
+
+        #printableForm {
+            position: absolute;
+            left: 0;
+            top: 0;
+        }
+    }
+</style>

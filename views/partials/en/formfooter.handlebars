@@ -1,0 +1,17 @@
+﻿<div class="container">
+    <div class="row">
+        <button id="nextSectionButton" class="btn waves-effect waves-light right" type="submit" name="action"><i class="material-icons right">arrow_forward</i>Siguente</button>
+        <button id="printButton" class="btn waves-effect waves-light right" type="submit" name="action">Impremir<i class="material-icons right">print</i></button>
+        <button id="saveButton" class="btn waves-effect waves-light right" type="submit" name="action">Submit<i class="material-icons right">save</i></button>
+    </div>
+</div>
+
+<script type="text/javascript">
+    document.getElementById('printButton').onclick = function() {
+        window.print();
+    }
+
+    $('#nextSectionButton').click(function() {
+        window.location = '/en/forms/women/page2';
+    });
+</script>
