@@ -1,17 +1,50 @@
 ﻿<div class="container">
     <div class="row">
-        <button id="nextSectionButton" class="btn waves-effect waves-light right" type="submit" name="action"><i class="material-icons right">arrow_forward</i>Siguente</button>
-        <button id="printButton" class="btn waves-effect waves-light right" type="submit" name="action">Impremir<i class="material-icons right">print</i></button>
-        <button id="saveButton" class="btn waves-effect waves-light right" type="submit" name="action">Submit<i class="material-icons right">save</i></button>
+        <button id="nextSectionButton" class="btn waves-effect waves-light right" type="submit" name="action"><i class="material-icons right">arrow_forward</i>Next</button>
+        <button id="printButton" class="btn waves-effect waves-light right" type="submit" name="action">Print<i class="material-icons right">print</i></button>
+        <button id="saveButton" class="btn waves-effect waves-light right" type="submit" name="action">Save<i class="material-icons right">save</i></button>
+        <button id="prevSectionButton" class="btn waves-effect waves-light right" type="submit" name="action"><i class="material-icons left">arrow_back</i>Back</button>
     </div>
 </div>
 
 <script type="text/javascript">
     document.getElementById('printButton').onclick = function() {
         window.print();
+
     }
 
-    $('#nextSectionButton').click(function() {
-        window.location = '/en/forms/women/page2';
+    $(document).ready(function () {
+        var path = window.location.pathname;
+        var pathArr = path.split('/');
+        var pageNumber = pathArr[pathArr.length - 1];
+        pageNumber = parseInt(pageNumber[4]);
+        console.log(pageNumber);
+        var nextPageNumber = pageNumber + 1;
+        var prevPageNumber = pageNumber - 1;
+        if(pageNumber === 1) {
+            $('#prevSectionButton').addClass('disabled');
+        } else if (pageNumber === 7) {
+            $('#nextSectionButton').addClass('green');
+            $('#nextSectionButton').html('Finsih');
+        }
+
+
+        $('#nextSectionButton').click(function () {
+            var nextPage = 'page' + nextPageNumber;
+            console.log(nextPage);
+            pathArr[pathArr.length - 1] = nextPage;
+            var newPath = pathArr.join('/');
+            console.log(newPath);
+            window.location = newPath;
+        });
+
+        $('#prevSectionButton').click(function () {
+            var nextPage = 'page' + prevPageNumber;
+            console.log(nextPage);
+            pathArr[pathArr.length - 1] = nextPage;
+            var newPath = pathArr.join('/');
+            console.log(newPath);
+            window.location = newPath;
+        });
     });
 </script>

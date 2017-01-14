@@ -7,11 +7,12 @@
 <body>
     {{>en/navigation}}
     <main>
+        <br />
         <div class="container z-depth-5">
             {{>en/formnav}}
             {{{body}}}
-            {{>en/formfooter}}
         </div>
+        {{>en/formfooter}}
     </main>
     {{>en/footer}}
 
@@ -24,6 +25,42 @@
 
         main {
             flex: 1 0 auto;
+        }
+
+        .container {
+        padding-top: 40px;
+        padding-left: 40px;
+        padding-right: 40px;
+        }
+
+        .inner-title {
+            color: red;
+        }
+
+        .container > .row > .btn {
+            margin-right: 10px;
+        }
+
+        .inner {
+            padding-left: 40px;
+            padding-right: 40px;
+        }
+
+        @media print {
+            body * {
+                visibility: hidden;
+            }
+
+            #printableForm,
+            #printableForm * {
+                visibility: visible;
+            }
+
+            #printableForm {
+                position: absolute;
+                left: 0;
+                top: 0;
+            }
         }
     </style>
 

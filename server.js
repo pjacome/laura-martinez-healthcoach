@@ -11,6 +11,7 @@ app.use(require('body-parser').urlencoded({extended: true}));
 app.use(require('body-parser').json());
 app.disable('x-powered-by');
 app.set('port', process.env.PORT || 5000);
+app.use(express.static(__dirname + '/public'));
 app.use('/en', express.static(__dirname + '/public'));
 app.use('/es', express.static(__dirname + '/public'));
 // Enable this on Host Server ... but why?
