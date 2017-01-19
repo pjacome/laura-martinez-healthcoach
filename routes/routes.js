@@ -2,6 +2,8 @@
 
 var express = require('express');
 var router  = express.Router();
+var obj_Recipes = require('./controllers/recipes');
+var obj_Contact = require('./controllers/contacts');
 
 /* Language = English - Routes */
 
@@ -24,15 +26,27 @@ router.get('/en/events', function(req, res) {res.render('en/events');});
 router.get('/en/blog', function(req, res) {res.render('en/blog');});
 router.get('/en/contact', function(req, res) {res.render('en/contact');});
 
+
+
 /////////////////// recipes ////////////////////
 router.get('/en/recipes/search', function(req, res) {res.render('en/comingsoon');});
-router.get('/en/recipes/breakfast', function(req, res) {res.render('en/recipes/breakfast', {layout: 'recipepages.handlebars'});});
-router.get('/en/recipes/breakfast/:id', function(req, res) {res.render('en/recipes/recipeitem');});
-router.get('/en/recipes/entrees', function(req, res) {res.render('en/comingsoon');});
-router.get('/en/recipes/desserts', function(req, res) {res.render('en/comingsoon');});
-router.get('/en/recipes/drinks', function(req, res) {res.render('en/comingsoon');});
-router.get('/en/recipes/snacks', function(req, res) {res.render('en/comingsoon');});
-router.get('/en/recipes/salads', function(req, res) {res.render('en/comingsoon');});
+router.get('/en/recipes/:category', function (req, res) {
+    var category = req.params.category;
+    // now that i have the category i can search of recipes based on the category
+    obj_Recipes.GET(category);
+    console.log('going to look for recipes under the ' + category + ' category');
+    res.render('en/recipes/' + category, { layout: 'recipepages.handlebars' });
+});
+router.get('/en/recipes/:category/:id', function(req, res) {
+    var category = req.params.category;
+    var id = req.params.id;
+    obj_Recipes.GET(category, id);
+    res.render('en/recipes/recipeitem');
+    //res.render('en/recipes/' + category + '/' + id, { layout: 'recipepages.handlebars' });
+});
+router.post('/en/recipes/create', obj_Recipes.POST);
+
+
 
 /////////////////// forms //////////////////////
 router.get('/en/forms', function(req, res) {res.render('en/forms/forms');});
@@ -83,10 +97,10 @@ router.get('/en/admin/recipes', function(req, res) {res.render('en/admin/arecipe
 // router.delete('/en/blog/edit/?:id, obj_Blog.DELETE);
 
 //recipes
-// router.get   ('/en/recipes/read/all', obj_Recipes.GET);
-// router.post  ('/en/recipes/create',   obj_Recipes.POST);
-// router.put   ('/en/recipes/edit/?:id, obj_Recipes.PUT);
-// router.delete('/en/recipes/edit/?:id, obj_Recipes.DELETE);
+//router.get   ('/en/recipes/read/all', obj_Recipes.GET);
+//router.post  ('/en/recipes/create',   obj_Recipes.POST);
+//router.put   ('/en/recipes/edit/?:id', obj_Recipes.PUT);
+//router.delete('/en/recipes/edit/?:id', obj_Recipes.DELETE);
 
 //forms
 // router.get   ('/en/read/all', obj_Forms.GET);
@@ -99,7 +113,7 @@ router.get('/en/admin/recipes', function(req, res) {res.render('en/admin/arecipe
 // router.post  ('/en/create',   obj_Events.POST);
 // router.put   ('/en/edit/?:id, obj_Events.PUT);
 // router.delete('/en/edit/?:id, obj_Events.DELETE);
-var obj_Contact = require('./controllers/contacts');
+
 router.post('/en/contact/send', obj_Contact.POST);
 
 /* Idioma = Espanol - Rutas */
@@ -129,6 +143,10 @@ router.get('/formas/mujeres', function(req, res) {
 */
 
 router.use(function(req, res) {
+    if(req.url === "/favicon.ico") {
+        // remove this if statement
+        return;
+    }
     console.log("\nLooking for URL: '" + req.url + "'");
     res.type('text/html');
     res.status(404);
@@ -140,6 +158,10 @@ router.use(function(req, res) {
 */
 
 router.use(function(err, req, res, next) {
+    if(req.url === "/favicon.ico") {
+        // remove this if statement
+        return;
+    }
     console.log('\nTried to access ' + req.url);
     console.error(err.stack);
     res.status(500);

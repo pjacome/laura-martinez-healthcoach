@@ -7,7 +7,7 @@
         <div class="col l9 flow-text">
             <h4>Acai Bowl</h4>
             <p>No Description</p>
-            <a class="orange-text">Read more...</a>
+            <a id="58808fcc46b8db3a30759e9c" class="orange-text">Read more...</a>
         </div>
     </div>
 
@@ -19,7 +19,7 @@
         <div class="col l9 flow-text">
             <h4>Avocado Toast</h4>
             <p>No Description</p>
-            <a class="orange-text">Read more...</a>
+            <a id="456" class="orange-text">Read more...</a>
         </div>
     </div>
 </div>
@@ -65,5 +65,8 @@
 </style>
 
 <script>
-
+    $('a.orange-text').click(function(e) {
+        console.log('id:', e.target.id);
+        window.location.href = 'breakfast/58808fcc46b8db3a30759e9c';
+    });
 </script>
