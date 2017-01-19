@@ -13,29 +13,32 @@ var router  = express.Router();
 // use '/' route to see what default language the client prefers
 // or read into displying the proper partial
 //router.get('/', function (req, res) {res.render('home');});
-router.get('/', function (req, res) { res.redirect('en/home');});
-router.get('/home', function (req, res) { res.redirect('en/home'); });
+router.get('/', function(req, res) {res.redirect('en/home');});
+router.get('/en', function (req, res) { res.redirect('en/home'); });
+router.get('/home', function(req, res) {res.redirect('en/home');});
 router.get('/en/home', function(req, res) {res.render('en/home');});
 router.get('/en/about', function(req, res) {res.render('en/about');});
 router.get('/en/recipes', function(req, res) {res.render('en/recipes/recipes');});
-router.get('/en/healthcoaching', function (req, res) { res.render('en/healthcoaching'); });
-router.get('/en/events', function (req, res) { res.render('en/events'); });
-router.get('/en/blog', function (req, res) { res.render('en/blog'); });
-router.get('/en/contact', function (req, res) { res.render('en/contact'); });
+router.get('/en/healthcoaching', function(req, res) {res.render('en/healthcoaching');});
+router.get('/en/events', function(req, res) {res.render('en/events');});
+router.get('/en/blog', function(req, res) {res.render('en/blog');});
+router.get('/en/contact', function(req, res) {res.render('en/contact');});
 
 /////////////////// recipes ////////////////////
-router.get('/en/recipes/breakfast', function(req, res) {res.render('en/comingsoon');});
-router.get('/en/recipes/entrees', function (req, res) {res.render('en/comingsoon');});
-router.get('/en/recipes/desserts', function (req, res) {res.render('en/comingsoon');});
-router.get('/en/recipes/drinks', function (req, res) {res.render('en/comingsoon');});
-router.get('/en/recipes/snacks', function (req, res) {res.render('en/comingsoon');});
-router.get('/en/recipes/salads', function (req, res) { res.render('en/comingsoon'); });
+router.get('/en/recipes/search', function(req, res) {res.render('en/comingsoon');});
+router.get('/en/recipes/breakfast', function(req, res) {res.render('en/recipes/breakfast', {layout: 'recipepages.handlebars'});});
+router.get('/en/recipes/breakfast/:id', function(req, res) {res.render('en/recipes/recipeitem');});
+router.get('/en/recipes/entrees', function(req, res) {res.render('en/comingsoon');});
+router.get('/en/recipes/desserts', function(req, res) {res.render('en/comingsoon');});
+router.get('/en/recipes/drinks', function(req, res) {res.render('en/comingsoon');});
+router.get('/en/recipes/snacks', function(req, res) {res.render('en/comingsoon');});
+router.get('/en/recipes/salads', function(req, res) {res.render('en/comingsoon');});
 
 /////////////////// forms //////////////////////
-router.get('/en/forms', function (req, res) { res.render('en/forms/forms'); });
-router.get('/en/forms/revisit', function (req, res) { res.render('en/comingsoon'); });
+router.get('/en/forms', function(req, res) {res.render('en/forms/forms');});
+router.get('/en/forms/revisit', function(req, res) {res.render('en/comingsoon');});
 
-router.get('/en/forms/women', function (req, res) { res.render('en/forms/women/women'); });
+router.get('/en/forms/women', function(req, res) {res.render('en/forms/women/women');});
 router.get('/en/forms/women/page1', function(req, res) {res.render('en/forms/women/p1', {layout: 'formpages.handlebars'});});
 router.get('/en/forms/women/page2', function(req, res) {res.render('en/forms/women/p2', {layout: 'formpages.handlebars'});});
 router.get('/en/forms/women/page3', function(req, res) {res.render('en/forms/women/p3', {layout: 'formpages.handlebars'});});
@@ -47,7 +50,7 @@ router.get('/en/forms/women/page7', function(req, res) {res.render('en/forms/wom
 
 // '/forms/men' is just a placeholder endpoint. first page starts at p1
 // -> same applies for the '/women' routes
-router.get('/en/forms/men', function (req, res) { res.render('en/comingsoon'); });
+router.get('/en/forms/men', function(req, res) {res.render('en/comingsoon');});
 router.get('/en/forms/p1', function(req, res) {res.render('en/forms/forms-p1');});
 router.get('/en/forms/p2', function(req, res) {res.render('en/forms/forms-p2');});
 router.get('/en/forms/p3', function(req, res) {res.render('en/forms/forms-p3');});
@@ -57,16 +60,16 @@ router.get('/en/forms/p6', function(req, res) {res.render('en/forms/forms-p6');}
 router.get('/en/forms/p7', function(req, res) {res.render('en/forms/forms-p7');});
 
 /////////////////// admin //////////////////////
-router.get('/en/admin/login', function (req, res) {res.render('en/admin/alogin');});
-router.get('/en/admin/dashboard', function (req, res) {res.render('en/admin/adash');});
-router.get('/en/admin/blog', function (req, res) {res.render('en/admin/ablog');});
-    router.get('/en/admin/blog/add', function (req, res) {res.render('en/admin/ablogadd');});
-    router.get('/en/admin/blog/edit', function (req, res) {res.render('en/admin/ablogedit');});
-        router.get('/en/admin/blog/edit/exedit', function (req, res) {res.render('en/admin/exedit');});
+router.get('/en/admin/login', function(req, res) {res.render('en/admin/alogin');});
+router.get('/en/admin/dashboard', function(req, res) {res.render('en/admin/adash');});
+router.get('/en/admin/blog', function(req, res) {res.render('en/admin/ablog');});
+    router.get('/en/admin/blog/add', function(req, res) {res.render('en/admin/ablogadd');});
+    router.get('/en/admin/blog/edit', function(req, res) {res.render('en/admin/ablogedit');});
+        router.get('/en/admin/blog/edit/exedit', function(req, res) {res.render('en/admin/exedit');});
 
-router.get('/en/admin/events', function (req, res) {res.render('en/admin/aevents');});
-router.get('/en/admin/forms', function (req, res) {res.render('en/admin/aforms');});
-router.get('/en/admin/recipes', function (req, res) {res.render('en/admin/arecipes');});
+router.get('/en/admin/events', function(req, res) {res.render('en/admin/aevents');});
+router.get('/en/admin/forms', function(req, res) {res.render('en/admin/aforms');});
+router.get('/en/admin/recipes', function(req, res) {res.render('en/admin/arecipes');});
 
 // ###########################################################################
 // The following endpoints manipulate data and are responsible for CRUD
@@ -74,34 +77,34 @@ router.get('/en/admin/recipes', function (req, res) {res.render('en/admin/arecip
 // ###########################################################################
 
 //blog
-// router.get ('/blog/read/all', obj_Blog.GET);
-// router.post('/blog/create', obj_Blog.POST);
-// router.put ('/blog/edit/?:id, obj_Blog.PUT);
-// router.delete('/blog/edit/?:id, obj_Blog.DELETE);
+// router.get ('/en/blog/read/all', obj_Blog.GET);
+// router.post('/en/blog/create', obj_Blog.POST);
+// router.put ('/en/blog/edit/?:id, obj_Blog.PUT);
+// router.delete('/en/blog/edit/?:id, obj_Blog.DELETE);
 
 //recipes
-// router.get ('/recipes/read/all', obj_Recipes.GET);
-// router.post('/recipes/create', obj_Recipes.POST);
-// router.put ('/recipes/edit/?:id, obj_Recipes.PUT);
-// router.delete('/recipes/edit/?:id, obj_Recipes.DELETE);
+// router.get   ('/en/recipes/read/all', obj_Recipes.GET);
+// router.post  ('/en/recipes/create',   obj_Recipes.POST);
+// router.put   ('/en/recipes/edit/?:id, obj_Recipes.PUT);
+// router.delete('/en/recipes/edit/?:id, obj_Recipes.DELETE);
 
 //forms
-// router.get ('//read/all', obj_.GET);
-// router.post('//create', obj_.POST);
-// router.put ('//edit/?:id, obj_.PUT);
-// router.delete('//edit/?:id, obj_.DELETE);
+// router.get   ('/en/read/all', obj_Forms.GET);
+// router.post  ('/en/create',   obj_Forms.POST);
+// router.put   ('/en/edit/?:id, obj_Forms.PUT);
+// router.delete('/en/edit/?:id, obj_Forms.DELETE);
 
 //events
-// router.get ('//read/all', obj_.GET);
-// router.post('//create', obj_.POST);
-// router.put ('//edit/?:id, obj_.PUT);
-// router.delete('//edit/?:id, obj_.DELETE);
-
-
+// router.get   ('/en/read/all', obj_Events.GET);
+// router.post  ('/en/create',   obj_Events.POST);
+// router.put   ('/en/edit/?:id, obj_Events.PUT);
+// router.delete('/en/edit/?:id, obj_Events.DELETE);
+var obj_Contact = require('./controllers/contacts');
+router.post('/en/contact/send', obj_Contact.POST);
 
 /* Idioma = Espanol - Rutas */
 
-router.get('/formas/mujeres', function (req, res) {
+router.get('/formas/mujeres', function(req, res) {
     res.render('es/mujeres');
 });
 
