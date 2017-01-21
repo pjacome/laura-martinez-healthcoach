@@ -1,41 +1,78 @@
-﻿<!-- carousel/gallery goes here -->
+﻿<div class="container">
+    <h2 class="lmhc-main-title-font center">
+        {{title}}
+    </h2>
+    <!-- carousel/gallery goes here -->
+    <div class="carousel">
+        {{#each images}}
+        <a class="carousel-item"><img src="/images/{{this}}"></a>
+        {{/each}}
+    </div>
 
-<!-- description goes here -->
-
-<div class="container">
+    <!-- description goes here -->
+    <p class="flow-text" style="margin-top: 0;">{{description}}</p>
+    
     <!-- ingredients go here -->
-    <table>
-        <thead>
-            <tr>
-                <th>Quantity</th>
-                <th>Item</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td>2</td>
-                <td>acai packets</td>
-            </tr>
-            <tr>
-                <td>1</td>
-                <td>banana</td>
-            </tr>
-            <tr>
-                <td>1/2 cup</td>
-                <td>almond milk</td>
-            </tr>
-            <tr>
-                <td>1/2 cup</td>
-                <td>coconut water</td>
-            </tr>
-            <tr>
-                <td>1</td>
-                <td>tablespoon hempseeds</td>
-            </tr>
-        </tbody>
-    </table>
-    <!-- steps go here -->
+    <div class="ingredients-wrapper green lighten-2">
+        <table class="responsive-table highlight white">
+            <thead>
+                <tr>
+                    <th>Quantity</th>
+                    <th>Unit</th>
+                    <th>Item</th>
+                </tr>
+            </thead>
+            <tbody>
+                {{#each ingredients}}
+                <tr>
+                    <td>{{quantity}}</td>
+                    <td>{{unit}}</td>
+                    <td>{{item}}</td>
+                </tr>
+                {{/each}}
+            </tbody>
+        </table>
+    </div>
 
-    <p>All the ingredients in the blender for 15 seconds</p>
-    <p>Optional: additional toppings are Organic granola, 1 spoon of chia, 1 spoon of coconut flakes, goji berries</p>
+    <!-- steps go here -->
+    {{instructions}}
+
+    <p>{{additionalNotes}}</p>
 </div>
+
+<style>
+    .ingredients-wrapper {
+        padding: 20px;
+    }
+
+    .lmhc-main-title-font.center {
+        margin-bottom: 0;
+    }
+
+    .ingredients-wrapper table td {
+        padding-right: 20px;
+    }
+
+    /* small */
+    @media (min-width: 768px) {
+        .ingredients-wrapper table th,
+        .ingredients-wrapper table td {
+            padding: 20px;
+        }
+    }
+    /* 
+        - write media query for the padding on larger screens
+        - smaller screens do not require the padding once the table
+          is reformatted
+    */
+</style>
+
+<script>
+    $(document).ready(function(){
+        $('.carousel').carousel({
+            dist: -50,
+            indicators: true,
+            no_wrap: true
+        });
+    });
+</script>

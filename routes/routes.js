@@ -30,20 +30,8 @@ router.get('/en/contact', function(req, res) {res.render('en/contact');});
 
 /////////////////// recipes ////////////////////
 router.get('/en/recipes/search', function(req, res) {res.render('en/comingsoon');});
-router.get('/en/recipes/:category', function (req, res) {
-    var category = req.params.category;
-    // now that i have the category i can search of recipes based on the category
-    obj_Recipes.GET(category);
-    console.log('going to look for recipes under the ' + category + ' category');
-    res.render('en/recipes/' + category, { layout: 'recipepages.handlebars' });
-});
-router.get('/en/recipes/:category/:id', function(req, res) {
-    var category = req.params.category;
-    var id = req.params.id;
-    obj_Recipes.GET(category, id);
-    res.render('en/recipes/recipeitem');
-    //res.render('en/recipes/' + category + '/' + id, { layout: 'recipepages.handlebars' });
-});
+router.get('/en/recipes/:category', obj_Recipes.GET);
+router.get('/en/recipes/:category/:id', obj_Recipes.GET);
 router.post('/en/recipes/create', obj_Recipes.POST);
 
 
@@ -143,14 +131,10 @@ router.get('/formas/mujeres', function(req, res) {
 */
 
 router.use(function(req, res) {
-    if(req.url === "/favicon.ico") {
-        // remove this if statement
-        return;
-    }
     console.log("\nLooking for URL: '" + req.url + "'");
     res.type('text/html');
     res.status(404);
-    res.render('en/404');
+    res.render('en/400');
 });
 
 /*
@@ -158,10 +142,6 @@ router.use(function(req, res) {
 */
 
 router.use(function(err, req, res, next) {
-    if(req.url === "/favicon.ico") {
-        // remove this if statement
-        return;
-    }
     console.log('\nTried to access ' + req.url);
     console.error(err.stack);
     res.status(500);

@@ -9,22 +9,45 @@
     <main>
         <br />
         <div class="container">
-            {{>en/recipesearch}}
-            {{{body}}}
-            {{!--{{>en/recipefooter}--}}
+            <div class="justneedsomepadding">
+                {{!-->en/recipesearch--}}
+                {{{body}}}
+                {{!--{{>en/recipefooter}--}}
+            </div>
         </div>
     </main>
     {{>en/footer}}
 
-    <style type="text/css">
-        body {
-            display: flex;
-            min-height: 100vh;
-            flex-direction: column;
+    <style>
+        body{background-color: #7cb407;}
+        .justneedsomepadding {
+            background-color: white;
+            padding: 20px;
+        }
+        .recipe-results-wrapper {/*background-color: #c4d6cb;*/}
+
+        .recipe-single-result {
+            height: 200px;
+            /*border-right: 1px black solid;*/
         }
 
-        main {
-            flex: 1 0 auto;
+        .col {
+            height: 100%;
+        }
+
+        .vertical-divider {
+            height: 100%;
+            width: 1px;
+            margin: 0 auto;
+        }
+
+        .photos {
+            height: 100%;
+            width: 100%;
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center;
+            margin-left: 20px;
         }
     </style>
 

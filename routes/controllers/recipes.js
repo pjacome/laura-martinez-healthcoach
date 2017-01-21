@@ -16,21 +16,44 @@ module.exports.POST = function(req, res) {
     });
 }
 
-module.exports.GET = function(category, id) {
+module.exports.GET = function(req, res) {
+    var category = req.params.category;
+    var id = req.params.id;
+    // validate the query parameters before making any database calls
     if(category && id) {
         var obj_ID = new ObjectID(id);
         console.log('returning recipe based on: ' + category + ' and _id: ' + obj_ID);
         db.client.collection('recipes').find({'category': category, '_id': obj_ID}).toArray(function(err, docs) {
-            console.log(docs);
-            return docs;
+            if(docs.length === 0) {
+                res.render('en/400');
+            } else {
+                console.log(docs);
+                docs = docs[0];
+                var options = {
+                    title: docs.title,
+                    ingredients: docs.ingredients,
+                    description: docs.description,
+                    additionalNotes: docs.additionalNotes,
+                    images: docs.imageURLs
+                };
+                res.render('en/recipes/recipeitem', options);
+            }
         });
     } else if(category) {
-        // return all
+        // return all under the same category
         console.log('returning recipes based on: ' + category);
         db.client.collection('recipes').find({'category': category}).toArray(function(err, docs) {
             console.log(docs);
-            return docs;
+            var categoryCapitalized = category.charAt(0).toUpperCase() + category.slice(1);
+            var options = {
+                layout: 'recipepages.handlebars',
+                categoryTitle: 'Breakfast',
+                recipeResult: docs
+            };
+            res.render('en/recipes/list', options);
         });
+    } else {
+        res.render(400);
     }
 }
 

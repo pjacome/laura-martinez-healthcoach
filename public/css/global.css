@@ -12,3 +12,9 @@ main {
     font-family: 'Times New Roman', Times, serif;
     font-variant: small-caps;
 }
+
+/*
+    Consider writing color classes in here 
+    and spread them across the files. 
+    Easier for me to maintain like this.
+*/

@@ -1,0 +1,26 @@
+﻿<h2 class="lmhc-main-title-font center">
+    {{categoryTitle}}
+</h2>
+{{>en/recipesearch}}
+<br />
+<div class="recipe-results-wrapper">
+    <h4 class="lmhc-main-title-font center">Results</h4>
+
+    {{#each recipeResult}}
+    <div class="row recipe-single-result">
+        <div class="col l2"><div class="photos photo{{@index}}" style="background-image: url('/images/{{imageURLs.[0]}}');"></div></div>
+        <div class="col s1"><div class="vertical-divider center black"></div></div>
+        <div class="col l9 flow-text">
+            <h4>{{title}}</h4>
+            <p class="truncate">{{description}}</p>
+            <a href="./{{category}}/{{_id}}" class="orange-text">Read more...</a>
+        </div>
+    </div>
+
+    {{#unless @last}}
+        <div class="divider"></div><br />
+    {{/unless}}
+
+    {{/each}}
+
+</div>
