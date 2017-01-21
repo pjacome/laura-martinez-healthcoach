@@ -28,13 +28,13 @@ app.use('/', require('./routes/routes'));
 var ipv4 = '192.168.1.64';
 //ipv4 = '127.0.0.1';
 
-db.init(function(err) {
-    if(err) {
-        console.log(err);
-    }
-});
+//db.init(function(err) {
+//    if(err) {
+//        console.log(err);
+//    }
+//});
 
-app.listen(app.get('port'), ipv4, function() {
+app.listen(app.get('port'), function() {
     console.log("listening on port " + app.get('port'));
 });
 
