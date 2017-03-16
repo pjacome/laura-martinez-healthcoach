@@ -72,6 +72,7 @@ router.get('/en/admin/blog', function(req, res) {res.render('en/admin/ablog');})
 router.get('/en/admin/events', function(req, res) {res.render('en/admin/aevents');});
 router.get('/en/admin/forms', function(req, res) {res.render('en/admin/aforms');});
 router.get('/en/admin/recipes', function(req, res) {res.render('en/admin/arecipes');});
+router.get('/en/admin/recipes/add', function(req, res) {res.render('en/admin/recipes/add')});
 
 // ###########################################################################
 // The following endpoints manipulate data and are responsible for CRUD
