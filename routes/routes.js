@@ -4,6 +4,7 @@ var express = require('express');
 var router  = express.Router();
 var obj_Recipes = require('./controllers/recipes');
 var obj_Contact = require('./controllers/contacts');
+var obj_Photos = require('./controllers/photos');
 
 /* Language = English - Routes */
 
@@ -103,6 +104,18 @@ router.get('/en/admin/recipes/add', function(req, res) {res.render('en/admin/rec
 // router.put   ('/en/edit/?:id, obj_Events.PUT);
 // router.delete('/en/edit/?:id, obj_Events.DELETE);
 
+// file upload
+var multer = require('multer');
+var upload = multer({
+    dest: __dirname + '/../public/images',
+    fileFilter: function(req, file, cb) {
+        console.log('-->', file);
+    }
+});
+var photos = upload.array('photos[]', 12);
+router.post('/en/admin/photos/upload', photos, obj_Photos.POST);
+
+// contact via email
 router.post('/en/contact/send', obj_Contact.POST);
 
 /* Idioma = Espanol - Rutas */
