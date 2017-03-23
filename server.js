@@ -15,7 +15,7 @@ app.set('port', process.env.PORT || 8080);
 app.use(express.static(__dirname + '/public'));
 app.use('/en', express.static(__dirname + '/public'));
 app.use('/es', express.static(__dirname + '/public'));
-app.enable('view cache');
+//app.enable('view cache');
 
 // routes
 app.use('/', require('./routes/routes'));
