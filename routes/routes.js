@@ -107,7 +107,7 @@ router.get('/en/admin/recipes/add', function(req, res) {res.render('en/admin/rec
 // file upload
 var multer = require('multer');
 var upload = multer({
-    dest: __dirname + '/../public/images',
+    dest: __dirname + '/../public/images/uploads',
     fileFilter: function(req, file, cb) {
         console.log('-->', file);
     }
