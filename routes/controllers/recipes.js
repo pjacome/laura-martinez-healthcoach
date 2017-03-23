@@ -10,7 +10,7 @@ module.exports.POST = function(req, res) {
             console.log(err);
             res.sendStatus(400);
         } else {
-            console.log(result);
+            //console.log(result);
             res.sendStatus(200);
         }
     });
