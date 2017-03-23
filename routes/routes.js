@@ -118,10 +118,8 @@ var storage = multer.diskStorage({
     },
 });
 var upload = multer({
-    //dest: __dirname + '/../public/images/uploads',
     storage: storage,
     fileFilter: function(req, file, cb) {
-        console.log('-->', file);
         var ext = file.originalname.split('.');
         ext = ext[ext.length - 1];
         var mime = file.mimetype;
@@ -131,7 +129,6 @@ var upload = multer({
         if (!ext.match(/(png|jpe?g|gif|tiff|PNG|JPE?G|GIF|TIFF)$/))
             cb(null, false);
 
-        console.log('----- made it! -----');
         cb(null, true);
     }
 });

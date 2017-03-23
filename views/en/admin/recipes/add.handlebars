@@ -40,10 +40,11 @@
                     <i class="material-icons right">add</i>
                 </button>
             </div>
+
             <div class="row">
                 <div class="input-field col s12">
-                    <textarea id="textarea1" class="materialize-textarea" placeholder=""></textarea>
-                    <label for="textarea1">Description</label>
+                    <textarea id="description" class="materialize-textarea" placeholder="" required></textarea>
+                    <label for="description">Description</label>
                 </div>
             </div>
 
@@ -60,7 +61,7 @@
 
             <div class="row">
                 <div class="input-field col s12">
-                    <textarea id="textarea2" class="materialize-textarea" placeholder="Example: Toppings include mixed nuts with some honey glaze!"></textarea>
+                    <textarea id="textarea2" class="materialize-textarea" placeholder="Example: Toppings include mixed nuts with some honey glaze!" required></textarea>
                     <label for="textarea2">Additional Notes</label>
                 </div>
             </div>
@@ -71,6 +72,20 @@
                 <i class="material-icons right">send</i>
             </button>
         </form>
+    </div>
+</div>
+
+<!-- Modal Structure -->
+<div id="modal1" class="modal">
+    <div class="modal-content">
+        <h4>Wait! Looks like you left something empty!</h4>
+        <p>The following were not filled in:</p>
+        <ul id="listOfNeglected" class="browser-default"></ul>
+        <p>Are you sure you want to continue?</p>
+    </div>
+    <div class="modal-footer">
+        <a id="send-anyway-btn" href="" class="modal-action modal-close waves-effect btn-flat">Submit Anyway</a>
+        <a id="close-modal-btn" href="" class="modal-action modal-close waves-effect btn-flat">Go Back</a>
     </div>
 </div>
 
@@ -114,21 +129,22 @@
         var ingredientCounter = 1;
         
         $('select').material_select();
+        $('.modal').modal();
 
         $('#add-ingredient-btn').click(function() {
             $('.insert-ingredients-here').append(
-                '<div id="ingredient-object-'+ ingredientCounter +'" class="col s12 m6 l4">' +
+                '<div id="ingredient-object-'+ ingredientCounter +'" class="col s12 m6 l4 ingredients">' +
                     '<div class="row">' +
                         '<div class="input-field col s12">' +
-                            '<input id="item-'+ ingredientCounter +'" type="text" class="validate" placeholder="Ex: almonds">' +
+                            '<input id="item-'+ ingredientCounter +'" type="text" class="validate" placeholder="Ex: almonds" required>' +
                             '<label for="item-'+ ingredientCounter +'">Item</label>' +
                         '</div>' +
                         '<div class="input-field col s12">' +
-                            '<input id="unit-'+ ingredientCounter +'" type="text" class="validate" placeholder="Ex: cup">' +
+                            '<input id="unit-'+ ingredientCounter +'" type="text" class="validate" placeholder="Ex: cup" required>' +
                             '<label for="unit-'+ ingredientCounter +'">Unit</label>' +
                         '</div>' +
                         '<div class="input-field col s12">' +
-                            '<input id="quantity-'+ ingredientCounter +'" type="number" class="validate" placeholder="Ex: 2.5">' +
+                            '<input id="quantity-'+ ingredientCounter +'" type="number" class="validate" placeholder="Ex: 2.5" required>' +
                             '<label for="quantity-'+ ingredientCounter +'">Quantity</label>' +
                         '</div>' +
                         '<div class="center">' +
@@ -153,6 +169,7 @@
             if($('#tags').val() === '')
                 tagsArr = [];
 
+            // form data
             var imageStrings = [];
             var files = document.getElementById('imageFiles').files;
             var formData = new FormData();
@@ -164,31 +181,41 @@
                 formData.append('photos[]', file, file.name);
                 imageStrings.push(file.name);
             }
-            console.log('files:', files);
-            console.log(formData);
+
+            // ingredients
+            var ingredients = $('#insert-ingredients-here').children();
+            console.log('ingredients:',ingredients);
 
             var recipeObject = {
                 title: $('#title').val(),
                 category: $('#category').val(),
                 tags: tagsArr,
                 imageURLs: imageStrings,
-                description: $('#textarea1').val(),
+                description: $('#description').val(),
                 additionalNotes: $('#textarea2').val()
             };
 
-            $.ajax({
-                method: 'POST',
-                data: recipeObject,
-                url: '/en/recipes/create'
-            });
+            // check for empty fields
+            if(!$('#title').val() || !$('#category').val() ||
+               !$('#tags').val()  || !$('#description').val()) {
+                $('#modal1').modal('open');
+                PopulateModalList($('#title').val(),
+                    $('#category').val(),
+                    $('#tags').val(),
+                    $('#description').val());
+                $('#send-anyway-btn').click(function(e) {
+                    e.preventDefault();
+                    SendRequestObjects(recipeObject, formData, files.length);
+                    $('#modal1').modal('close');
+                });
+            } else {
+                SendRequestObjects(recipeObject, formData, files.length);
+            }
+        });
 
-            $.ajax({
-                method: 'POST',
-                data: formData,
-                processData: false,
-                contentType: false,
-                url: '/en/admin/photos/upload'
-            });
+        $('#close-modal-btn').click(function(e) {
+            e.preventDefault();
+            $('#modal1').modal('close');
         });
     });
 
@@ -196,5 +223,32 @@
         var idNumberArr = id.split('-');
         var idNumber = idNumberArr[2];
         $('#ingredient-object-' + idNumber).css('display', 'none');
+    }
+
+    function SendRequestObjects(recipeObject, formData, length) {
+        console.log('POSTING');
+        $.ajax({
+            method: 'POST',
+            data: recipeObject,
+            url: '/en/recipes/create'
+        });
+
+        if(length > 0) {
+            $.ajax({
+                method: 'POST',
+                data: formData,
+                processData: false,
+                contentType: false,
+                url: '/en/admin/photos/upload'
+            });
+        }
+    }
+
+    function PopulateModalList(title, category, tags, description) {
+        $('#listOfNeglected').html('');
+        if(!title) { $('#listOfNeglected').append('<li>Title</li>'); }
+        if(!category) { $('#listOfNeglected').append('<li>Category</li>'); }
+        if(!tags) { $('#listOfNeglected').append('<li>Tags</li>'); }
+        if(!description) { $('#listOfNeglected').append('<li>Description</li>'); }
     }
 </script>
