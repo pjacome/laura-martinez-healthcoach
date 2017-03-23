@@ -106,10 +106,33 @@ router.get('/en/admin/recipes/add', function(req, res) {res.render('en/admin/rec
 
 // file upload
 var multer = require('multer');
+var storage = multer.diskStorage({
+    destination: function(req, file, cb) {
+        cb(null, __dirname + '/../public/images/uploads');
+    },
+    filename: function (req, file, cb) {
+        var ext = file.originalname.split('.');
+        var name = ext[0];
+        ext = ext[ext.length - 1];
+        cb(null, name + '-' + Date.now() + '.' + ext);
+    },
+});
 var upload = multer({
-    dest: __dirname + '/../public/images/uploads',
+    //dest: __dirname + '/../public/images/uploads',
+    storage: storage,
     fileFilter: function(req, file, cb) {
         console.log('-->', file);
+        var ext = file.originalname.split('.');
+        ext = ext[ext.length - 1];
+        var mime = file.mimetype;
+        console.log('ext', ext);
+        if(!mime.match(/image\/(png|jpe?g|gif|tiff|PNG|JPE?G|GIF|TIFF)$/i))
+            cb(null, false);
+        if (!ext.match(/(png|jpe?g|gif|tiff|PNG|JPE?G|GIF|TIFF)$/))
+            cb(null, false);
+
+        console.log('----- made it! -----');
+        cb(null, true);
     }
 });
 var photos = upload.array('photos[]', 12);
