@@ -183,14 +183,22 @@
             }
 
             // ingredients
-            var ingredients = $('#insert-ingredients-here').children();
-            console.log('ingredients:',ingredients);
+            var ingredients = [];
+            $('.insert-ingredients-here').children('.ingredients').each(function() {
+                var idNum = (this.id).split('-')[2];
+                ingredients.push({
+                    item: $(this).find('#item-'+idNum).val(),
+                    unit: $(this).find('#unit-'+idNum).val(),
+                    quantity: $(this).find('#quantity-'+idNum).val()
+                });
+            });
 
             var recipeObject = {
                 title: $('#title').val(),
                 category: $('#category').val(),
                 tags: tagsArr,
                 imageURLs: imageStrings,
+                ingredients: ingredients,
                 description: $('#description').val(),
                 additionalNotes: $('#textarea2').val()
             };
@@ -222,24 +230,48 @@
     function RemoveIngredient(id) {
         var idNumberArr = id.split('-');
         var idNumber = idNumberArr[2];
-        $('#ingredient-object-' + idNumber).css('display', 'none');
+        $('#ingredient-object-' + idNumber).remove();
     }
 
     function SendRequestObjects(recipeObject, formData, length) {
-        console.log('POSTING');
         $.ajax({
             method: 'POST',
             data: recipeObject,
             url: '/en/recipes/create'
+        }).done(function(data) {
+            Materialize.toast('Recipe Upload Succesful!', 4000, 'green');
+        }).fail(function(jqXHR, textStatus, errorThrown) {
+            var statusCode = (jqXHR.status.toString()).split('');
+            var statusText = jqXHR.statusText;
+            if(statusCode[0] === 5 || statusText.match(/Internal Server Error/)) {
+                // server-side error - contact pablo
+                Materialize.toast('Server-side Error. Contact Pablo if problem persists.', 5000, 'red');
+            } else if(statusCode[0] === 4 || statusText.match(/Bad Request/)) {
+                // client-side error - try again in a few moments
+                Materialize.toast('Failed to Upload Recipe!<br>Try again in a few moments.', 5000, 'red');
+            }
         });
 
         if(length > 0) {
+            var word = length > 1 ? 'Photos' : 'Photo';
             $.ajax({
                 method: 'POST',
                 data: formData,
                 processData: false,
                 contentType: false,
                 url: '/en/admin/photos/upload'
+            }).done(function(data) {
+                Materialize.toast(word + ' Upload Succesful!', 4000, 'green');
+            }).fail(function(jqXHR, textStatus, errorThrown) {
+                var statusCode = (jqXHR.status.toString()).split('');
+                var statusText = jqXHR.statusText;
+                if(statusCode[0] === 5 || statusText.match(/Internal Server Error/)) {
+                    // server-side error - contact pablo
+                    Materialize.toast('Server-side Error. Contact Pablo if problem persists.', 5000, 'red');
+                } else if(statusCode[0] === 4 || statusText.match(/Bad Request/)) {
+                    // client-side error - try again in a few moments
+                    Materialize.toast('Failed to Upload '+word+'!<br>Try again in a few moments.', 5000, 'red');
+                }
             });
         }
     }

@@ -9,9 +9,11 @@ module.exports.POST = function(req, res) {
         if(err) {
             console.log(err);
             res.sendStatus(400);
-        } else {
+        } else if(result) {
             //console.log(result);
             res.sendStatus(200);
+        } else {
+            res.sendStatus(500);
         }
     });
 }
