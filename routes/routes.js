@@ -1,7 +1,9 @@
 'use strict';
 
 var express = require('express');
-var router  = express.Router();
+var router = express.Router();
+var session = require('express-session');
+var mongoStore = require('connect-mongo')(session);
 var obj_Recipes = require('./controllers/recipes');
 var obj_Contact = require('./controllers/contacts');
 var obj_Photos = require('./controllers/photos');
@@ -64,6 +66,25 @@ router.get('/en/forms/p6', function(req, res) {res.render('en/forms/forms-p6');}
 router.get('/en/forms/p7', function(req, res) {res.render('en/forms/forms-p7');});
 
 /////////////////// admin //////////////////////
+// move this to ENV file
+var secret = 'test';
+
+var useSessions =
+    express().use(session({
+        resave: true,
+        saveUninitialized: true,
+        secret: secret,
+        store: new mongoStore({
+            url: 'mongodb://127.0.0.1:27017',
+            host: 'localhost',
+            port: '27017',
+            db: 'laura',
+            collection: 'sessions'
+        })
+    }));
+
+// login route
+router.post('/login', useSessions, obj_Admin.POST);
 router.get('/en/admin/login', function(req, res) {res.render('en/admin/alogin');});
 router.get('/en/admin/dashboard', function(req, res) {res.render('en/admin/adash');});
 router.get('/en/admin/blog', function(req, res) {res.render('en/admin/ablog');});
@@ -75,8 +96,6 @@ router.get('/en/admin/events', function(req, res) {res.render('en/admin/aevents'
 router.get('/en/admin/forms', function(req, res) {res.render('en/admin/aforms');});
 router.get('/en/admin/recipes', function(req, res) {res.render('en/admin/arecipes');});
 router.get('/en/admin/recipes/add', function(req, res) {res.render('en/admin/recipes/add')});
-// login route
-router.post('/login', obj_Admin.POST);
 
 
 // ###########################################################################

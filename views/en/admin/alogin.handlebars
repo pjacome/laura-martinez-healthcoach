@@ -75,6 +75,9 @@
             method: 'POST',
             data: cred,
             url: '/login'
+        }).done(function() {
+            console.log('success, redirecting');
+            window.location = './dashboard';
         });
     });
 </script>
