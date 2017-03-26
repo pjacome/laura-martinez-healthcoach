@@ -83,10 +83,24 @@ var useSessions =
         })
     }));
 
+var authenticate = function (req, res, next) {
+    console.log(req.session);
+    if (!req.session) {
+        console.log('1');
+        res.redirect('/en/admin/login');
+    } else if (req.session.isAuthenticated) {
+        console.log('2');
+        next();
+    } else {
+        console.log('3');
+        res.redirect('/en/admin/login');
+    }
+};
+
 // login route
 router.post('/login', useSessions, obj_Admin.POST);
 router.get('/en/admin/login', function(req, res) {res.render('en/admin/alogin');});
-router.get('/en/admin/dashboard', function(req, res) {res.render('en/admin/adash');});
+router.get('/en/admin/dashboard', authenticate, function(req, res) {res.render('en/admin/adash');});
 router.get('/en/admin/blog', function(req, res) {res.render('en/admin/ablog');});
     router.get('/en/admin/blog/add', function(req, res) {res.render('en/admin/ablogadd');});
     router.get('/en/admin/blog/edit', function(req, res) {res.render('en/admin/ablogedit');});

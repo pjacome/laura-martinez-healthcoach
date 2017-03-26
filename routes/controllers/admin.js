@@ -16,6 +16,8 @@ module.exports.POST = function(req, res) {
         res.sendStatus(200);
     } else {
         console.log(email, ' |', password, ' |', remember);
+        if(req.session.isAuthenticated) req.session.isAuthenticated = false;
+        console.log('isAuth:', req.session.isAuthenticated);
         res.sendStatus(404);
     }
 }
