@@ -4,16 +4,20 @@
         <form class="white">
             <div class="row">
                 <div class="input-field col s12">
-                    <input id="last_name" type="text" class="validate">
-                    <label for="last_name">Username</label>
+                    <input id="email" name="email" type="email" class="validate">
+                    <label for="email">Email</label>
                 </div>
             </div>
             <div class="row">
                 <div class="input-field col s12">
-                    <input id="last_name" type="password" class="validate">
-                    <label for="last_name">Password</label>
+                    <input id="password" name="password" type="password" class="validate">
+                    <label for="password">Password</label>
                 </div>
             </div>
+            <p>
+                <input type="checkbox" name="remember" class="filled-in" id="remember">
+                <label for="remember">Remember me</label>
+            </p>
             <button class="btn waves-effect waves-light login" type="submit" name="action">
                 Submit
                 <i class="material-icons right">send</i>
@@ -24,7 +28,7 @@
 
 <style>
     .outer-card {
-        width: 300px;
+        width: 95%;
         padding: 20px;
         margin: 0 auto;
     }
@@ -53,8 +57,24 @@
 </style>
 
 <script>
-    $('.login.btn').click(function (e) {
+    $('.login.btn').click(function(e) {
         e.preventDefault();
-        window.location.href = './dashboard';
+        
+        var cred = {
+            email: $('#email').val(),
+            password: $('#password').val(),
+            remember: $('#remember').prop('checked')
+        }
+
+        if(!cred.email)
+            $('#email').focus();
+        else if(!cred.password)
+            $('#password').focus();
+
+        $.ajax({
+            method: 'POST',
+            data: cred,
+            url: '/login'
+        });
     });
 </script>

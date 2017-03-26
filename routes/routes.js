@@ -5,6 +5,7 @@ var router  = express.Router();
 var obj_Recipes = require('./controllers/recipes');
 var obj_Contact = require('./controllers/contacts');
 var obj_Photos = require('./controllers/photos');
+var obj_Admin = require('./controllers/admin');
 
 /* Language = English - Routes */
 
@@ -74,6 +75,9 @@ router.get('/en/admin/events', function(req, res) {res.render('en/admin/aevents'
 router.get('/en/admin/forms', function(req, res) {res.render('en/admin/aforms');});
 router.get('/en/admin/recipes', function(req, res) {res.render('en/admin/arecipes');});
 router.get('/en/admin/recipes/add', function(req, res) {res.render('en/admin/recipes/add')});
+// login route
+router.post('/login', obj_Admin.POST);
+
 
 // ###########################################################################
 // The following endpoints manipulate data and are responsible for CRUD
