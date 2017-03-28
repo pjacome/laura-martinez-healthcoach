@@ -1,13 +1,13 @@
 'use strict';
 
 var express = require('express');
-var router = express.Router();
 var session = require('express-session');
 var mongoStore = require('connect-mongo')(session);
 var obj_Recipes = require('./controllers/recipes');
 var obj_Contact = require('./controllers/contacts');
 var obj_Photos = require('./controllers/photos');
 var obj_Admin = require('./controllers/admin');
+var router = express.Router();
 
 /* Language = English - Routes */
 
@@ -20,7 +20,7 @@ var obj_Admin = require('./controllers/admin');
 // or read into displying the proper partial
 //router.get('/', function (req, res) {res.render('home');});
 router.get('/', function(req, res) {res.redirect('en/home');});
-router.get('/en', function (req, res) { res.redirect('en/home'); });
+router.get('/en', function (req, res) {res.redirect('en/home');});
 router.get('/home', function(req, res) {res.redirect('en/home');});
 router.get('/en/home', function(req, res) {res.render('en/home');});
 router.get('/en/about', function(req, res) {res.render('en/about');});
@@ -74,6 +74,10 @@ var useSessions =
         resave: true,
         saveUninitialized: true,
         secret: secret,
+        cookie: {
+            secure: false,
+            maxAge: 60*1000 // 60 sec x 1000 milliseconds
+        },
         store: new mongoStore({
             url: 'mongodb://127.0.0.1:27017',
             host: 'localhost',
@@ -84,8 +88,8 @@ var useSessions =
     }));
 
 var authenticate = function (req, res, next) {
-    console.log(req.session);
     if (!req.session) {
+        console.log('b:',req.session);
         console.log('1');
         res.redirect('/en/admin/login');
     } else if (req.session.isAuthenticated) {
