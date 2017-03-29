@@ -11,12 +11,15 @@ module.exports.POST = function(req, res) {
         password = req.body.password,
         remember = req.body.remember;
     if(email === 'p@p.c' && password === 'pj') {
+        console.log('>>> Authenticating ...');
         req.session.isAuthenticated = true;
         console.log('>>> You have now been Authenticated. <<<\n', req.session);
-        res.redirect('en/admin/dashboard');
+        console.log('>>> Redirecting ...');
+        res.status(302).redirect('/en/admin/dashboard');
     } else {
+        console.log('>>> Incorrect credentials. Authentication denied. <<<');
         console.log(email, ' |', password, ' |', remember);
-        if(req.session.isAuthenticated) req.session.isAuthenticated = false;
+        //if(req.session.isAuthenticated) req.session.isAuthenticated = false;
         console.log('isAuth:', req.session.isAuthenticated);
         res.sendStatus(404);
     }

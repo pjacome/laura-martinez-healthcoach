@@ -22,7 +22,7 @@ var router = express.Router();
 router.get('/', function(req, res) {res.redirect('en/home');});
 router.get('/en', function (req, res) {res.redirect('en/home');});
 router.get('/home', function(req, res) {res.redirect('en/home');});
-router.get('/en/home', function(req, res) {res.render('en/home');});
+router.get('/en/home', function(req, res) {console.log(req.session);res.render('en/home');});
 router.get('/en/about', function(req, res) {res.render('en/about');});
 router.get('/en/recipes', function(req, res) {res.render('en/recipes/recipes');});
 router.get('/en/healthcoaching', function(req, res) {res.render('en/healthcoaching');});
@@ -66,31 +66,27 @@ router.get('/en/forms/p6', function(req, res) {res.render('en/forms/forms-p6');}
 router.get('/en/forms/p7', function(req, res) {res.render('en/forms/forms-p7');});
 
 /////////////////// admin //////////////////////
-// move this to ENV file
-var secret = 'test';
-
-var useSessions =
-    express().use(session({
-        resave: true,
-        saveUninitialized: true,
-        secret: secret,
-        cookie: {
-            secure: false,
-            maxAge: 60*1000 // 60 sec x 1000 milliseconds
-        },
-        store: new mongoStore({
-            url: 'mongodb://127.0.0.1:27017',
-            host: 'localhost',
-            port: '27017',
-            db: 'laura',
-            collection: 'sessions'
-        })
-    }));
+var InitSession = session({
+    resave: true,
+    saveUninitialized: true,
+    secret: 'test',
+    cookie: {
+        secure: false,
+        maxAge: 60 * 1000 // 60 sec x 1000 milliseconds
+    },
+    store: new mongoStore({
+        url: 'mongodb://127.0.0.1:27017',
+        host: 'localhost',
+        port: '27017',
+        db: 'laura',
+        collection: 'sessions'
+    })
+});
 
 var authenticate = function (req, res, next) {
     if (!req.session) {
         console.log('b:',req.session);
-        console.log('1');
+        console.log('>>> You are not authenticated. Returning to login page <<<');
         res.redirect('/en/admin/login');
     } else if (req.session.isAuthenticated) {
         console.log('2');
@@ -101,12 +97,18 @@ var authenticate = function (req, res, next) {
     }
 };
 
+var EndSession = function(req, res, next) {
+    console.log('>>> Session destroyed. <<<');
+    req.session.destroy();
+    next();
+};
+
 // login route
-router.post('/login', useSessions, obj_Admin.POST);
+router.post('/login', InitSession, obj_Admin.POST);
 router.get('/en/admin/login', function(req, res) {res.render('en/admin/alogin');});
 router.get('/en/admin/dashboard', authenticate, function(req, res) {res.render('en/admin/adash');});
 router.get('/en/admin/blog', function(req, res) {res.render('en/admin/ablog');});
-    router.get('/en/admin/blog/add', function(req, res) {res.render('en/admin/ablogadd');});
+    router.get('/en/admin/blog/add', EndSession, function(req, res) {res.render('en/admin/ablogadd');});
     router.get('/en/admin/blog/edit', function(req, res) {res.render('en/admin/ablogedit');});
         router.get('/en/admin/blog/edit/exedit', function(req, res) {res.render('en/admin/exedit');});
 

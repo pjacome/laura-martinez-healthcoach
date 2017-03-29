@@ -17,22 +17,6 @@ app.use(require('body-parser').json());
 app.use(express.static(__dirname + '/public'));
 app.use('/en', express.static(__dirname + '/public'));
 app.use('/es', express.static(__dirname + '/public'));
-app.use(session({
-    resave: true,
-    saveUninitialized: true,
-    secret: 'test',
-    cookie: {
-        secure: false,
-        maxAge: 60 * 1000 // 60 sec x 1000 milliseconds
-    },
-    store: new mongoStore({
-        url: 'mongodb://127.0.0.1:27017',
-        host: 'localhost',
-        port: '27017',
-        db: 'laura',
-        collection: 'sessions'
-    })
-}));
 //app.enable('view cache');
 
 // db connection
@@ -43,18 +27,18 @@ db.init(function (err) {
     }
 });
 
-//app.use(session({
-//    resave: true,
-//    saveUninitialized: true,
-//    secret: secret,
-//    store: new mongoStore({
-//        url: 'mongodb://127.0.0.1:27017',
-//        host: 'localhost',
-//        port: '27017',
-//        db: 'laura',
-//        collection: 'sessions'
-//    })
-//}));
+app.use(session({
+    resave: true,
+    saveUninitialized: true,
+    secret: 'fuck off',
+    store: new mongoStore({
+        url: 'mongodb://127.0.0.1:27017',
+        host: 'localhost',
+        port: '27017',
+        db: 'laura',
+        collection: 'sessions'
+    })
+}));
 
 // routes
 app.use('/', require('./routes/routes'));
