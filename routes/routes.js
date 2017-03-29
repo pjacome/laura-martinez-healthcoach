@@ -66,24 +66,13 @@ router.get('/en/forms/p6', function(req, res) {res.render('en/forms/forms-p6');}
 router.get('/en/forms/p7', function(req, res) {res.render('en/forms/forms-p7');});
 
 /////////////////// admin //////////////////////
-var InitSession = session({
-    resave: true,
-    saveUninitialized: true,
-    secret: 'test',
-    cookie: {
-        secure: false,
-        maxAge: 60 * 1000 // 60 sec x 1000 milliseconds
-    },
-    store: new mongoStore({
-        url: 'mongodb://127.0.0.1:27017',
-        host: 'localhost',
-        port: '27017',
-        db: 'laura',
-        collection: 'sessions'
-    })
-});
-
-var authenticate = function (req, res, next) {
+var IsLoggedIn = function(req, res, next) {
+    if(req.session.isAuthenticated)
+        res.redirect('/en/admin/dashboard');
+    else
+        next();
+};
+var Authenticate = function(req, res, next) {
     if (!req.session) {
         console.log('b:',req.session);
         console.log('>>> You are not authenticated. Returning to login page <<<');
@@ -96,7 +85,6 @@ var authenticate = function (req, res, next) {
         res.redirect('/en/admin/login');
     }
 };
-
 var EndSession = function(req, res, next) {
     console.log('>>> Session destroyed. <<<');
     req.session.destroy();
@@ -104,18 +92,20 @@ var EndSession = function(req, res, next) {
 };
 
 // login route
-router.post('/login', InitSession, obj_Admin.POST);
-router.get('/en/admin/login', function(req, res) {res.render('en/admin/alogin');});
-router.get('/en/admin/dashboard', authenticate, function(req, res) {res.render('en/admin/adash');});
+router.post('/login', obj_Admin.POST);
+router.get('/en/admin/login', IsLoggedIn, function(req, res) {res.render('en/admin/alogin');});
+router.get('/en/admin/dashboard', Authenticate, function(req, res) {res.render('en/admin/adash');});
+// test route - replace for '/en/admin/dashboard' when complete /-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|
+router.get('/en/admin/test', function(req, res) {res.render('en/admin/admin-blog', {layout: 'admin-main.handlebars'})});
 router.get('/en/admin/blog', function(req, res) {res.render('en/admin/ablog');});
     router.get('/en/admin/blog/add', EndSession, function(req, res) {res.render('en/admin/ablogadd');});
-    router.get('/en/admin/blog/edit', function(req, res) {res.render('en/admin/ablogedit');});
+    router.get('/en/admin/blog/edit', Authenticate, function(req, res) {res.render('en/admin/ablogedit');});
         router.get('/en/admin/blog/edit/exedit', function(req, res) {res.render('en/admin/exedit');});
 
 router.get('/en/admin/events', function(req, res) {res.render('en/admin/aevents');});
 router.get('/en/admin/forms', function(req, res) {res.render('en/admin/aforms');});
 router.get('/en/admin/recipes', function(req, res) {res.render('en/admin/arecipes');});
-router.get('/en/admin/recipes/add', function(req, res) {res.render('en/admin/recipes/add')});
+router.get('/en/admin/recipes/add', Authenticate, function(req, res) {res.render('en/admin/recipes/add')});
 
 
 // ###########################################################################
