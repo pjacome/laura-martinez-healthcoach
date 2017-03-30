@@ -15,7 +15,7 @@ module.exports.POST = function(req, res) {
             res.sendStatus(500);
         }
     });
-}
+};
 
 module.exports.GET = function(req, res) {
     var category = req.params.category;
@@ -56,10 +56,20 @@ module.exports.GET = function(req, res) {
     } else {
         res.render(400);
     }
-}
+};
 
 module.exports.PUT = function(req, res) {
-}
+};
 
 module.exports.DELETE = function(req, res) {
-}
+};
+
+module.exports.SEARCH = function(callback) {
+    db.client.collection('recipes').find({}, function(err, cursor) {
+        if(err) throw err;
+        cursor.toArray(function(err, docs) {
+            if(err) throw err;
+            callback(docs);
+        });
+    });
+};

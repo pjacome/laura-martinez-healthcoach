@@ -63,17 +63,27 @@ module.exports.GET = function(req, res) {
             // make db call to populate 'options' with data to render on client
             switch(route) {
                 case 'blogs':
+                    res.render('en/admin/admin-dashboards', options);
                     break;
                 case 'events':
+                    res.render('en/admin/admin-dashboards', options);
                     break;
                 case 'forms':
+                    res.render('en/admin/admin-dashboards', options);
                     break;
                 case 'recipes':
+                    obj_Recipes.SEARCH(function(docs) {
+                        options.data = docs;
+                        console.log(options.layout);
+                        console.log(options.category);
+                        console.log(options.data);
+                        console.log(options);
+                        res.render('en/admin/admin-dashboards', options);
+                    });
                     break;
                 default:
                     break;
             }
-            res.render('en/admin/admin-dashboards', options);
         }
     }
 };

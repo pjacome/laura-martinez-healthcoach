@@ -13,32 +13,26 @@
                 {{!-- each block goes here. for now just hard code --}}
                 <th>#</th>
                 <th>Title</th>
+                {{#if data.1.category}}
+                    <th>Category</th>
+                {{/if}}
                 <th>Date Created</th>
                 <th>Last Updated</th>
             </tr>
         </thead>
         <tbody>
+            {{#each data}}
             <tr>
-                <td><input type="checkbox" id="delete-blog-1" class="potential-delete"><label for="delete-blog-1"></label></td>
-                <td>1</td>
-                <td>Banana Smoothie</td>
-                <td>11/22/2016</td>
-                <td>11/22/2016</td>
-            </tr>
-            <tr>
-                <td><input type="checkbox" id="delete-blog-2" class="potential-delete" /><label for="delete-blog-2"></label></td>
-                <td>2</td>
-                <td>Nut Salad</td>
-                <td>12/02/2016</td>
-                <td>12/03/2016</td>
-            </tr>
-            <tr>
-                <td><input type="checkbox" id="delete-blog-3" class="potential-delete" /><label for="delete-blog-3"></label></td>
-                <td>3</td>
-                <td>Soy Meat Tacos</td>
+                <td><input type="checkbox" id="delete-blog-{{@index}}" class="potential-delete" /><label for="delete-blog-{{@index}}"></label></td>
+                <td>{{@index}}</td>
+                <td>{{title}}</td>
+                {{#if category}}
+                    <td>{{category}}</td>
+                {{/if}}
                 <td>12/15/2016</td>
                 <td>12/15/2016</td>
             </tr>
+            {{/each}}
         </tbody>
     </table>
 </div>
