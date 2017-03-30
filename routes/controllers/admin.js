@@ -59,6 +59,19 @@ module.exports.GET = function(req, res) {
                 layout: 'admin-main.handlebars',
                 category: route
             };
+            // make db call to populate 'options' with data to render on client
+            switch(route) {
+                case 'blogs':
+                    break;
+                case 'events':
+                    break;
+                case 'forms':
+                    break;
+                case 'recipes':
+                    break;
+                default:
+                    break;
+            }
             res.render('en/admin/admin-dashboards', options);
         }
     }
