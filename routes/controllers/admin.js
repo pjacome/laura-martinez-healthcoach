@@ -24,3 +24,19 @@ module.exports.POST = function(req, res) {
         res.sendStatus(404);
     }
 }
+
+// logout route
+module.exports.ENDSESSION = function(req, res) {
+    if(!req.session) {
+        console.log('>>> Session does not exist. <<<');
+        res.sendStatus(404);
+    } else if(!req.session.isAuthenticated) {
+        console.log('>>> Never authenticated. Proceed to login papge. <<<');
+        res.sendStatus(404);
+    } else if(req.session.isAuthenticated) {
+        console.log('>>> Logging out ...');
+        req.session.isAuthenticated = false;
+        console.log('>>> Returning to login page ...');
+        res.sendStatus(200);
+    }
+};

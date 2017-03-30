@@ -46,7 +46,7 @@
                 </a>
             </li>
             <!-- Language Selection - Desktop - End -->
-            <li><a href="/en/admin/login">Logout</a></li>
+            <li class="logout-btn"><a href="">Logout</a></li>
             <li><a href=""></a></li>
         </ul>
 
@@ -110,7 +110,7 @@
             </li>
             <!-- Language Selection - End -->
             <li class="divider"></li>
-            <li><a href="#">Logout</a></li>
+            <li class="logout-btn"><a href="">Logout</a></li>
         </ul>
         <!-- Side Nav Structure - End -->
     </div>
@@ -158,6 +158,18 @@
             belowOrigin: true,
             alignment: 'right'
         });
+        
         $('.main-nav-hamburger-button').sideNav({menuWidth: 200});
+
+        $('.logout-btn').click(function(e) {
+            $.ajax({
+                method: 'POST',
+                data: null,
+                url: '/logout'
+            }).done(function() {
+                console.log('Logging out.');
+                window.location = '/en/admin/login';
+            });
+        });
     });
 </script>
