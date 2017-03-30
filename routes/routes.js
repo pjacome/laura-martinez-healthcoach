@@ -96,8 +96,8 @@ router.post('/login', obj_Admin.POST);
 router.get('/en/admin/login', IsLoggedIn, function(req, res) {res.render('en/admin/alogin');});
 router.get('/en/admin/dashboard', Authenticate, function(req, res) {res.render('en/admin/adash');});
 // test route - replace for '/en/admin/dashboard' when complete /-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|
-router.get('/en/admin/test', function(req, res) {res.render('en/admin/admin-blog', {layout: 'admin-main.handlebars'})});
-router.get('/en/admin/blog', function(req, res) {res.render('en/admin/ablog');});
+router.get('/en/admin/blog', Authenticate, function(req, res) {res.render('en/admin/admin-blog', {layout: 'admin-main.handlebars'})});
+    // routes below are placeholders for files being rendered. files being rendered should be renamed/deleted
     router.get('/en/admin/blog/add', EndSession, function(req, res) {res.render('en/admin/ablogadd');});
     router.get('/en/admin/blog/edit', Authenticate, function(req, res) {res.render('en/admin/ablogedit');});
         router.get('/en/admin/blog/edit/exedit', function(req, res) {res.render('en/admin/exedit');});
