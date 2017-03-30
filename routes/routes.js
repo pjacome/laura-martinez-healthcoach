@@ -93,8 +93,8 @@ var EndSession = function(req, res, next) {
 
 // login route
 router.post('/login', obj_Admin.POST);
-router.get('/en/admin/login', IsLoggedIn, function(req, res) {res.render('en/admin/alogin');});
-router.get('/en/admin/dashboard', Authenticate, function(req, res) {res.render('en/admin/adash');});
+router.get('/en/admin/login', IsLoggedIn, function(req, res) {res.render('en/admin/login');});
+router.get('/en/admin/dashboard', Authenticate, function(req, res) {res.render('en/admin/dashboard', {layout: 'admin-main.handlebars'});});
 // test route - replace for '/en/admin/dashboard' when complete /-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|
 router.get('/en/admin/blog', Authenticate, function(req, res) {res.render('en/admin/admin-blog', {layout: 'admin-main.handlebars'})});
     // routes below are placeholders for files being rendered. files being rendered should be renamed/deleted
