@@ -85,26 +85,23 @@ var Authenticate = function(req, res, next) {
         res.redirect('/en/admin/login');
     }
 };
-var EndSession = function(req, res, next) {
-    console.log('>>> Session destroyed. <<<');
-    req.session.destroy();
-    next();
-};
 
 // login route
 router.post('/login', obj_Admin.POST);
 router.post('/logout', obj_Admin.ENDSESSION);
-router.get('/en/admin/login', IsLoggedIn, function(req, res) {res.render('en/admin/login');});
-router.get('/en/admin/dashboard', Authenticate, function(req, res) {res.render('en/admin/dashboard', {layout: 'admin-main.handlebars'});});
-router.get('/en/admin/blog', Authenticate, function(req, res) {res.render('en/admin/dashboard-blog', {layout: 'admin-main.handlebars'})});
+// login route (below) requires a special layout
+//router.get('/en/admin/login', IsLoggedIn, function(req, res) {res.render('en/admin/login');});
+//router.get('/en/admin/dashboard', Authenticate, function(req, res) {res.render('en/admin/dashboard', {layout: 'admin-main.handlebars'});});
+//router.get('/en/admin/blog', Authenticate, function(req, res) {res.render('en/admin/dashboard-blog', {layout: 'admin-main.handlebars'})});
     // routes below are placeholders for files being rendered. files being rendered should be renamed/deleted
     router.get('/en/admin/blog/add', Authenticate, function(req, res) {res.render('en/admin/ablogadd');});
     router.get('/en/admin/blog/edit', Authenticate, function(req, res) {res.render('en/admin/ablogedit');});
         router.get('/en/admin/blog/edit/exedit', function(req, res) {res.render('en/admin/exedit');});
 
-router.get('/en/admin/events', function(req, res) {res.render('en/admin/aevents');});
-router.get('/en/admin/forms', function(req, res) {res.render('en/admin/aforms');});
-router.get('/en/admin/recipes', function(req, res) {res.render('en/admin/arecipes');});
+/*router.get('/en/admin/events', function(req, res) {res.render('en/admin/dashboard-events', {layout: 'admin-dashboards.handlebars'});});
+router.get('/en/admin/forms', function(req, res) {res.render('en/admin/dashboard-topic', {layout: 'admin-dashboards.handlebars'});});
+router.get('/en/admin/recipes', function(req, res) {res.render('en/admin/dashboard-recipes', {layout: 'admin-dashboards.handlebars'});});*/
+router.get('/en/admin/:dashboard', Authenticate, obj_Admin.GET);
 router.get('/en/admin/recipes/add', Authenticate, function(req, res) {res.render('en/admin/recipes/add')});
 
 

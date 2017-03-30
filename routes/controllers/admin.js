@@ -32,11 +32,34 @@ module.exports.ENDSESSION = function(req, res) {
         res.sendStatus(404);
     } else if(!req.session.isAuthenticated) {
         console.log('>>> Never authenticated. Proceed to login papge. <<<');
+        req.session.isAuthenticated = false;
         res.sendStatus(404);
     } else if(req.session.isAuthenticated) {
         console.log('>>> Logging out ...');
         req.session.isAuthenticated = false;
         console.log('>>> Returning to login page ...');
         res.sendStatus(200);
+    }
+};
+
+// displays [/dashboard, /blogs, /events, /forms, /recipes]
+module.exports.GET = function(req, res) {
+    var route = req.params.dashboard;
+    var routes = /(dashboard|blogs|events|forms|recipes)/;
+    if(!route.match(routes)) {
+        console.log('>>> Incorrect URL: \''+route+'\' <<<');
+        res.sendStaus(500);
+    } else {
+        if(route.match(/dashboard/)) {
+            console.log('>>> Displaying Admin Dashboard ... ');
+            res.render('en/admin/dashboard', {layout: 'admin-main.handlebars'});
+        } else {
+            console.log('>>> Displaying Dashboard ' + route);
+            var options = {
+                layout: 'admin-main.handlebars',
+                category: route
+            };
+            res.render('en/admin/admin-dashboards', options);
+        }
     }
 };
