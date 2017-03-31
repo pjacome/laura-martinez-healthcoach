@@ -9,7 +9,7 @@
     <table class="bordered highlight responsive-table">
         <thead>
             <tr>
-                <th></th>
+                <th class="less-bottom-padding"><input type="checkbox" id="select-all" /><label for="select-all"></label></th>
                 {{!-- each block goes here. for now just hard code --}}
                 <th>#</th>
                 <th>Title</th>
@@ -23,7 +23,7 @@
         <tbody>
             {{#each data}}
             <tr>
-                <td><input type="checkbox" id="delete-blog-{{@index}}" class="potential-delete" /><label for="delete-blog-{{@index}}"></label></td>
+                <td class="less-bottom-padding"><input type="checkbox" id="delete-{{category}}-{{@index}}" class="potential-delete" /><label for="delete-{{category}}-{{@index}}"></label></td>
                 <td>{{@index}}</td>
                 <td>{{title}}</td>
                 {{#if category}}
@@ -42,6 +42,10 @@
         text-transform: uppercase;
     }
 
+    .less-bottom-padding {
+        padding-bottom: 7px;
+    }
+
     .title-and-help-wrapper > * {
         display: inline-block;
     }
@@ -58,6 +62,12 @@
 
 <scr{{!}}ipt>
     $(document).ready(function() {
+        $('#select-all').click(function() {
+            var checkBoxes = $('tbody > tr > td > input[type=checkbox]');
+            checkBoxes.prop('checked', $(this).prop('checked'));
+            DeleteButtonClickable();
+        });
+
         $('#display-help').click(function() {
             // display modal to help laura with navigating admin buttons/table
         });
@@ -67,8 +77,10 @@
             // display modal to delete these mutha fuckas
         });
 
-        $('.potential-delete').click(function() {
-            $('#delete-{{category}}').toggleClass('disabled', $('tbody > tr > td > input[type=checkbox]:checked').length <= 0);
-        });
+        $('.potential-delete').click(DeleteButtonClickable);
     });
+
+    function DeleteButtonClickable() {
+        $('#delete-{{category}}').toggleClass('disabled', $('tbody > tr > td > input[type=checkbox]:checked').length <= 0);
+    }
 </scr{{!}}ipt>

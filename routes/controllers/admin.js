@@ -74,10 +74,6 @@ module.exports.GET = function(req, res) {
                 case 'recipes':
                     obj_Recipes.SEARCH(function(docs) {
                         options.data = docs;
-                        console.log(options.layout);
-                        console.log(options.category);
-                        console.log(options.data);
-                        console.log(options);
                         res.render('en/admin/admin-dashboards', options);
                     });
                     break;
