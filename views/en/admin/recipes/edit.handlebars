@@ -1,0 +1,288 @@
+﻿<br>
+<div class="container">
+    <div class="outer-card z-depth-2 blue lighten-100">
+        <h5 class="white-text center">New Recipe</h5>
+        <form class="white">
+            <div class="row">
+                <div class="input-field col s12 l6">
+                    <input id="title" name="title" type="text" class="validate" value="{{title}}" required>
+                    <label for="title">Title</label>
+                </div>
+                <div class="input-field col s12 l6">
+                    <select id="category">
+                        {{!-- {{#select theSelected}} --}}
+                        <option value="" disabled selected>Choose the Category</option>
+                        <option value="breakfast">Breakfast</option>
+                        <option value="entrees">Entrees</option>
+                        <option value="desserts">Desserts</option>
+                        <option value="drinks">Drinks</option>
+                        <option value="snacks">Snacks</option>
+                        <option value="salads">Salads</option>
+                        {{!-- {{/select}} --}}
+                    </select>
+                    <label>Category</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="input-field col s12">
+                    <input id="tags" name="tags" type="text" class="validate" placeholder="Example: banana, nuts, drink, soda, lettuce, ..." value="{{#each tags}}{{this}}{{#unless @last}},&nbsp;{{/unless}}{{/each}}">
+                    <label for="tags">Tags</label>
+                </div>
+            </div>
+
+            <div class="row insert-ingredients-here">
+                <!-- Ingredients get added here dynamically through Javascript -->
+            </div>
+
+            <!-- Add Ingredient Button -->
+            <p>Add the ingredients for your recipe!</p>
+            <div class="add-ingredient-spacing">
+                <button id="add-ingredient-btn" class="btn waves-effect waves-light" type="button" name="action">
+                    Add
+                    <i class="material-icons right">add</i>
+                </button>
+            </div>
+
+            <div class="row">
+                <div class="input-field col s12">
+                    <textarea id="description" class="materialize-textarea" placeholder="" required>{{description}}</textarea>
+                    <label for="description">Description</label>
+                </div>
+            </div>
+
+            <!-- File Upload -->
+            <div class="file-field input-field">
+                <div class="btn">
+                    <span>File</span>
+                    <input id="imageFiles" name="photos[]" type="file" multiple>
+                </div>
+                <div class="file-path-wrapper">
+                    <input class="file-path validate" type="text" placeholder="Upload one or more images">
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="input-field col s12">
+                    <textarea id="textarea2" class="materialize-textarea" placeholder="Example: Toppings include mixed nuts with some honey glaze!" required>{{additionalNotes}}</textarea>
+                    <label for="textarea2">Additional Notes</label>
+                </div>
+            </div>
+
+            <!-- Submit Button -->
+            <button id="submit-recipe-btn" class="btn waves-effect waves-light login" type="submit" name="action">
+                Submit
+                <i class="material-icons right">send</i>
+            </button>
+        </form>
+    </div>
+</div>
+
+<!-- Modal Structure -->
+<div id="modal1" class="modal">
+    <div class="modal-content">
+        <h4>Wait! Looks like you left something empty!</h4>
+        <p>The following were not filled in:</p>
+        <ul id="listOfNeglected" class="browser-default"></ul>
+        <p>Are you sure you want to continue?</p>
+    </div>
+    <div class="modal-footer">
+        <a id="send-anyway-btn" href="" class="modal-action modal-close waves-effect btn-flat">Submit Anyway</a>
+        <a id="close-modal-btn" href="" class="modal-action modal-close waves-effect btn-flat">Go Back</a>
+    </div>
+</div>
+
+<style>
+    .outer-card {
+        width: 300px;
+        padding: 20px;
+        margin: 0 auto;
+    }
+
+        .outer-card form {
+            padding-top: 10px;
+            padding-left: 10px;
+            padding-right: 10px;
+            padding-bottom: 40px;
+            padding: 10px 30px 40px 30px;
+        }
+
+    .add-ingredient-spacing {
+        margin-bottom: 20px;
+    }
+
+    /* small */
+    @media (min-width: 768px) {
+    }
+
+    /* medium */
+    @media (min-width: 992px) {
+    }
+
+    /* desktop */
+    @media (min-width: 1200px) {
+        .outer-card {
+            width: 100%;
+        }
+    }
+</style>
+
+<script>
+    $(document).ready(function() {
+        var ingredientCounter = 1;
+
+        $('select').material_select();
+        $('.modal').modal();
+
+        $('#add-ingredient-btn').click(function() {
+            $('.insert-ingredients-here').append(
+                '<div id="ingredient-object-'+ ingredientCounter +'" class="col s12 m6 l4 ingredients">' +
+                    '<div class="row">' +
+                        '<div class="input-field col s12">' +
+                            '<input id="item-'+ ingredientCounter +'" type="text" class="validate" placeholder="Ex: almonds" required>' +
+                            '<label for="item-'+ ingredientCounter +'">Item</label>' +
+                        '</div>' +
+                        '<div class="input-field col s12">' +
+                            '<input id="unit-'+ ingredientCounter +'" type="text" class="validate" placeholder="Ex: cup" required>' +
+                            '<label for="unit-'+ ingredientCounter +'">Unit</label>' +
+                        '</div>' +
+                        '<div class="input-field col s12">' +
+                            '<input id="quantity-'+ ingredientCounter +'" type="number" class="validate" placeholder="Ex: 2.5" required>' +
+                            '<label for="quantity-'+ ingredientCounter +'">Quantity</label>' +
+                        '</div>' +
+                        '<div class="center">' +
+                            '<button id="remove-ingredient-'+ ingredientCounter +'-btn" class="red btn waves-effect waves-light remove-ingredient" type="button" name="action" onclick="RemoveIngredient(this.id)">' +
+                                'Remove' +
+                                '<i class="material-icons right">delete</i>' +
+                            '</button>' +
+                        '</div>' +
+                    '</div>' +
+                '</div>'
+            );
+            $('#item-'+ingredientCounter).focus().blur();
+            $('#unit-'+ingredientCounter).focus().blur();
+            $('#quantity-'+ingredientCounter).focus().blur();
+            ++ingredientCounter;
+        });
+
+        $('#submit-recipe-btn').click(function(e) {
+            e.preventDefault();
+
+            var tagsArr = $('#tags').val().split('-');
+            if($('#tags').val() === '')
+                tagsArr = [];
+
+            // form data
+            var imageStrings = [];
+            var files = document.getElementById('imageFiles').files;
+            var formData = new FormData();
+            for(var i = 0; i < files.length; ++i) {
+                var file = files[i];
+                if(!file.type.match('image.*'))
+                    continue;
+
+                formData.append('photos[]', file, file.name);
+                imageStrings.push(file.name);
+            }
+
+            // ingredients
+            var ingredients = [];
+            $('.insert-ingredients-here').children('.ingredients').each(function() {
+                var idNum = (this.id).split('-')[2];
+                ingredients.push({
+                    item: $(this).find('#item-'+idNum).val(),
+                    unit: $(this).find('#unit-'+idNum).val(),
+                    quantity: $(this).find('#quantity-'+idNum).val()
+                });
+            });
+
+            var recipeObject = {
+                title: $('#title').val(),
+                category: $('#category').val(),
+                tags: tagsArr,
+                imageURLs: imageStrings,
+                ingredients: ingredients,
+                description: $('#description').val(),
+                additionalNotes: $('#textarea2').val()
+            };
+
+            // check for empty fields
+            if(!$('#title').val() || !$('#category').val() ||
+               !$('#tags').val()  || !$('#description').val()) {
+                $('#modal1').modal('open');
+                PopulateModalList($('#title').val(),
+                    $('#category').val(),
+                    $('#tags').val(),
+                    $('#description').val());
+                $('#send-anyway-btn').click(function(e) {
+                    e.preventDefault();
+                    SendRequestObjects(recipeObject, formData, files.length);
+                    $('#modal1').modal('close');
+                });
+            } else {
+                SendRequestObjects(recipeObject, formData, files.length);
+            }
+        });
+
+        $('#close-modal-btn').click(function(e) {
+            e.preventDefault();
+            $('#modal1').modal('close');
+        });
+    });
+
+    function RemoveIngredient(id) {
+        var idNumberArr = id.split('-');
+        var idNumber = idNumberArr[2];
+        $('#ingredient-object-' + idNumber).remove();
+    }
+
+    function SendRequestObjects(recipeObject, formData, length) {
+        $.ajax({
+            method: 'POST',
+            data: recipeObject,
+            url: '/admin/recipes'
+        }).done(function(data) {
+            Materialize.toast('Recipe Upload Succesful!', 4000, 'green');
+        }).fail(function(jqXHR, textStatus, errorThrown) {
+            var statusCode = (jqXHR.status.toString()).split('');
+            var statusText = jqXHR.statusText;
+            if(statusCode[0] === 5 || statusText.match(/Internal Server Error/)) {
+                // server-side error - contact pablo
+                Materialize.toast('Server-side Error. Contact Pablo if problem persists.', 5000, 'red');
+            } else if(statusCode[0] === 4 || statusText.match(/Bad Request/)) {
+                // client-side error - try again in a few moments
+                Materialize.toast('Failed to Upload Recipe!<br>Try again in a few moments.', 5000, 'red');
+            }
+        });
+
+        if(length > 0) {
+            var word = length > 1 ? 'Photos' : 'Photo';
+            $.ajax({
+                method: 'POST',
+                data: formData,
+                processData: false,
+                contentType: false,
+                url: '/admin/photos/upload'
+            }).done(function(data) {
+                Materialize.toast(word + ' Upload Succesful!', 4000, 'green');
+            }).fail(function(jqXHR, textStatus, errorThrown) {
+                var statusCode = (jqXHR.status.toString()).split('');
+                var statusText = jqXHR.statusText;
+                if(statusCode[0] === 5 || statusText.match(/Internal Server Error/)) {
+                    // server-side error - contact pablo
+                    Materialize.toast('Server-side Error. Contact Pablo if problem persists.', 5000, 'red');
+                } else if(statusCode[0] === 4 || statusText.match(/Bad Request/)) {
+                    // client-side error - try again in a few moments
+                    Materialize.toast('Failed to Upload '+word+'!<br>Try again in a few moments.', 5000, 'red');
+                }
+            });
+        }
+    }
+
+    function PopulateModalList(title, category, tags, description) {
+        $('#listOfNeglected').html('');
+        if(!title) { $('#listOfNeglected').append('<li>Title</li>'); }
+        if(!category) { $('#listOfNeglected').append('<li>Category</li>'); }
+        if(!tags) { $('#listOfNeglected').append('<li>Tags</li>'); }
+        if(!description) { $('#listOfNeglected').append('<li>Description</li>'); }
+    }
+</script>

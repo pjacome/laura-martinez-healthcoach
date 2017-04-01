@@ -20,7 +20,6 @@ module.exports.POST = function(req, res) {
     } else {
         console.log('>>> Incorrect credentials. Authentication denied. <<<');
         console.log(email, ' |', password, ' |', remember);
-        //if(req.session.isAuthenticated) req.session.isAuthenticated = false;
         console.log('isAuth:', req.session.isAuthenticated);
         res.sendStatus(404);
     }
@@ -51,7 +50,7 @@ module.exports.GET = function(req, res) {
         // render dashboard
         DisplayDashboard(req, res);
     } else if(operation.match(/(add|edit)/)) {
-        // render add edit page
+        // render add or edit page
         DisplayOperation(req, res);
     } else {
         // render 400 page
@@ -94,7 +93,7 @@ function DisplayDashboard(req, res) {
                     res.render('en/admin/admin-dashboards', options);
                     break;
                 case 'recipes':
-                    obj_Recipes.SEARCH(function (docs) {
+                    obj_Recipes.SEARCH(function(docs) {
                         options.data = docs;
                         res.render('en/admin/admin-dashboards', options);
                     });
@@ -115,6 +114,9 @@ function DisplayOperation(req, res) {
         console.log('>>> Incorrect URL: \'' + route + '\' <<<');
         res.sendStaus(400);
     } else {
+        var options = {
+            layout: 'admin-main.handlebars'
+        };
         switch(dashboard) {
             case 'blogs':
                 break;
@@ -125,9 +127,15 @@ function DisplayOperation(req, res) {
             case 'recipes':
                 if(route.match(/add/)) {
                     // add
-                    res.render('en/admin/recipes/add', {layout: 'admin-main.handlebars'});
+                    res.render('en/admin/recipes/add', options);
                 } else {
                     // edit
+                    obj_Recipes.SEARCH(function(docs) {
+                        console.log('>>> docs:', docs);
+                        console.log('>>> Opening file for editing ...');
+                        options.data = docs;
+                        res.render('en/admin/recipes/edit', options);
+                    });
                 }
                 break;
             default:

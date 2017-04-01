@@ -86,7 +86,10 @@ module.exports.DELETE = function(req, res) {
 
 module.exports.SEARCH = function(callback) {
     db.client.collection('recipes').find({}, function(err, cursor) {
-        if(err) throw err;
+        if(err) { 
+            console.log(err);
+            return;
+        }
         cursor.toArray(function(err, docs) {
             if(err) throw err;
             callback(docs);
