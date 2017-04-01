@@ -237,7 +237,7 @@
         $.ajax({
             method: 'POST',
             data: recipeObject,
-            url: '/en/recipes/create'
+            url: '/admin/recipes'
         }).done(function(data) {
             Materialize.toast('Recipe Upload Succesful!', 4000, 'green');
         }).fail(function(jqXHR, textStatus, errorThrown) {
@@ -259,7 +259,7 @@
                 data: formData,
                 processData: false,
                 contentType: false,
-                url: '/en/admin/photos/upload'
+                url: '/admin/photos/upload'
             }).done(function(data) {
                 Materialize.toast(word + ' Upload Succesful!', 4000, 'green');
             }).fail(function(jqXHR, textStatus, errorThrown) {

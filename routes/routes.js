@@ -31,15 +31,6 @@ router.get('/en/blog', function(req, res) {res.render('en/blog');});
 router.get('/en/contact', function(req, res) {res.render('en/contact');});
 
 
-
-/////////////////// recipes ////////////////////
-router.get('/en/recipes/search', function(req, res) {res.render('en/comingsoon');});
-router.get('/en/recipes/:category', obj_Recipes.GET);
-router.get('/en/recipes/:category/:id', obj_Recipes.GET);
-router.post('/en/recipes/create', obj_Recipes.POST);
-
-
-
 /////////////////// forms //////////////////////
 router.get('/en/forms', function(req, res) {res.render('en/forms/forms');});
 router.get('/en/forms/revisit', function(req, res) {res.render('en/comingsoon');});
@@ -97,7 +88,7 @@ router.get('/en/admin/login', IsLoggedIn, function(req, res) {res.render('en/adm
         router.get('/en/admin/blog/edit/exedit', function(req, res) {res.render('en/admin/exedit');});
 
 router.get('/en/admin/:dashboard', Authenticate, obj_Admin.GET);
-router.get('/en/admin/recipes/add', Authenticate, function(req, res) {res.render('en/admin/recipes/add')});
+router.get('/en/admin/recipes/add', Authenticate, function(req, res) {res.render('en/admin/recipes/add', {layout: 'admin-main.handlebars'})});
 
 
 // ###########################################################################
@@ -105,17 +96,27 @@ router.get('/en/admin/recipes/add', Authenticate, function(req, res) {res.render
 // operations - including getting the data for viewing on client-side
 // ###########################################################################
 
-//blog
-// router.get ('/en/blog/read/all', obj_Blog.GET);
-// router.post('/en/blog/create', obj_Blog.POST);
-// router.put ('/en/blog/edit/?:id, obj_Blog.PUT);
-// router.delete('/en/blog/edit/?:id, obj_Blog.DELETE);
+/////////////////// recipes ////////////////////
+// client-side rendering
+router.get('/en/recipes/search', function (req, res) { res.render('en/comingsoon'); });
+router.get('/en/recipes/:category', obj_Recipes.GET);
+router.get('/en/recipes/:category/:id', obj_Recipes.GET);
+// CRUD operations
+router.post  ('/admin/recipes', Authenticate, obj_Recipes.POST);
+router.put   ('/admin/recipes', Authenticate, obj_Recipes.PUT);
+router.delete('/admin/recipes', Authenticate, obj_Recipes.DELETE);
+
+//blogs
+// router.get   ('/en/blog/read/all', obj_Blogs.GET);
+// router.post  ('/en/blog/create',   obj_Blogs.POST);
+// router.put   ('/en/blog/edit/:id,  obj_Blogs.PUT);
+// router.delete('/en/blog/edit/:id,  obj_Blogs.DELETE);
 
 //recipes
 //router.get   ('/en/recipes/read/all', obj_Recipes.GET);
 //router.post  ('/en/recipes/create',   obj_Recipes.POST);
-//router.put   ('/en/recipes/edit/?:id', obj_Recipes.PUT);
-//router.delete('/en/recipes/edit/?:id', obj_Recipes.DELETE);
+//router.put   ('/en/recipes/edit/:id', obj_Recipes.PUT);
+//router.delete('/en/recipes/edit/:id', obj_Recipes.DELETE);
 
 //forms
 // router.get   ('/en/read/all', obj_Forms.GET);
@@ -139,7 +140,7 @@ var storage = multer.diskStorage({
         var ext = file.originalname.split('.');
         var name = ext[0];
         ext = ext[ext.length - 1];
-        cb(null, name + '-' + Date.now() + '.' + ext);
+        cb(null, file.originalname);
     },
 });
 var upload = multer({
@@ -158,7 +159,7 @@ var upload = multer({
     }
 });
 var photos = upload.array('photos[]', 12);
-router.post('/en/admin/photos/upload', photos, obj_Photos.POST);
+router.post('/admin/photos/upload', Authenticate, photos, obj_Photos.POST);
 
 // contact via email
 router.post('/en/contact/send', obj_Contact.POST);

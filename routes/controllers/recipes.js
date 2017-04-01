@@ -59,9 +59,29 @@ module.exports.GET = function(req, res) {
 };
 
 module.exports.PUT = function(req, res) {
+    // TODO: needs validation
+    console.log('>>> Updating ' + req.query.id + '... ');
+    var id = req.query.id;
+    var obj_ID = new ObjectID(id);
+    var filter = {_id: {$eq: obj_ID}};
+    var update = req.body.update;
+    console.log('update:',update);
+    var options = {upsert: false};
+    db.client.collection('recipes').updateOne(filter, update, options);
 };
 
 module.exports.DELETE = function(req, res) {
+    // TODO: needs validation
+    var id = req.query.id;
+    var obj_ID = new ObjectID(id);
+    db.client.collection('recipes').remove({ _id: {$eq: obj_ID}}, function(err, result) {
+        if(err)
+            res.sendStatus(500);
+        else {
+            console.log('>>> Item #' + id + ' deleted. <<<');
+            res.sendStatus(200);
+        }
+    });
 };
 
 module.exports.SEARCH = function(callback) {

@@ -63,6 +63,11 @@ module.exports.GET = function(req, res) {
             // make db call to populate 'options' with data to render on client
             switch(route) {
                 case 'blogs':
+                    // TODO
+                    // obj_Blogs.SEARCH(function(docs) {
+                    //     options.data = docs;
+                    //     res.render();
+                    //});
                     res.render('en/admin/admin-dashboards', options);
                     break;
                 case 'events':
