@@ -88,7 +88,6 @@ router.get('/en/admin/login', IsLoggedIn, function(req, res) {res.render('en/adm
         router.get('/en/admin/blog/edit/exedit', function(req, res) {res.render('en/admin/exedit');});
 
 router.get('/en/admin/:dashboard', Authenticate, obj_Admin.GET);
-router.get('/en/admin/recipes/add', Authenticate, function(req, res) {res.render('en/admin/recipes/add', {layout: 'admin-main.handlebars'})});
 router.get('/en/admin/:dashboard/:operation', Authenticate, obj_Admin.GET);
 
 // ###########################################################################

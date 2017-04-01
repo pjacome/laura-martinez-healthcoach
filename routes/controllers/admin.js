@@ -70,8 +70,8 @@ function DisplayDashboard(req, res) {
     } else {
         if (route.match(/dashboard/)) {
             console.log('>>> Displaying Admin Dashboard ... ');
-            res.render('en/admin/dashboard', { layout: 'admin-main.handlebars' });
-        } else {
+            res.render('en/admin/dashboard', {layout: 'admin-main.handlebars'});
+        } else if(route.match(/(blogs|events|forms|recipes)/)) {
             console.log('>>> Displaying Dashboard ' + route);
             var options = {
                 layout: 'admin-main.handlebars',
@@ -108,4 +108,30 @@ function DisplayDashboard(req, res) {
 
 function DisplayOperation(req, res) {
     // displays [add, edit] pages
+    var dashboard = req.params.dashboard;
+    var route = req.params.operation;
+    var routes = /(add|edit)/;
+    if (!route.match(routes)) {
+        console.log('>>> Incorrect URL: \'' + route + '\' <<<');
+        res.sendStaus(400);
+    } else {
+        switch(dashboard) {
+            case 'blogs':
+                break;
+            case 'events':
+                break;
+            case 'forms':
+                break;
+            case 'recipes':
+                if(route.match(/add/)) {
+                    // add
+                    res.render('en/admin/recipes/add', {layout: 'admin-main.handlebars'});
+                } else {
+                    // edit
+                }
+                break;
+            default:
+                break;
+        }
+    }
 }
