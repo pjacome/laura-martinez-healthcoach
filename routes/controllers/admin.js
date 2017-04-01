@@ -43,17 +43,34 @@ module.exports.ENDSESSION = function(req, res) {
     }
 };
 
-// displays [/dashboard, /blogs, /events, /forms, /recipes]
+// displays dashboards and operational pages: [add, edit]
 module.exports.GET = function(req, res) {
+    var dashboard = req.params.dashboard;
+    var operation = req.params.operation;
+    if(dashboard.match(/(dashboard|blogs|events|forms|recipes)/) && !operation) {
+        // render dashboard
+        DisplayDashboard(req, res);
+    } else if(operation.match(/(add|edit)/)) {
+        // render add edit page
+        DisplayOperation(req, res);
+    } else {
+        // render 400 page
+        res.sendStatus(400);
+    }
+};
+
+// Helpers
+function DisplayDashboard(req, res) {
+    // displays [blogs, events, forms, recipes] dashboard
     var route = req.params.dashboard;
     var routes = /(dashboard|blogs|events|forms|recipes)/;
-    if(!route.match(routes)) {
-        console.log('>>> Incorrect URL: \''+route+'\' <<<');
-        res.sendStaus(500);
+    if (!route.match(routes)) {
+        console.log('>>> Incorrect URL: \'' + route + '\' <<<');
+        res.sendStaus(400);
     } else {
-        if(route.match(/dashboard/)) {
+        if (route.match(/dashboard/)) {
             console.log('>>> Displaying Admin Dashboard ... ');
-            res.render('en/admin/dashboard', {layout: 'admin-main.handlebars'});
+            res.render('en/admin/dashboard', { layout: 'admin-main.handlebars' });
         } else {
             console.log('>>> Displaying Dashboard ' + route);
             var options = {
@@ -61,7 +78,7 @@ module.exports.GET = function(req, res) {
                 category: route
             };
             // make db call to populate 'options' with data to render on client
-            switch(route) {
+            switch (route) {
                 case 'blogs':
                     // TODO
                     // obj_Blogs.SEARCH(function(docs) {
@@ -77,7 +94,7 @@ module.exports.GET = function(req, res) {
                     res.render('en/admin/admin-dashboards', options);
                     break;
                 case 'recipes':
-                    obj_Recipes.SEARCH(function(docs) {
+                    obj_Recipes.SEARCH(function (docs) {
                         options.data = docs;
                         res.render('en/admin/admin-dashboards', options);
                     });
@@ -87,4 +104,8 @@ module.exports.GET = function(req, res) {
             }
         }
     }
-};
+}
+
+function DisplayOperation(req, res) {
+    // displays [add, edit] pages
+}
