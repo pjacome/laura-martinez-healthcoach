@@ -71,7 +71,7 @@ module.exports.PUT = function(req, res) {
             console.log('>>> Error updating ' + id + ' <<<', err);
             res.sendStatus(500);
         } else {
-            console.log('>>> Successfully updated ' + id + ' <<<', result);
+            console.log('>>> Successfully updated ' + id + ' <<<');
             res.sendStatus(200);
         }
     });
@@ -80,10 +80,13 @@ module.exports.PUT = function(req, res) {
 module.exports.DELETE = function(req, res) {
     // TODO: needs validation
     var id = req.query.id;
+    console.log('>>> Deleting recipe #'+id);
     var obj_ID = new ObjectID(id);
     db.client.collection('recipes').remove({ _id: {$eq: obj_ID}}, function(err, result) {
-        if(err)
+        if(err) {
+            console.log('>>> Error. Unable to delete item. <<<', err);
             res.sendStatus(500);
+        }
         else {
             console.log('>>> Item #' + id + ' deleted. <<<');
             res.sendStatus(200);

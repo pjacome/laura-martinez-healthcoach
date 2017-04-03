@@ -74,6 +74,7 @@
         </form>
     </div>
 </div>
+<div class="this-div"></div>
 
 <!-- Modal Structure -->
 <div id="modal1" class="modal">
@@ -90,6 +91,18 @@
 </div>
 
 <style>
+    .mask {
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+        position: fixed;
+        background-color: black;
+        z-index: 2;
+        background-color: black;
+        opacity: 0.5;
+    }
+
     .outer-card {
         width: 300px;
         padding: 20px;
@@ -102,6 +115,11 @@
         padding-right: 10px;
         padding-bottom: 40px;
         padding: 10px 30px 40px 30px;
+    }
+
+    .remove-ingredient {
+        padding-left: 15px;
+        padding-right: 15px;
     }
 
     .add-ingredient-spacing {
@@ -149,8 +167,7 @@
                         '</div>' +
                         '<div class="center">' +
                             '<button id="remove-ingredient-'+ ingredientCounter +'-btn" class="red btn waves-effect waves-light remove-ingredient" type="button" name="action" onclick="RemoveIngredient(this.id)">' +
-                                'Remove' +
-                                '<i class="material-icons right">delete</i>' +
+                                '<i class="material-icons center">delete</i>' +
                             '</button>' +
                         '</div>' +
                     '</div>' +
@@ -239,7 +256,11 @@
             data: recipeObject,
             url: '/admin/recipes'
         }).done(function(data) {
+            var subject = window.location.pathname.split('/')[3];
+            $('.this-div').addClass('mask');
             Materialize.toast('Recipe Upload Succesful!', 4000, 'green');
+            Materialize.toast('Redirecting to ' + subject + ' dashboard in&nbsp;<span id="timer">3<span>', 3000, 'blue');
+            Timer(3, subject);
         }).fail(function(jqXHR, textStatus, errorThrown) {
             var statusCode = (jqXHR.status.toString()).split('');
             var statusText = jqXHR.statusText;
@@ -282,5 +303,14 @@
         if(!category) { $('#listOfNeglected').append('<li>Category</li>'); }
         if(!tags) { $('#listOfNeglected').append('<li>Tags</li>'); }
         if(!description) { $('#listOfNeglected').append('<li>Description</li>'); }
+    }
+
+    function Timer(duration, subject) {
+        setInterval(function() {
+            console.log(duration);
+            if(--duration < 0)
+                window.location.href = '/en/admin/' + subject;
+            $('#timer').html(duration);
+        }, 1000, duration);
     }
 </script>

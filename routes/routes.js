@@ -158,7 +158,8 @@ var upload = multer({
     }
 });
 var photos = upload.array('photos[]', 12);
-router.post('/admin/photos/upload', Authenticate, photos, obj_Photos.POST);
+router.post  ('/admin/photos/upload', Authenticate, photos, obj_Photos.POST);
+router.delete('/admin/photos', Authenticate, obj_Photos.DELETE);
 
 // contact via email
 router.post('/en/contact/send', obj_Contact.POST);

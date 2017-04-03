@@ -9,8 +9,7 @@
     <table class="bordered highlight responsive-table">
         <thead>
             <tr>
-                <th class="less-bottom-padding"><input type="checkbox" id="select-all" /><label for="select-all"></label></th>
-                {{!-- each block goes here. for now just hard code --}}
+                <th class="less-bottom-padding"><input type="checkbox" id="select-all" class="filled-in" /><label for="select-all"></label></th>
                 <th>#</th>
                 <th>Title</th>
                 {{#if data.1.category}}
@@ -23,7 +22,7 @@
         <tbody>
             {{#each data}}
             <tr>
-                <td class="less-bottom-padding"><input type="checkbox" id="delete-{{category}}-{{@index}}" class="potential-delete" /><label for="delete-{{category}}-{{@index}}"></label></td>
+                <td class="less-bottom-padding"><input type="checkbox" id="delete-{{category}}-{{@index}}" class="potential-delete filled-in" /><label for="delete-{{category}}-{{@index}}"></label></td>
                 <td>{{@index}}</td>
                 <td><a href="{{../category}}/edit?id={{_id}}">{{title}}</a></td>
                 {{#if category}}

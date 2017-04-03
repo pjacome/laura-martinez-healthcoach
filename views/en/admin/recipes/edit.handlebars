@@ -1,7 +1,7 @@
 <br>
 <div class="container">
     <div class="outer-card z-depth-2 blue lighten-100">
-        <h5 class="white-text center">New Recipe</h5>
+        <h5 class="white-text center">Update Recipe</h5>
         <form class="white">
             <div class="row">
                 <div class="input-field col s12 l6">
@@ -49,8 +49,7 @@
                         </div>
                         <div class="center">
                             <button id="remove-ingredient-{{@index}}-btn" class="red btn waves-effect waves-light remove-ingredient" type="button" name="action" onclick="RemoveIngredient(this.id)">
-                                Remove
-                                <i class="material-icons right">delete</i>
+                                <i class="material-icons">delete</i>
                             </button>
                         </div>
                     </div>
@@ -85,6 +84,14 @@
                 </div>
             </div>
 
+            <!-- photos/images as chips -->
+            <div class="chips-section">
+                {{#each data.imageURLs}}
+                    <div class="chip current-imageURLs"><span class="the-image-string">{{this}}</span><i class="close material-icons">close</i></div>
+                {{/each}}
+            </div>
+            <br>
+
             <div class="row">
                 <div class="input-field col s12">
                     <textarea id="textarea2" class="materialize-textarea" placeholder="Example: Toppings include mixed nuts with some honey glaze!" required>{{data.additionalNotes}}</textarea>
@@ -93,15 +100,21 @@
             </div>
 
             <!-- Submit Button -->
-            <button id="submit-recipe-btn" class="btn waves-effect waves-light login" type="submit" name="action">
+            <button id="update-recipe-btn" class="btn waves-effect waves-light" type="submit" name="update-recipe-btn">
                 Update
                 <i class="material-icons right">update</i>
+            </button>
+
+            <button id="delete-this-recipe-btn" class="btn waves-effect waves-light red" type="button" name="delete-this-recipe-btn">
+                Delete
+                <i class="material-icons right">delete</i>
             </button>
         </form>
     </div>
 </div>
+<div class="this-div"></div>
 
-<!-- Modal Structure -->
+<!-- Modal Structure 1 -->
 <div id="modal1" class="modal">
     <div class="modal-content">
         <h4>Wait! Looks like you left something empty!</h4>
@@ -115,7 +128,39 @@
     </div>
 </div>
 
+<!-- Modal Structure 2 -->
+<div id="delete-recipe-modal" class="modal">
+    <div class="modal-content">
+        <h4>Are you sure you want to delete this recipe?</h4>
+        <p>If you decide to delete this recipe it will permanently be lost. Are you sure you want to continue?</p>
+        <p>
+            <input type="checkbox" id="confirm-remove-associated-photos" class="filled-in">
+            <label for="confirm-remove-associated-photos">
+                Check this box if you also want to permanently delete the photos associated with this recipe.
+                <br>
+                <b>Note</b>: if you delete the photos then you will not be able to recover them.
+            </label>
+        </p>
+    </div>
+    <div class="modal-footer">
+        <a id="confirm-delete-btn" href="" class="modal-action modal-close waves-effect btn-flat">Yes, delete.</a>
+        <a id="close-modal-2-btn" href="" class="modal-action modal-close waves-effect btn-flat">No</a>
+    </div>
+</div>
+
 <style>
+    .mask {
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+        position: fixed;
+        background-color: black;
+        z-index: 5000;
+        background-color: black;
+        opacity: 0.5;
+    }
+
     .outer-card {
         width: 300px;
         padding: 20px;
@@ -129,6 +174,11 @@
             padding-bottom: 40px;
             padding: 10px 30px 40px 30px;
         }
+
+    .remove-ingredient {
+        padding-left: 15px;
+        padding-right: 15px;
+    }
 
     .add-ingredient-spacing {
         margin-bottom: 20px;
@@ -157,6 +207,10 @@
         $('select').material_select();
         $('.modal').modal();
 
+        $('#delete-this-recipe-btn').click(function() {
+            $('#delete-recipe-modal').modal('open');
+        });
+
         $('#add-ingredient-btn').click(function() {
             $('.insert-ingredients-here').append(
                 '<div id="ingredient-object-'+ ingredientCounter +'" class="col s12 m6 l4 ingredients">' +
@@ -175,8 +229,7 @@
                         '</div>' +
                         '<div class="center">' +
                             '<button id="remove-ingredient-'+ ingredientCounter +'-btn" class="red btn waves-effect waves-light remove-ingredient" type="button" name="action" onclick="RemoveIngredient(this.id)">' +
-                                'Remove' +
-                                '<i class="material-icons right">delete</i>' +
+                                '<i class="material-icons center">delete</i>' +
                             '</button>' +
                         '</div>' +
                     '</div>' +
@@ -188,15 +241,20 @@
             ++ingredientCounter;
         });
 
-        $('#submit-recipe-btn').click(function(e) {
+        $('#update-recipe-btn').click(function(e) {
             e.preventDefault();
 
             var tagsArr = $('#tags').val().split('-');
             if($('#tags').val() === '')
                 tagsArr = [];
 
-            // form data
+            // form data for photos/images
             var imageStrings = [];
+            $('.chips-section').children('.current-imageURLs').each(function() {
+                var fileName = $(this).children('.the-image-string').html();
+                imageStrings.push(fileName);
+            });
+            
             var files = document.getElementById('imageFiles').files;
             var formData = new FormData();
             for(var i = 0; i < files.length; ++i) {
@@ -230,8 +288,7 @@
             };
 
             // check for empty fields
-            if(!$('#title').val() || !$('#category').val() ||
-               !$('#tags').val()  || !$('#description').val()) {
+            if(!$('#title').val() || !$('#category').val() || !$('#tags').val()  || !$('#description').val()) {
                 $('#modal1').modal('open');
                 PopulateModalList($('#title').val(),
                     $('#category').val(),
@@ -247,9 +304,37 @@
             }
         });
 
+        $('#confirm-delete-btn').click(function(e) {
+            e.preventDefault();
+            DeleteRecipeFromDatabase();
+            var alsoDeletePhotos = $('#confirm-remove-associated-photos').is(':checked');
+            if(alsoDeletePhotos) {
+                var imageStrings = [];
+                $('.chips-section').children('.current-imageURLs').each(function() {
+                    var fileName = $(this).children('.the-image-string').html();
+                    imageStrings.push(fileName);
+                });
+            
+                var files = document.getElementById('imageFiles').files;
+                for(var i = 0; i < files.length; ++i) {
+                    var file = files[i];
+                    if(!file.type.match('image.*'))
+                        continue;
+
+                    imageStrings.push(file.name);
+                }
+                DeletePhotosFromDatabase(0, imageStrings);
+            }
+        });
+
         $('#close-modal-btn').click(function(e) {
             e.preventDefault();
             $('#modal1').modal('close');
+        });
+
+        $('#close-modal-2-btn').click(function(e) {
+            e.preventDefault();
+            $('#delete-recipe-modal').modal('close');
         });
     });
 
@@ -258,16 +343,26 @@
         var idNumber = idNumberArr[2];
         $('#ingredient-object-' + idNumber).remove();
     }
+
+    function PopulateModalList(title, category, tags, description) {
+        $('#listOfNeglected').html('');
+        if(!title)       { $('#listOfNeglected').append('<li>Title</li>'); }
+        if(!category)    { $('#listOfNeglected').append('<li>Category</li>'); }
+        if(!tags)        { $('#listOfNeglected').append('<li>Tags</li>'); }
+        if(!description) { $('#listOfNeglected').append('<li>Description</li>'); }
+    }
     
     function SendRequestObjects(recipeObject, formData, length) {
         $.ajax({
             method: 'PUT',
             contentType: 'application/json',
-            dataType: 'json',
             data: JSON.stringify(recipeObject),
             url: '/admin/recipes?id='+(window.location.search).split('=')[1]
-        }).done(function(data) {
+        }).done(function() {
+            var subject = window.location.pathname.split('/')[3];
             Materialize.toast('Recipe Update Succesful!', 4000, 'green');
+            Materialize.toast('Redirecting to '+ subject +' dashboard in&nbsp;<span id="timer">3<span>', 4000, 'blue');
+            Timer(3, subject);
         }).fail(function(jqXHR, textStatus, errorThrown) {
             var statusCode = (jqXHR.status.toString()).split('');
             var statusText = jqXHR.statusText;
@@ -304,11 +399,48 @@
         }
     }
 
-    function PopulateModalList(title, category, tags, description) {
-        $('#listOfNeglected').html('');
-        if(!title) { $('#listOfNeglected').append('<li>Title</li>'); }
-        if(!category) { $('#listOfNeglected').append('<li>Category</li>'); }
-        if(!tags) { $('#listOfNeglected').append('<li>Tags</li>'); }
-        if(!description) { $('#listOfNeglected').append('<li>Description</li>'); }
+    function DeleteRecipeFromDatabase() {
+        var id = window.location.search.split('=')[1];
+        $.ajax({
+            method: 'DELETE',
+            url: '/admin/recipes?id=' + id
+        }).done(function(data) {
+            Materialize.toast('Successfully deleted recipe', 5000, 'green');
+        }).fail(function(jqXHR, textStatus, errorThrown) {
+            var statusCode = (jqXHR.status.toString()).split('');
+                var statusText = jqXHR.statusText;
+                if(statusCode[0] === 5 || statusText.match(/Internal Server Error/)) {
+                    // server-side error - contact pablo
+                    Materialize.toast('Server-side Error - Was not able to delete. Contact Pablo if problem persists.', 5000, 'red');
+                } else if(statusCode[0] === 4 || statusText.match(/Bad Request/)) {
+                    // client-side error - try again in a few moments
+                    Materialize.toast('Failed to Delete Recipe!<br>Try again momentarily.', 5000, 'red');
+                }
+        });
+    }
+
+    function DeletePhotosFromDatabase(index, imageURLs) {
+        var length = imageURLs.length;
+        $.ajax({
+            method: 'DELETE',
+            url: '/admin/photos?name='+imageURLs[index]
+        }).done(function(filename) {
+            Materialize.toast('Successfully deleted ' + filename, 5000, 'green');
+        }).fail(function(filename) {
+            Materialize.toast('Failed to delete ' + filename.responseText, 5000, 'red');
+        });
+        if(++index < length) {
+            DeletePhotosFromDatabase(index, imageURLs);
+        }
+        return;
+    }
+
+    function Timer(duration, subject) {
+        setInterval(function() {
+            console.log(duration);
+            if(--duration < 0)
+                window.location.href = '/en/admin/' + subject;
+            $('#timer').html(duration);
+        }, 1000, duration);
     }
 </script>
