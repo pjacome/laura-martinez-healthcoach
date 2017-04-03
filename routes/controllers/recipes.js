@@ -64,10 +64,17 @@ module.exports.PUT = function(req, res) {
     var id = req.query.id;
     var obj_ID = new ObjectID(id);
     var filter = {_id: {$eq: obj_ID}};
-    var update = req.body.update;
-    console.log('update:',update);
+    var update = req.body;
     var options = {upsert: false};
-    db.client.collection('recipes').updateOne(filter, update, options);
+    db.client.collection('recipes').updateOne(filter, update, options, function(err, result) {
+        if(err) {
+            console.log('>>> Error updating ' + id + ' <<<', err);
+            res.sendStatus(500);
+        } else {
+            console.log('>>> Successfully updated ' + id + ' <<<', result);
+            res.sendStatus(200);
+        }
+    });
 };
 
 module.exports.DELETE = function(req, res) {
@@ -91,8 +98,28 @@ module.exports.SEARCH = function(callback) {
             return;
         }
         cursor.toArray(function(err, docs) {
-            if(err) throw err;
+            if(err) {
+                console.log('Error converting cursor to Array', err);
+                return;
+            }
             callback(docs);
+        });
+    });
+};
+
+module.exports.SEARCH_BY_ID = function(id, callback) {
+    var obj_ID = new ObjectID(id);
+    db.client.collection('recipes').find({'_id': obj_ID}, function(err, cursor) {
+        if(err) {
+            console.log('Error searching for ID', err);
+            return;
+        }
+        cursor.toArray(function(err, doc) {
+            if(err) {
+                console.log('Error converting cursor to Array', err);
+                return;
+            }
+            callback(doc);
         });
     });
 };

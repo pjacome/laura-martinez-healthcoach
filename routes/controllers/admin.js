@@ -130,10 +130,19 @@ function DisplayOperation(req, res) {
                     res.render('en/admin/recipes/add', options);
                 } else {
                     // edit
-                    obj_Recipes.SEARCH(function(docs) {
-                        console.log('>>> docs:', docs);
+                    var id = req.query.id;
+                    console.log(id);
+                    obj_Recipes.SEARCH_BY_ID(id, function(doc) {
+                        console.log('>>> docs:', doc[0]);
                         console.log('>>> Opening file for editing ...');
-                        options.data = docs;
+                        options.data = doc[0];
+                        options.helpers = {
+                            select: function(theSelected, options) {
+                                return options.fn(this).replace(
+                                    new RegExp(' value=\"' + theSelected + '\"'), '$& selected="selected"'
+                                );
+                            }
+                        };
                         res.render('en/admin/recipes/edit', options);
                     });
                 }

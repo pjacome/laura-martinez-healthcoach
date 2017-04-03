@@ -1,16 +1,16 @@
-﻿<br>
+<br>
 <div class="container">
     <div class="outer-card z-depth-2 blue lighten-100">
         <h5 class="white-text center">New Recipe</h5>
         <form class="white">
             <div class="row">
                 <div class="input-field col s12 l6">
-                    <input id="title" name="title" type="text" class="validate" value="{{title}}" required>
+                    <input id="title" name="title" type="text" class="validate" value="{{data.title}}" required>
                     <label for="title">Title</label>
                 </div>
                 <div class="input-field col s12 l6">
                     <select id="category">
-                        {{!-- {{#select theSelected}} --}}
+                        {{#select data.category}}
                         <option value="" disabled selected>Choose the Category</option>
                         <option value="breakfast">Breakfast</option>
                         <option value="entrees">Entrees</option>
@@ -18,20 +18,44 @@
                         <option value="drinks">Drinks</option>
                         <option value="snacks">Snacks</option>
                         <option value="salads">Salads</option>
-                        {{!-- {{/select}} --}}
+                        {{/select}}
                     </select>
                     <label>Category</label>
                 </div>
             </div>
             <div class="row">
                 <div class="input-field col s12">
-                    <input id="tags" name="tags" type="text" class="validate" placeholder="Example: banana, nuts, drink, soda, lettuce, ..." value="{{#each tags}}{{this}}{{#unless @last}},&nbsp;{{/unless}}{{/each}}">
+                    <input id="tags" name="tags" type="text" class="validate" placeholder="Example: banana, nuts, drink, soda, lettuce, ..." value="{{#each data.tags}}{{this}}{{#unless @last}},&nbsp;{{/unless}}{{/each}}">
                     <label for="tags">Tags</label>
                 </div>
             </div>
 
             <div class="row insert-ingredients-here">
                 <!-- Ingredients get added here dynamically through Javascript -->
+                {{#each data.ingredients}}
+                <div id="ingredient-object-{{@index}}" class="col s12 m6 l4 ingredients">
+                    <div class="row">
+                        <div class="input-field col s12">
+                            <input id="item-{{@index}}" type="text" class="validate" placeholder="Ex: almonds" value="{{item}}" required>
+                            <label for="item-{{@index}}">Item</label>
+                        </div>
+                        <div class="input-field col s12">
+                            <input id="unit-{{@index}}" type="text" class="validate" placeholder="Ex: cup" value="{{unit}}" required>
+                            <label for="unit-{{@index}}">Unit</label>
+                        </div>
+                        <div class="input-field col s12">
+                            <input id="quantity-{{@index}}" type="number" class="validate" placeholder="Ex: 2.5" value="{{quantity}}" required>
+                            <label for="quantity-{{@index}}">Quantity</label>
+                        </div>
+                        <div class="center">
+                            <button id="remove-ingredient-{{@index}}-btn" class="red btn waves-effect waves-light remove-ingredient" type="button" name="action" onclick="RemoveIngredient(this.id)">
+                                Remove
+                                <i class="material-icons right">delete</i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                {{/each}}
             </div>
 
             <!-- Add Ingredient Button -->
@@ -45,7 +69,7 @@
 
             <div class="row">
                 <div class="input-field col s12">
-                    <textarea id="description" class="materialize-textarea" placeholder="" required>{{description}}</textarea>
+                    <textarea id="description" class="materialize-textarea" placeholder="" required>{{data.description}}</textarea>
                     <label for="description">Description</label>
                 </div>
             </div>
@@ -63,15 +87,15 @@
 
             <div class="row">
                 <div class="input-field col s12">
-                    <textarea id="textarea2" class="materialize-textarea" placeholder="Example: Toppings include mixed nuts with some honey glaze!" required>{{additionalNotes}}</textarea>
+                    <textarea id="textarea2" class="materialize-textarea" placeholder="Example: Toppings include mixed nuts with some honey glaze!" required>{{data.additionalNotes}}</textarea>
                     <label for="textarea2">Additional Notes</label>
                 </div>
             </div>
 
             <!-- Submit Button -->
             <button id="submit-recipe-btn" class="btn waves-effect waves-light login" type="submit" name="action">
-                Submit
-                <i class="material-icons right">send</i>
+                Update
+                <i class="material-icons right">update</i>
             </button>
         </form>
     </div>
@@ -128,7 +152,7 @@
 
 <script>
     $(document).ready(function() {
-        var ingredientCounter = 1;
+        var ingredientCounter = {{data.ingredients.length}};
 
         $('select').material_select();
         $('.modal').modal();
@@ -234,14 +258,16 @@
         var idNumber = idNumberArr[2];
         $('#ingredient-object-' + idNumber).remove();
     }
-
+    
     function SendRequestObjects(recipeObject, formData, length) {
         $.ajax({
-            method: 'POST',
-            data: recipeObject,
-            url: '/admin/recipes'
+            method: 'PUT',
+            contentType: 'application/json',
+            dataType: 'json',
+            data: JSON.stringify(recipeObject),
+            url: '/admin/recipes?id='+(window.location.search).split('=')[1]
         }).done(function(data) {
-            Materialize.toast('Recipe Upload Succesful!', 4000, 'green');
+            Materialize.toast('Recipe Update Succesful!', 4000, 'green');
         }).fail(function(jqXHR, textStatus, errorThrown) {
             var statusCode = (jqXHR.status.toString()).split('');
             var statusText = jqXHR.statusText;
