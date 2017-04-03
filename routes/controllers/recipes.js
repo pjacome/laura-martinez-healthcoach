@@ -78,20 +78,11 @@ module.exports.PUT = function(req, res) {
 };
 
 module.exports.DELETE = function(req, res) {
-    // TODO: needs validation
-    var id = req.query.id;
-    console.log('>>> Deleting recipe #'+id);
-    var obj_ID = new ObjectID(id);
-    db.client.collection('recipes').remove({ _id: {$eq: obj_ID}}, function(err, result) {
-        if(err) {
-            console.log('>>> Error. Unable to delete item. <<<', err);
-            res.sendStatus(500);
-        }
-        else {
-            console.log('>>> Item #' + id + ' deleted. <<<');
-            res.sendStatus(200);
-        }
-    });
+    if(req.query.deleteMultiple === 'true') {
+        DeleteMultiple(req, res);
+    } else {
+        DeleteSingle(req, res);
+    }
 };
 
 module.exports.SEARCH = function(callback) {
@@ -126,3 +117,24 @@ module.exports.SEARCH_BY_ID = function(id, callback) {
         });
     });
 };
+
+function DeleteSingle(req, res) {
+    // TODO: needs validation
+    var id = req.query.id;
+    var obj_ID = new ObjectID(id);
+    console.log('>>> Deleting recipe #' + id);
+    db.client.collection('recipes').remove({_id: { $eq: obj_ID }}, function(err, result) {
+        if(err) {
+            console.log('>>> Error. Unable to delete item. <<<', err);
+            res.sendStatus(500);
+        }
+        else {
+            console.log('>>> Item #' + id + ' deleted. <<<');
+            res.sendStatus(200);
+        }
+    });
+}
+
+function DeleteMultiple(req, res) {
+    return;
+}
