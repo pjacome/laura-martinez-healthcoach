@@ -1,9 +1,12 @@
-﻿/* controller class for recipes */
+﻿'use strict';
+
+/* controller class for recipes */
 var db = require('../../db');
 var ObjectID = require('mongodb').ObjectID;
 module.exports.obj_Recipes = {};
 
 module.exports.POST = function(req, res) {
+    // TODO: validation
     var newRecipe = req.body;
     db.client.collection('recipes').insertOne(newRecipe, function(err, result) {
         if(err) {

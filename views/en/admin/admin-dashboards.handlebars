@@ -21,8 +21,8 @@
         </thead>
         <tbody>
             {{#each data}}
-            <tr>
-                <td class="less-bottom-padding"><input type="checkbox" id="delete-{{category}}-{{@index}}" class="potential-delete filled-in" /><label for="delete-{{category}}-{{@index}}"></label></td>
+            <tr id="row-{{_id}}">
+                <td class="less-bottom-padding checkbox-td"><input type="checkbox" id="delete-{{category}}-{{@index}}" class="potential-delete filled-in" name="{{_id}}" /><label for="delete-{{category}}-{{@index}}"></label></td>
                 <td>{{@index}}</td>
                 <td><a href="{{../category}}/edit?id={{_id}}">{{title}}</a></td>
                 {{#if category}}
@@ -34,6 +34,27 @@
             {{/each}}
         </tbody>
     </table>
+</div>
+
+<!-- Modal Structure 2 -->
+<div id="delete-recipes-modal" class="modal">
+    <div class="modal-content">
+        <h4>Are you sure you want to delete this recipe?</h4>
+        <p>
+            If you decide to delete this recipe it will permanently be lost.
+            Are you sure you want to continue?
+            <br>
+            <br>
+            <span class="grey-text">
+                <b>Note</b>: deleting the recipe will <b>not</b> delete the photos associated with the recipe.
+                You must visit the gallery and delete them from there.
+            </span>
+        </p>
+    </div>
+    <div class="modal-footer">
+        <a id="confirm-delete-btn" href="" class="modal-action modal-close waves-effect btn-flat">Yes, delete selected.</a>
+        <a id="close-modal-2-btn" href="" class="modal-action modal-close waves-effect btn-flat">No</a>
+    </div>
 </div>
 
 <style>
@@ -68,6 +89,8 @@
 
 <scr{{!}}ipt>
     $(document).ready(function() {
+        $('.modal').modal();
+
         $('#select-all').click(function() {
             var checkBoxes = $('tbody > tr > td > input[type=checkbox]');
             checkBoxes.prop('checked', $(this).prop('checked'));
@@ -79,8 +102,27 @@
         });
 
         $('#delete-{{category}}').click(function() {
-            console.log('TODO');
-            // display modal to delete these mutha fuckas
+            $('#delete-recipes-modal').modal('open');
+        });
+
+        $('#confirm-delete-btn').click(function(e) {
+            e.preventDefault();
+            var selected = [];
+            $('.checkbox-td > input:checked').each(function() {
+                selected.push($(this).attr('name'));
+            });
+
+            if(selected.length === 1) {
+                DeleteSingleRecipe(selected[0]);
+            } else {
+                DeleteMultipleRecipes(selected);
+            }
+            DeleteRows(selected);
+        });
+
+        $('#close-modal-2-btn').click(function(e) {
+            e.preventDefault();
+            $('#delete-recipes-modal').modal('close');
         });
 
         $('.potential-delete').click(DeleteButtonClickable);
@@ -88,5 +130,21 @@
 
     function DeleteButtonClickable() {
         $('#delete-{{category}}').toggleClass('disabled', $('tbody > tr > td > input[type=checkbox]:checked').length <= 0);
+    }
+
+    function DeleteRows(selected) {
+        selected.forEach(function(id) {
+            var row = $('#row-'+id);
+            <!--row.fadeOut(300, function() {row.remove();});-->
+            row.children('td, th').animate({padding: 0}).wrapInner('<div />').children().slideUp(function() {$(this).closest('tr').remove();});
+        });
+    }
+
+    function DeleteSingleRecipe(recipe) {
+        // deletes single recipe
+    }
+
+    function DeleteMultipleRecipes(recipes) {
+        // deletes multiple recipes
     }
 </scr{{!}}ipt>
