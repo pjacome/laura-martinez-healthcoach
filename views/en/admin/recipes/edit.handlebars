@@ -408,14 +408,14 @@
             Materialize.toast('Successfully deleted recipe', 5000, 'green');
         }).fail(function(jqXHR, textStatus, errorThrown) {
             var statusCode = (jqXHR.status.toString()).split('');
-                var statusText = jqXHR.statusText;
-                if(statusCode[0] === 5 || statusText.match(/Internal Server Error/)) {
-                    // server-side error - contact pablo
-                    Materialize.toast('Server-side Error - Was not able to delete. Contact Pablo if problem persists.', 5000, 'red');
-                } else if(statusCode[0] === 4 || statusText.match(/Bad Request/)) {
-                    // client-side error - try again in a few moments
-                    Materialize.toast('Failed to Delete Recipe!<br>Try again momentarily.', 5000, 'red');
-                }
+            var statusText = jqXHR.statusText;
+            if(statusCode[0] === 5 || statusText.match(/Internal Server Error/)) {
+                // server-side error - contact pablo
+                Materialize.toast('Server-side Error - Was not able to delete. Contact Pablo if problem persists.', 5000, 'red');
+            } else if(statusCode[0] === 4 || statusText.match(/Bad Request/)) {
+                // client-side error - try again in a few moments
+                Materialize.toast('Failed to Delete Recipe!<br>Try again momentarily.', 5000, 'red');
+            }
         });
     }
 

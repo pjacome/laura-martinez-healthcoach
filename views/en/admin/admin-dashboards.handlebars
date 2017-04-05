@@ -87,7 +87,7 @@
     }
 </style>
 
-<scr{{!}}ipt>
+<script>
     $(document).ready(function() {
         $('.modal').modal();
 
@@ -98,7 +98,8 @@
         });
 
         $('#display-help').click(function() {
-            // display modal to help laura with navigating admin buttons/table
+            // TODO: display modal to help laura with navigating admin buttons/table
+            $('#help-modal').modal('open');
         });
 
         $('#delete-{{category}}').click(function() {
@@ -113,11 +114,10 @@
             });
 
             if(selected.length === 1) {
-                DeleteSingleRecipe(selected[0]);
+                DeleteSingleRecipe(selected);
             } else {
                 DeleteMultipleRecipes(selected);
             }
-            DeleteRows(selected);
         });
 
         $('#close-modal-2-btn').click(function(e) {
@@ -135,16 +135,57 @@
     function DeleteRows(selected) {
         selected.forEach(function(id) {
             var row = $('#row-'+id);
-            <!--row.fadeOut(300, function() {row.remove();});-->
-            row.children('td, th').animate({padding: 0}).wrapInner('<div />').children().slideUp(function() {$(this).closest('tr').remove();});
+            row.children('td, th')
+                .animate({padding: 0})
+                .wrapInner('<div />')
+                .children()
+                .slideUp(function() {
+                    $(this).closest('tr').remove();
+                });
         });
     }
 
-    function DeleteSingleRecipe(recipe) {
+    function DeleteSingleRecipe(selected) {
         // deletes single recipe
+        var recipe = selected[0];
+        $.ajax({
+            method: 'DELETE',
+            url: '/admin/recipes' + '?id=' + recipe,
+        }).done(function(response) {
+            DeleteRows(selected);
+            Materialize.toast('Successfully deleted recipe', 5000, 'green');
+        }).fail(function(jqXHR, textStatus, errorThrown) {
+            var statusCode = (jqXHR.status.toString()).split('');
+            var statusText = jqXHR.statusText;
+            if(statusCode[0] === 5 || statusText.match(/Internal Server Error/)) {
+                // server-side error - contact pablo
+                Materialize.toast('Server-side Error - Was not able to delete. Contact Pablo if problem persists.', 5000, 'red');
+            } else if(statusCode[0] === 4 || statusText.match(/Bad Request/)) {
+                // client-side error - try again in a few moments
+                Materialize.toast('Failed to Delete Recipe!<br>Try again momentarily.', 5000, 'red');
+            }
+        });
     }
 
-    function DeleteMultipleRecipes(recipes) {
+    function DeleteMultipleRecipes(selected) {
         // deletes multiple recipes
+        var ids = selected;
+        $.ajax({
+            method: 'DELETE',
+            url: '/admin/recipes' + '?deleteMultiple=true&ids=' + ids
+        }).done(function(response) {
+            DeleteRows(selected);
+            Materialize.toast('Successfully deleted recipe', 5000, 'green');
+        }).fail(function(jqXHR, textStatus, errorThrown) {
+            var statusCode = (jqXHR.status.toString()).split('');
+            var statusText = jqXHR.statusText;
+            if(statusCode[0] === 5 || statusText.match(/Internal Server Error/)) {
+                // server-side error - contact pablo
+                Materialize.toast('Server-side Error - Was not able to delete. Contact Pablo if problem persists.', 5000, 'red');
+            } else if(statusCode[0] === 4 || statusText.match(/Bad Request/)) {
+                // client-side error - try again in a few moments
+                Materialize.toast('Failed to Delete Recipe!<br>Try again momentarily.', 5000, 'red');
+            }
+        });
     }
-</scr{{!}}ipt>
+</script>

@@ -125,19 +125,36 @@ function DeleteSingle(req, res) {
     // TODO: needs validation
     var id = req.query.id;
     var obj_ID = new ObjectID(id);
+    var options = {justOne: true};
     console.log('>>> Deleting recipe #' + id);
-    db.client.collection('recipes').remove({_id: { $eq: obj_ID }}, function(err, result) {
+    db.client.collection('recipes').remove({_id: { $eq: obj_ID }}, options, function(err, result) {
         if(err) {
-            console.log('>>> Error. Unable to delete item. <<<', err);
+            console.log('>>> Error. Unable to delete document. <<<', err);
             res.sendStatus(500);
-        }
-        else {
-            console.log('>>> Item #' + id + ' deleted. <<<');
+        } else {
+            console.log('>>> Document #' + id + ' deleted. <<<');
             res.sendStatus(200);
         }
     });
 }
 
 function DeleteMultiple(req, res) {
-    return;
+    // TODO: validation
+    var ids = [];
+    var objIds = [];
+    var options = {justOne: false};
+    console.log(req.query.ids);
+    req.query.ids.split(',').forEach(function(id) {
+        ids.push(new ObjectID(id));
+    });
+    console.log('ids:',ids);
+    db.client.collection('recipes').remove({_id: {$in: ids}}, options, function(err, result) {
+        if(err) {
+            console.log('>>> Error. Unable to delete documents. <<<', err);
+            res.sendStatus(400);
+        } else {
+            console.log('>>> Deleted the following documents: ' + ids + ' <<<');
+            res.sendStatus(200);
+        }
+    });
 }
