@@ -24,7 +24,7 @@
             <tr id="row-{{_id}}">
                 <td class="less-bottom-padding checkbox-td"><input type="checkbox" id="delete-{{category}}-{{@index}}" class="potential-delete filled-in" name="{{_id}}" /><label for="delete-{{category}}-{{@index}}"></label></td>
                 <td>{{@index}}</td>
-                <td><a href="{{../category}}/edit?id={{_id}}">{{title}}</a></td>
+                <td><a class="truncate" href="{{../category}}/edit?id={{_id}}">{{title}}</a></td>
                 {{#if category}}
                     <td>{{category}}</td>
                 {{/if}}
