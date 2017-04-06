@@ -107,10 +107,10 @@ router.put   ('/admin/recipes', Authenticate, obj_Recipes.PUT);
 router.delete('/admin/recipes', Authenticate, obj_Recipes.DELETE);
 
 //blogs
-// router.get   ('/en/blog/read/all', obj_Blogs.GET);
-// router.post  ('/en/blog/create',   obj_Blogs.POST);
-// router.put   ('/en/blog/edit/:id,  obj_Blogs.PUT);
-// router.delete('/en/blog/edit/:id,  obj_Blogs.DELETE);
+ router.get   ('/admin/blogs', Authenticate, obj_Blogs.GET);
+ router.post  ('/admin/blogs', Authenticate, obj_Blogs.POST);
+ router.put   ('/admin/blogs', Authenticate, obj_Blogs.PUT);
+ router.delete('/admin/blogs', Authenticate, obj_Blogs.DELETE);
 
 //recipes
 //router.get   ('/en/recipes/read/all', obj_Recipes.GET);
