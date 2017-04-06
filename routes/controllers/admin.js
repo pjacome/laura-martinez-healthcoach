@@ -113,7 +113,12 @@ function DisplayOperation(req, res) {
     if (!route.match(routes)) {
         console.log('>>> Incorrect URL: \'' + route + '\' <<<');
         res.sendStaus(400);
-    } else {
+    } else if(route.match(/(add)/)) {
+        var options = {
+            layout: 'admin-main.handlebars'
+        };
+        res.render('en/admin/'+dashboard+'/add', options);
+    } else if(route.match(/(edit)/)) {
         var options = {
             layout: 'admin-main.handlebars'
         };

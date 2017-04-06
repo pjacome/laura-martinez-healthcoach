@@ -26,14 +26,17 @@
                     <label for="textarea1">Blog Text</label>
                 </div>
             </div>
-            <button class="btn waves-effect waves-light login" type="submit" name="action">
+            <button class="btn waves-effect waves-light" type="button" name="action">
                 Submit
                 <i class="material-icons right">send</i>
+            </button>
+            <button class="btn waves-effect waves-light" type="button" name="action">
+                Preview
+                <i class="material-icons right">view_day</i>
             </button>
         </form>
     </div>
 </div>
-
 <style>
     .outer-card {
         width: 300px;
@@ -41,12 +44,12 @@
         margin: 0 auto;
     }
 
-    .outer-card form {
-        padding-top: 10px;
-        padding-left: 10px;
-        padding-right: 10px;
-        padding-bottom: 40px;
-    }
+        .outer-card form {
+            padding-top: 10px;
+            padding-left: 10px;
+            padding-right: 10px;
+            padding-bottom: 40px;
+        }
 
     /* small */
     @media (min-width: 768px) {
@@ -63,12 +66,7 @@
         }
     }
 </style>
-
 <script>
-    $('.login.btn').click(function (e) {
-        e.preventDefault();
-    });
-
     $('.datepicker').pickadate({
         selectMonths: true, // Creates a dropdown to control month
         selectYears: 15 // Creates a dropdown of 15 years to control year

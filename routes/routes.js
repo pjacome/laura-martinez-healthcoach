@@ -6,6 +6,7 @@ var mongoStore = require('connect-mongo')(session);
 var obj_Recipes = require('./controllers/recipes');
 var obj_Contact = require('./controllers/contacts');
 var obj_Photos = require('./controllers/photos');
+var obj_Blogs = require('./controllers/blogs');
 var obj_Admin = require('./controllers/admin');
 var router = express.Router();
 
@@ -27,7 +28,7 @@ router.get('/en/about', function(req, res) {res.render('en/about');});
 router.get('/en/recipes', function(req, res) {res.render('en/recipes/recipes');});
 router.get('/en/healthcoaching', function(req, res) {res.render('en/healthcoaching');});
 router.get('/en/events', function(req, res) {res.render('en/events');});
-router.get('/en/blog', function(req, res) {res.render('en/blog');});
+router.get('/en/blogs', function(req, res) {res.render('en/blogs');});
 router.get('/en/contact', function(req, res) {res.render('en/contact');});
 
 

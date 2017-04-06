@@ -121,6 +121,8 @@ module.exports.SEARCH_BY_ID = function(id, callback) {
     });
 };
 
+/* Helpers */
+
 function DeleteSingle(req, res) {
     // TODO: needs validation
     var id = req.query.id;
