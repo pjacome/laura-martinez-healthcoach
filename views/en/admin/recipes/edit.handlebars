@@ -360,6 +360,7 @@
             url: '/admin/recipes?id='+(window.location.search).split('=')[1]
         }).done(function() {
             var subject = window.location.pathname.split('/')[3];
+            $('.this-div').addClass('mask');
             Materialize.toast('Recipe Update Succesful!', 4000, 'green');
             Materialize.toast('Redirecting to '+ subject +' dashboard in&nbsp;<span id="timer">3<span>', 4000, 'blue');
             Timer(3, subject);
