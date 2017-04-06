@@ -1,6 +1,6 @@
 <br>
 <div class="container">
-    <div class="outer-card z-depth-2 blue lighten-100">
+    <div class="outer-card z-depth-2 blue">
         <h5 class="white-text center">New Blog</h5>
         <form class="white">
             <div class="row">
@@ -23,51 +23,78 @@
             <!-- Blog Content Wrapper -->
             <div class="blog-content-wrapper z-depth-5">
                 
-                <!-- Try #1 -->
-                <div class="row">
-                    <div class="col m1 center">
-                        <div class="row">
-                            <div class="col s12">
-                                <a class="btn-floating btn-med waves-effect waves-light"><i class="material-icons">arrow_drop_up</i></a>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col s12">
-                                <a class="btn-floating btn-med waves-effect waves-light"><i class="material-icons">arrow_drop_down</i></a>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Actual Content -->
-                    <div class="input-field col s12 m10">
-                        <h6 class="grey-text">Paragraph 1</h6>
-                        <div class="paragraphs" contenteditable="true"></div>
-                    </div>
-                    <div class="col m1 center">
-                        <a class="btn-floating btn-med waves-effect waves-light red"><i class="material-icons">delete</i></a>
-                    </div>
-                </div>
-
-                <!-- Try #2 -->
-                <div class="div-table">
+                <!-- First Paragraph -->
+                <div class="div-table section-1">
                     <div class="div-row">
                         <div class="div-col sm center">
-                            <a class="btn-floating btn-med waves-effect waves-light vertically-align margin-bottom-10"><i class="material-icons">arrow_drop_up</i></a>
-                            <a class="btn-floating btn-med waves-effect waves-light vertically-align"><i class="material-icons">arrow_drop_down</i></a>
+                            <a id="bump-up-btn-1"   class="bump-btn btn-floating btn-med waves-effect waves-light margin-bottom-10"><i class="material-icons">arrow_drop_up</i></a>
+                            <a id="bump-down-btn-1" class="bump-btn btn-floating btn-med waves-effect waves-light"><i class="material-icons">arrow_drop_down</i></a>
                         </div>
                         <div class="div-col lg">
-                            <h6 class="grey-text">Paragraph 1</h6>
-                            <div class="paragraphs" contenteditable="true"></div>
+                            <h6 class="grey-text">Paragraph</h6>
+                            <div id="paragraph-1" class="paragraphs" contenteditable="true"></div>
                             <div class="formatting-buttons">
-                                <button class="btn" type="button" onclick="document.execCommand('bold', false, null)"><i class="tiny material-icons">format_bold</i></button>
-                                <button class="btn" type="button" onclick="document.execCommand('italic', false, null)"><i class="tiny material-icons">format_italic</i></button>
-                                <button class="btn" type="button" onclick="document.execCommand('underline', false, null)"><i class="tiny material-icons">format_underlined</i></button>
+                                <button class="btn teal" type="button" onclick="document.execCommand('bold', false, null)"><i class="tiny material-icons">format_bold</i></button>
+                                <button class="btn teal" type="button" onclick="document.execCommand('italic', false, null)"><i class="tiny material-icons">format_italic</i></button>
+                                <button class="btn teal" type="button" onclick="document.execCommand('underline', false, null)"><i class="tiny material-icons">format_underlined</i></button>
                             </div>
                         </div>
                         <div class="div-col sm center">
-                            <a class="btn-floating btn-med waves-effect waves-light vertically-align red"><i class="material-icons">delete</i></a>
+                            <a id="remove-section-1" class="btn-floating btn-med waves-effect waves-light red"><i class="material-icons">delete</i></a>
                         </div>
                     </div>
                 </div>
+                <br>
+
+                <!-- First Unordered List -->
+                <div class="div-table section-2">
+                    <div class="div-row">
+                        <div class="div-col sm center">
+                            <a id="bump-up-btn-2"   class="bump-btn btn-floating btn-med waves-effect waves-light margin-bottom-10"><i class="material-icons">arrow_drop_up</i></a>
+                            <a id="bump-down-btn-2" class="bump-btn btn-floating btn-med waves-effect waves-light"><i class="material-icons">arrow_drop_down</i></a>
+                        </div>
+                        <div class="div-col lg">
+                            <h6 class="grey-text">Bullet List</h6>
+                            <ul contenteditable="true" class="browser-default lists list-js bullet-list-1">
+                                <li class="list-item"></li>
+                            </ul>
+                            <div class="formatting-buttons">
+                                <button class="btn teal" type="button" onclick="document.execCommand('bold', false, null)"><i class="tiny material-icons">format_bold</i></button>
+                                <button class="btn teal" type="button" onclick="document.execCommand('italic', false, null)"><i class="tiny material-icons">format_italic</i></button>
+                                <button class="btn teal" type="button" onclick="document.execCommand('underline', false, null)"><i class="tiny material-icons">format_underlined</i></button>
+                            </div>
+                        </div>
+                        <div class="div-col sm center">
+                            <a id="remove-section-2" class="btn-floating btn-med waves-effect waves-light red"><i class="material-icons">delete</i></a>
+                        </div>
+                    </div>
+                </div>
+                <br>
+
+                <!-- First Unordered List -->
+                <div class="div-table section-3">
+                    <div class="div-row">
+                        <div class="div-col sm center">
+                            <a id="bump-up-btn-3"   class="bump-btn btn-floating btn-med waves-effect waves-light margin-bottom-10"><i class="material-icons">arrow_drop_up</i></a>
+                            <a id="bump-down-btn-3" class="bump-btn btn-floating btn-med waves-effect waves-light"><i class="material-icons">arrow_drop_down</i></a>
+                        </div>
+                        <div class="div-col lg">
+                            <h6 class="grey-text">Numbered List</h6>
+                            <ol id="numbered-list-1" class="browser-default lists list-js" contenteditable="true">
+                                <li class="list-item"></li>
+                            </ol>
+                            <div class="formatting-buttons">
+                                <button class="btn teal" type="button" onclick="document.execCommand('bold', false, null)"><i class="tiny material-icons">format_bold</i></button>
+                                <button class="btn teal" type="button" onclick="document.execCommand('italic', false, null)"><i class="tiny material-icons">format_italic</i></button>
+                                <button class="btn teal" type="button" onclick="document.execCommand('underline', false, null)"><i class="tiny material-icons">format_underlined</i></button>
+                            </div>
+                        </div>
+                        <div class="div-col sm center">
+                            <a id="remove-section-3" class="btn-floating btn-med waves-effect waves-light red"><i class="material-icons">delete</i></a>
+                        </div>
+                    </div>
+                </div>
+                <br>
 
                 <!-- This layout is a better idea for mobile (smaller screens) -->
                 <div class="row hide-on-med-and-up">
@@ -84,11 +111,15 @@
                     </div>
                 </div>
             </div>
-            <!-- Add Paragraph/Images buttons -->
+            <!-- Add Paragraph/Image/List buttons -->
             <div class="row padding-left-10">
                 <a class="btn-floating btn-med waves-effect waves-light"><i class="material-icons">subject</i></a>
                 &nbsp;&nbsp;
                 <a class="btn-floating btn-med waves-effect waves-light"><i class="material-icons">photo</i></a>
+                &nbsp;&nbsp;
+                <a class="btn-floating btn-med waves-effect waves-light"><i class="material-icons">format_list_bulleted</i></a>
+                &nbsp;&nbsp;
+                <a class="btn-floating btn-med waves-effect waves-light"><i class="material-icons">format_list_numbered</i></a>
                 &nbsp;&nbsp;
                 <a class="btn-floating btn-med waves-effect waves-light blue"><i class="material-icons">help_outline</i></a>
             </div>
@@ -105,6 +136,7 @@
         </form>
     </div>
 </div>
+
 <style>
     .outer-card {
         width: 300px;
@@ -121,17 +153,15 @@
 
     .blog-content-wrapper {
         padding-top: 30px;
-        padding-left: 30px;
-        padding-right: 30px;
         margin-bottom: 20px;
         overflow: hidden;
+        border: 1px grey solid;
     }
 
     .div-table {
         width: 100%;
         height: 150px;
         display: table;
-        background-color: limegreen;
         overflow: hidden;
         word-wrap: break-word;
     }
@@ -140,7 +170,6 @@
         display: table-row;
         width: inherit;
         height: inherit;
-        background-color: lightslategrey;
         overflow: hidden;
     }
 
@@ -155,7 +184,7 @@
         overflow-y: auto;
         overflow-x: hidden;
         word-wrap: break-word;
-        background-color: pink;
+        background-color: lightgray;
     }
 
     .div-col.lg > h6 {
@@ -169,13 +198,7 @@
         width: 5%;
         min-width: 5%;
         height: inherit;
-        background-color: yellow;
         vertical-align: middle;
-    }
-
-    .vertically-align {
-        /*-webkit-transform: translateY(100%);*/
-        /*transform: translateY(100%);*/
     }
 
     .formatting-buttons {
@@ -190,7 +213,7 @@
         padding-right: 10px;
     }
 
-    .paragraphs {
+    .paragraphs, .lists {
         border: 1px black solid;
         margin: 0 auto;
         max-height: 300px;
@@ -223,11 +246,27 @@
         }
     }
 </style>
+
 <script>
     $(document).ready(function() {
+        var paragraphContainer = '';
+        var bulletlistContainer = '';
+        var numberedlistContainer = '';
+
         $('.datepicker').pickadate({
             selectMonths: true, // Creates a dropdown to control month
             selectYears: 15 // Creates a dropdown of 15 years to control year
+        });
+
+        $('.formatting-buttons > .btn').click(function() {
+            $(this).toggleClass('darken-3');
+        });
+
+        $('.list-js').keydown(function(e) {
+            var innerHTML = $(this).html();
+            if(innerHTML === '' || innerHTML === '<br>') {
+                $(this).append('<li></li>');
+            }
         });
     });
 </script>
