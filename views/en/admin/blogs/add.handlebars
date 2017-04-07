@@ -5,7 +5,7 @@
         <form class="white">
             <div class="row">
                 <div class="input-field col s12">
-                    <input id="title" type="text" class="validate">
+                    <input id="title" type="text" class="validate" required>
                     <label for="title">Title</label>
                 </div>
             </div>
@@ -43,7 +43,7 @@
                 </div>
                 
                 <!-- This layout is a better idea for mobile (smaller screens) -->
-                <!--<div class="row hide-on-med-and-up">
+                {{!--<div class="row hide-on-med-and-up">
                     <div class="center">
                         <a class="btn-floating btn-med waves-effect waves-light"><i class="material-icons">arrow_drop_up</i></a>
                         &nbsp;&nbsp;
@@ -55,34 +55,47 @@
                         <textarea id="paragraph-1" class="materialize-textarea"></textarea>
                         <label for="paragraph-1">Paragraph 1</label>
                     </div>
-                </div>-->
+                </div>--}}
 
             </div>
             <!-- Add Paragraph/Image/List buttons -->
-            <div class="row padding-left-10">
+            {{!--<div class="row padding-left-10">
                 <a id="add-paragraph-btn" class="btn-floating btn-med waves-effect waves-light"><i class="material-icons">subject</i></a>
-                &nbsp;&nbsp;
                 <a id="add-image-btn" class="btn-floating btn-med waves-effect waves-light"><i class="material-icons">photo</i></a>
-                &nbsp;&nbsp;
                 <a id="add-ul-btn" class="btn-floating btn-med waves-effect waves-light"><i class="material-icons">format_list_bulleted</i></a>
-                &nbsp;&nbsp;
                 <a id="add-ol-btn" class="btn-floating btn-med waves-effect waves-light"><i class="material-icons">format_list_numbered</i></a>
-                &nbsp;&nbsp;
                 <a id="preview-blog-btn" class="btn-floating btn-med waves-effect waves-light blue"><i class="material-icons">help_outline</i></a>
+            </div>--}}
+
+            <div style="position: relative; height: 70px;">
+                <div class="fixed-action-btn horizontal" style="position: absolute; display: inline-block; right: 24px;">
+                    <a class="btn-floating btn-large green">
+                        <i class="large material-icons">add</i>
+                    </a>
+                    <ul>
+                        <li><a id="help-btn"    class="btn-floating waves-effect waves-light materialize-class-1 blue"><i class="material-icons">help_outline</i></a></li>
+                        <li><a id="add-paragraph-btn" class="btn-floating waves-effect waves-light materialize-class-1 yellow darken-2"><i class="material-icons">subject</i></a></li>
+                        <li><a id="add-ul-btn"  class="btn-floating waves-effect waves-light materialize-class-1 blue"><i class="material-icons">format_list_bulleted</i></a></li>
+                        <li><a id="add-ol-btn"  class="btn-floating waves-effect waves-light materialize-class-1 green"><i class="material-icons">format_list_numbered</i></a></li>
+                        <li><a id="add-image-btn" class="btn-floating waves-effect waves-light materialize-class-1 red"><i class="material-icons">photo</i></a></li>
+                    </ul>
+                </div>
             </div>
 
             <!-- Form Buttons -->
-            <button class="btn waves-effect waves-light" type="button" name="action">
+            <button id="submit-btn" class="btn waves-effect waves-light" type="button" name="action">
                 Submit
                 <i class="material-icons right">send</i>
             </button>
-            <button class="btn waves-effect waves-light" type="button" name="action">
+            <button id="preview-btn" class="btn waves-effect waves-light" type="button" name="action">
                 Preview
                 <i class="material-icons right">view_day</i>
             </button>
         </form>
     </div>
 </div>
+
+<div class="preview-div"><i class="exit-icon small material-icons right">close</i><div class="white-bar z-depth-5"><span>Blog Preview</span></div><br><div class="preview-content container"></div></div>
 
 <style>
     .outer-card {
@@ -202,12 +215,52 @@
         word-wrap: break-word;
     }
 
-    .padding-left-10 {
-        padding-left: 10px;
+    .preview-div {
+        position: fixed;
+        width: 1px;
+        height: 1px;
+        z-index: -10000;
+        opacity: 0;
+        top: 50%; left: 50%;
+        transform: translate(-50%, -50%);
+        -webkit-transform: translate(-50%, -50%);
+        background-color: white;
     }
 
-    .margin-bottom-10 {
-        margin-bottom: 10px;
+    .preview-div .exit-icon {
+        position: absolute;
+        right: 0;
+        top: 0;
+        transform: translate(-50%, 50%);
+        -webkit-transform: translate(-50%, 50%);
+    }
+
+    .preview-expand {
+        width: 100%;
+        height: 100%;
+        opacity: 1;
+        z-index: 10000;
+        transition: width 1s, height 1s, opacity 1s;
+        -webkit-transition: width 1s, height 1s, opacity 1s, z-index 0s;
+    }
+
+    .preview-close {
+        width: 1px;
+        height: 1px;
+        opacity: 0;
+        transition: width 1s, height 1s, opacity 1s;
+        -webkit-transition: width 1s, height 1s, opacity 1s, z-index 0s;
+    }
+    
+    .white-bar {
+        width: 100%;
+        height: 64px;
+        background-color: white;
+        text-align: center;
+        font-family: 'Times New Roman';
+        font-variant-caps: small-caps;
+        font-size: 2.25rem;
+        padding-top: 8px;
     }
 
     /* small */
@@ -223,6 +276,21 @@
 
     /* desktop */
     @media (min-width: 1200px) {
+    }
+
+    /* helpers */
+    .padding-left-10 {
+        padding-left: 10px;
+    }
+
+    .margin-bottom-10 {
+        margin-bottom: 10px;
+    }
+
+    .materialize-class-1 {
+        transform: scaleY(0.4) scaleX(0.4) translateY(0px) translateX(40px);
+        -webkit-transform: scaleY(0.4) scaleX(0.4) translateY(0px) translateX(40px);
+        opacity: 0;
     }
 </style>
 
@@ -264,6 +332,7 @@
                     '<br>'+
                 '</div>';
             $('.blog-content-wrapper').append(section);
+            $('#section-'+sectionCounter+' .list-js').focus();
             ++sectionCounter;
         });
 
@@ -276,6 +345,7 @@
                     '<br>'+
                 '</div>';
             $('.blog-content-wrapper').append(section);
+            $('#section-'+sectionCounter+' .list-js').focus();
             ++sectionCounter;
         });
 
@@ -290,8 +360,17 @@
             $('.blog-content-wrapper').append(section);
             ++sectionCounter;
         });
+
+        $('#preview-btn').click(function() {
+            PreviewBlog($('.blog-content-wrapper'));
+        });
+
+        $('.exit-icon').click(function() {
+            CloseBlog();
+        });
     });
 
+    /* Helpers */
     function Append_li_Element(element) {
         var innerHTML = $('#'+element.id).html();
         console.log(innerHTML);
@@ -475,3 +554,5 @@
         return sectionType;
     }
 </script>
+
+<script type="text/javascript" src="/js/preview.js"></script>
