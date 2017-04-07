@@ -24,11 +24,11 @@
             <div class="blog-content-wrapper z-depth-5">
                 
                 <!-- First Paragraph -->
-                <div class="div-table section-1">
+                <div id="section-1" class="div-table">
                     <div class="div-row">
                         <div class="div-col sm center">
-                            <a id="bump-up-btn-1"   class="bump-btn btn-floating btn-med waves-effect waves-light margin-bottom-10"><i class="material-icons">arrow_drop_up</i></a>
-                            <a id="bump-down-btn-1" class="bump-btn btn-floating btn-med waves-effect waves-light"><i class="material-icons">arrow_drop_down</i></a>
+                            <a id="bump-up-btn-1"   class="bump-btn btn-floating btn-med waves-effect waves-light margin-bottom-10" onclick="BumpSectionUp(this.id)"><i class="material-icons">arrow_drop_up</i></a>
+                            <a id="bump-down-btn-1" class="bump-btn btn-floating btn-med waves-effect waves-light" onclick="BumpSectionDown(this.id)"><i class="material-icons">arrow_drop_down</i></a>
                         </div>
                         <div class="div-col lg">
                             <h6 class="grey-text">Paragraph</h6>
@@ -40,22 +40,22 @@
                             </div>
                         </div>
                         <div class="div-col sm center">
-                            <a id="remove-section-1" class="btn-floating btn-med waves-effect waves-light red"><i class="material-icons">delete</i></a>
+                            <a id="remove-section-1" class="btn-floating btn-med waves-effect waves-light red remove-section" onclick="RemoveSection(this.id)"><i class="material-icons">delete</i></a>
                         </div>
                     </div>
+                    <br>
                 </div>
-                <br>
 
                 <!-- First Unordered List -->
-                <div class="div-table section-2">
+                <div id="section-2" class="div-table">
                     <div class="div-row">
                         <div class="div-col sm center">
-                            <a id="bump-up-btn-2"   class="bump-btn btn-floating btn-med waves-effect waves-light margin-bottom-10"><i class="material-icons">arrow_drop_up</i></a>
-                            <a id="bump-down-btn-2" class="bump-btn btn-floating btn-med waves-effect waves-light"><i class="material-icons">arrow_drop_down</i></a>
+                            <a id="bump-up-btn-2"   class="bump-btn btn-floating btn-med waves-effect waves-light margin-bottom-10" onclick="BumpSectionUp(this.id)"><i class="material-icons">arrow_drop_up</i></a>
+                            <a id="bump-down-btn-2" class="bump-btn btn-floating btn-med waves-effect waves-light" onclick="BumpSectionDown(this.id)"><i class="material-icons">arrow_drop_down</i></a>
                         </div>
                         <div class="div-col lg">
                             <h6 class="grey-text">Bullet List</h6>
-                            <ul contenteditable="true" class="browser-default lists list-js bullet-list-1">
+                            <ul id="bullet-list-1" class="browser-default lists list-js" contenteditable="true">
                                 <li class="list-item"></li>
                             </ul>
                             <div class="formatting-buttons">
@@ -65,18 +65,18 @@
                             </div>
                         </div>
                         <div class="div-col sm center">
-                            <a id="remove-section-2" class="btn-floating btn-med waves-effect waves-light red"><i class="material-icons">delete</i></a>
+                            <a id="remove-section-2" class="btn-floating btn-med waves-effect waves-light red remove-section" onclick="RemoveSection(this.id)"><i class="material-icons">delete</i></a>
                         </div>
                     </div>
+                    <br>
                 </div>
-                <br>
 
                 <!-- First Unordered List -->
-                <div class="div-table section-3">
+                <div id="section-3" class="div-table">
                     <div class="div-row">
                         <div class="div-col sm center">
-                            <a id="bump-up-btn-3"   class="bump-btn btn-floating btn-med waves-effect waves-light margin-bottom-10"><i class="material-icons">arrow_drop_up</i></a>
-                            <a id="bump-down-btn-3" class="bump-btn btn-floating btn-med waves-effect waves-light"><i class="material-icons">arrow_drop_down</i></a>
+                            <a id="bump-up-btn-3"   class="bump-btn btn-floating btn-med waves-effect waves-light margin-bottom-10" onclick="BumpSectionUp(this.id)"><i class="material-icons">arrow_drop_up</i></a>
+                            <a id="bump-down-btn-3" class="bump-btn btn-floating btn-med waves-effect waves-light" onclick="BumpSectionUp(this.id)"><i class="material-icons">arrow_drop_down</i></a>
                         </div>
                         <div class="div-col lg">
                             <h6 class="grey-text">Numbered List</h6>
@@ -90,11 +90,11 @@
                             </div>
                         </div>
                         <div class="div-col sm center">
-                            <a id="remove-section-3" class="btn-floating btn-med waves-effect waves-light red"><i class="material-icons">delete</i></a>
+                            <a id="remove-section-3" class="btn-floating btn-med waves-effect waves-light red remove-section" onclick="RemoveSection(this.id)"><i class="material-icons">delete</i></a>
                         </div>
                     </div>
+                    <br>
                 </div>
-                <br>
 
                 <!-- This layout is a better idea for mobile (smaller screens) -->
                 <div class="row hide-on-med-and-up">
@@ -269,4 +269,30 @@
             }
         });
     });
+
+    function RemoveSection(id) {
+        var number = id.split('-')[2];
+        var target = '#section-'+number;
+        $(target).remove();
+    }
+
+    function BumpSectionUp(id) {
+        var number = id.split('-')[3];
+        var numberAbove = parseInt(number) - 1;
+        var target = '#section-'+number+' > .div-row > .div-col.lg';
+        var targetAbove = '#section-'+numberAbove+' > .div-row > .div-col.lg';
+        var temp = $(target).html();
+        $(target).html($(targetAbove).html());
+        $(targetAbove).html(temp);
+    }
+
+    function BumpSectionDown(id) {
+        var number = id.split('-')[3];
+        var numberAbove = parseInt(number) + 1;
+        var target = '#section-'+number+' > .div-row > .div-col.lg';
+        var targetAbove = '#section-'+numberAbove+' > .div-row > .div-col.lg';
+        var temp = $(target).html();
+        $(target).html($(targetAbove).html());
+        $(targetAbove).html(temp);
+    }
 </script>
