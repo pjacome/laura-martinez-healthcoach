@@ -23,79 +23,6 @@
             <!-- Blog Content Wrapper -->
             <div class="blog-content-wrapper z-depth-5">
                 
-                <!-- First Paragraph -->
-                <div id="section-1" class="div-table">
-                    <div class="div-row">
-                        <div class="div-col sm center">
-                            <a id="bump-up-btn-1"   class="bump-btn btn-floating btn-med waves-effect waves-light margin-bottom-10" onclick="BumpSectionUp(this.id)"><i class="material-icons">arrow_drop_up</i></a>
-                            <a id="bump-down-btn-1" class="bump-btn btn-floating btn-med waves-effect waves-light" onclick="BumpSectionDown(this.id)"><i class="material-icons">arrow_drop_down</i></a>
-                        </div>
-                        <div class="div-col lg">
-                            <h6 class="grey-text">Paragraph</h6>
-                            <div id="paragraph-1" class="paragraphs" contenteditable="true"></div>
-                            <div class="formatting-buttons">
-                                <button class="btn teal" type="button" onclick="document.execCommand('bold', false, null)"><i class="tiny material-icons">format_bold</i></button>
-                                <button class="btn teal" type="button" onclick="document.execCommand('italic', false, null)"><i class="tiny material-icons">format_italic</i></button>
-                                <button class="btn teal" type="button" onclick="document.execCommand('underline', false, null)"><i class="tiny material-icons">format_underlined</i></button>
-                            </div>
-                        </div>
-                        <div class="div-col sm center">
-                            <a id="remove-section-1" class="btn-floating btn-med waves-effect waves-light red remove-section" onclick="RemoveSection(this.id)"><i class="material-icons">delete</i></a>
-                        </div>
-                    </div>
-                    <br>
-                </div>
-
-                <!-- First Unordered List -->
-                <div id="section-2" class="div-table">
-                    <div class="div-row">
-                        <div class="div-col sm center">
-                            <a id="bump-up-btn-2"   class="bump-btn btn-floating btn-med waves-effect waves-light margin-bottom-10" onclick="BumpSectionUp(this.id)"><i class="material-icons">arrow_drop_up</i></a>
-                            <a id="bump-down-btn-2" class="bump-btn btn-floating btn-med waves-effect waves-light" onclick="BumpSectionDown(this.id)"><i class="material-icons">arrow_drop_down</i></a>
-                        </div>
-                        <div class="div-col lg">
-                            <h6 class="grey-text">Bullet List</h6>
-                            <ul id="bullet-list-1" class="browser-default lists list-js" contenteditable="true" onkeydown="Append_li_Element(this);">
-                                <li class="list-item"></li>
-                            </ul>
-                            <div class="formatting-buttons">
-                                <button class="btn teal" type="button" onclick="document.execCommand('bold', false, null)"><i class="tiny material-icons">format_bold</i></button>
-                                <button class="btn teal" type="button" onclick="document.execCommand('italic', false, null)"><i class="tiny material-icons">format_italic</i></button>
-                                <button class="btn teal" type="button" onclick="document.execCommand('underline', false, null)"><i class="tiny material-icons">format_underlined</i></button>
-                            </div>
-                        </div>
-                        <div class="div-col sm center">
-                            <a id="remove-section-2" class="btn-floating btn-med waves-effect waves-light red remove-section" onclick="RemoveSection(this.id)"><i class="material-icons">delete</i></a>
-                        </div>
-                    </div>
-                    <br>
-                </div>
-
-                <!-- First Unordered List -->
-                <div id="section-3" class="div-table">
-                    <div class="div-row">
-                        <div class="div-col sm center">
-                            <a id="bump-up-btn-3"   class="bump-btn btn-floating btn-med waves-effect waves-light margin-bottom-10" onclick="BumpSectionUp(this.id)"><i class="material-icons">arrow_drop_up</i></a>
-                            <a id="bump-down-btn-3" class="bump-btn btn-floating btn-med waves-effect waves-light" onclick="BumpSectionDown(this.id)"><i class="material-icons">arrow_drop_down</i></a>
-                        </div>
-                        <div class="div-col lg">
-                            <h6 class="grey-text">Numbered List</h6>
-                            <ol id="numbered-list-1" class="browser-default lists list-js" contenteditable="true" onkeydown="Append_li_Element(this);">
-                                <li></li>
-                            </ol>
-                            <div class="formatting-buttons">
-                                <button class="btn teal" type="button" onclick="document.execCommand('bold', false, null)"><i class="tiny material-icons">format_bold</i></button>
-                                <button class="btn teal" type="button" onclick="document.execCommand('italic', false, null)"><i class="tiny material-icons">format_italic</i></button>
-                                <button class="btn teal" type="button" onclick="document.execCommand('underline', false, null)"><i class="tiny material-icons">format_underlined</i></button>
-                            </div>
-                        </div>
-                        <div class="div-col sm center">
-                            <a id="remove-section-3" class="btn-floating btn-med waves-effect waves-light red remove-section" onclick="RemoveSection(this.id)"><i class="material-icons">delete</i></a>
-                        </div>
-                    </div>
-                    <br>
-                </div>
-
                 <!-- This layout is a better idea for mobile (smaller screens) -->
                 <!--<div class="row hide-on-med-and-up">
                     <div class="center">
@@ -114,15 +41,15 @@
             </div>
             <!-- Add Paragraph/Image/List buttons -->
             <div class="row padding-left-10">
-                <a class="btn-floating btn-med waves-effect waves-light"><i class="material-icons">subject</i></a>
+                <a id="add-paragraph-btn" class="btn-floating btn-med waves-effect waves-light"><i class="material-icons">subject</i></a>
                 &nbsp;&nbsp;
-                <a class="btn-floating btn-med waves-effect waves-light"><i class="material-icons">photo</i></a>
+                <a id="add-image-btn" class="btn-floating btn-med waves-effect waves-light"><i class="material-icons">photo</i></a>
                 &nbsp;&nbsp;
-                <a class="btn-floating btn-med waves-effect waves-light"><i class="material-icons">format_list_bulleted</i></a>
+                <a id="add-ul-btn" class="btn-floating btn-med waves-effect waves-light"><i class="material-icons">format_list_bulleted</i></a>
                 &nbsp;&nbsp;
-                <a class="btn-floating btn-med waves-effect waves-light"><i class="material-icons">format_list_numbered</i></a>
+                <a id="add-ol-btn" class="btn-floating btn-med waves-effect waves-light"><i class="material-icons">format_list_numbered</i></a>
                 &nbsp;&nbsp;
-                <a class="btn-floating btn-med waves-effect waves-light blue"><i class="material-icons">help_outline</i></a>
+                <a id="preview-blog-btn" class="btn-floating btn-med waves-effect waves-light blue"><i class="material-icons">help_outline</i></a>
             </div>
 
             <!-- Form Buttons -->
@@ -249,11 +176,12 @@
 </style>
 
 <script>
-    $(document).ready(function() {
-        var paragraphContainer = '';
-        var bulletlistContainer = '';
-        var numberedlistContainer = '';
+    var sectionCounter = 1,
+        paragraphCounter = 1,
+        bulletlistCounter = 1,
+        numberedlistCounter = 1;
 
+    $(document).ready(function() {
         $('.datepicker').pickadate({
             selectMonths: true, // Creates a dropdown to control month
             selectYears: 15 // Creates a dropdown of 15 years to control year
@@ -261,6 +189,46 @@
 
         $('.formatting-buttons > .btn').click(function() {
             $(this).toggleClass('darken-3');
+        });
+
+        $('#add-paragraph-btn').click(function() {
+            var section = '' +
+                '<div id="section-'+sectionCounter+'" class="div-table">' +
+                    '<div class="div-row">' +
+                        AddSection(1) +
+                    '</div>'+
+                    '<br>'+
+                '</div>';
+            $('.blog-content-wrapper').append(section);
+            ++sectionCounter;
+        });
+
+        $('#add-image-btn').click(function() {
+            console.log('TODO: add images to blog');
+        });
+
+        $('#add-ul-btn').click(function() {
+            var section=''+
+                '<div id="section-'+sectionCounter+'" class="div-table">'+
+                    '<div class="div-row">'+
+                        AddSection(2)+
+                    '</div>'+
+                    '<br>'+
+                '</div>';
+            $('.blog-content-wrapper').append(section);
+            ++sectionCounter;
+        });
+
+        $('#add-ol-btn').click(function() {
+            var section=''+
+                '<div id="section-'+sectionCounter+'" class="div-table">'+
+                    '<div class="div-row">'+
+                        AddSection(3)+
+                    '</div>'+
+                    '<br>'+
+                '</div>';
+            $('.blog-content-wrapper').append(section);
+            ++sectionCounter;
         });
     });
 
@@ -341,5 +309,76 @@
         var temp = $(target).html();
         $(target).html($(targetAbove).html());
         $(targetAbove).html(temp);
+    }
+
+    function AddSection(option) {
+        var bumpButtons = '' +
+            '<div class="div-col sm center">' +
+                '<a id="bump-up-btn-'+sectionCounter+'"   class="bump-btn btn-floating btn-med waves-effect waves-light margin-bottom-10" onclick="BumpSectionUp(this.id)"><i class="material-icons">arrow_drop_up</i></a>' +
+                '<a id="bump-down-btn-'+sectionCounter+'" class="bump-btn btn-floating btn-med waves-effect waves-light" onclick="BumpSectionDown(this.id)"><i class="material-icons">arrow_drop_down</i></a>' +
+            '</div>';
+        var sectionType = GetMainSectionType(option);
+        var deleteButton = '' +
+            '<div class="div-col sm center">' +
+                '<a id="remove-section-'+sectionCounter+'" class="btn-floating btn-med waves-effect waves-light red remove-section" onclick="RemoveSection(this.id)"><i class="material-icons">delete</i></a>' +
+            '</div>';
+
+        return bumpButtons + sectionType + deleteButton;
+    }
+
+    /*
+        @option: selects what kind of section to add
+                 === 1. Add a paragraph section
+                 === 2. Add an unordered list section
+                 === 3. Add a numbered list section
+    */
+    function GetMainSectionType(option) {
+        var formatButtons = '' +
+            '<div class="formatting-buttons">' +
+                '<button class="btn teal" type="button" onclick="document.execCommand(\'bold\', false, null)"><i class="tiny material-icons">format_bold</i></button>&nbsp;' +
+                '<button class="btn teal" type="button" onclick="document.execCommand(\'italic\', false, null)"><i class="tiny material-icons">format_italic</i></button>&nbsp;'+
+                '<button class="btn teal" type="button" onclick="document.execCommand(\'underline\', false, null)"><i class="tiny material-icons">format_underlined</i></button>' +
+            '</div>';
+        switch(option) {
+            case 1:
+                // paragraph
+                sectionType = '' +
+                    '<div class="div-col lg">' +
+                        '<h6 class="grey-text">Paragraph</h6>' +
+                        '<div id="paragraph-'+paragraphCounter+'" class="paragraphs" contenteditable="true"></div>' +
+                        formatButtons +
+                    '</div>';
+                ++paragraphCounter;
+                break;
+            case 2:
+                // bullet list
+                sectionType = '' +
+                    '<div class="div-col lg">' +
+                        '<h6 class="grey-text">Bullet List</h6>' +
+                        '<ul id="bullet-list-'+bulletlistCounter+'" class="browser-default lists list-js" contenteditable="true" onkeydown="Append_li_Element(this);">' +
+                            '<li></li>' +
+                        '</ul>' +
+                        formatButtons +
+                    '</div>';
+                ++bulletlistCounter;
+                break;
+            case 3:
+                // numbered list
+                sectionType = '' +
+                    '<div class="div-col lg">' +
+                        '<h6 class="grey-text">Bullet List</h6>' +
+                        '<ol id="numbered-list-'+numberedlistCounter+'" class="browser-default lists list-js" contenteditable="true" onkeydown="Append_li_Element(this);">' +
+                            '<li></li>' +
+                        '</ol>' +
+                        formatButtons +
+                    '</div>';
+                ++numberedlistCounter;
+                break;
+            default:
+                // error
+                sectionType = undefined;
+                break;
+        }
+        return sectionType;
     }
 </script>
