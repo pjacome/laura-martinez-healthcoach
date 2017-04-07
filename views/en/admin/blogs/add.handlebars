@@ -22,6 +22,25 @@
 
             <!-- Blog Content Wrapper -->
             <div class="blog-content-wrapper z-depth-5">
+
+                <div class="div-table main-image-table">
+                    <div class="div-row">
+                        <div class="div-col sm"></div>
+                        <div class="div-col lg">
+                            <h6 class="grey-text">Main Photo</h6>
+                            <div class="file-field input-field">
+                                <div class="btn">
+                                    <span>File</span>
+                                    <input type="file">
+                                </div>
+                                <div class="file-path-wrapper">
+                                    <input class="file-path validate" type="text">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="div-col sm"></div>
+                    </div>
+                </div>
                 
                 <!-- This layout is a better idea for mobile (smaller screens) -->
                 <!--<div class="row hide-on-med-and-up">
@@ -84,6 +103,19 @@
         margin-bottom: 20px;
         overflow: hidden;
         border: 1px grey solid;
+    }
+
+    .main-image-table {
+        height: 75px !important;
+    }
+
+    .main-image-table .lg {
+        background-color: unset !important;
+    }
+
+    .main-image-table h6 {
+        margin: unset !important;
+        padding-top: unset !important;
     }
 
     .div-table {
@@ -193,7 +225,7 @@
 
         $('#add-paragraph-btn').click(function() {
             var section = '' +
-                '<div id="section-'+sectionCounter+'" class="div-table">' +
+                '<div id="section-'+sectionCounter+'" class="div-table sections">' +
                     '<div class="div-row">' +
                         AddSection(1) +
                     '</div>'+
@@ -204,12 +236,20 @@
         });
 
         $('#add-image-btn').click(function() {
-            console.log('TODO: add images to blog');
+            var section = '' +
+                '<div id="section-'+sectionCounter+'" class="div-table sections">' +
+                    '<div class="div-row">' +
+                        AddSection(4) +
+                    '</div>' +
+                    '<br>' +
+                '</div>';
+            $('.blog-content-wrapper').append(section);
+            ++sectionCounter;
         });
 
         $('#add-ul-btn').click(function() {
-            var section=''+
-                '<div id="section-'+sectionCounter+'" class="div-table">'+
+            var section = '' +
+                '<div id="section-'+sectionCounter+'" class="div-table sections">'+
                     '<div class="div-row">'+
                         AddSection(2)+
                     '</div>'+
@@ -220,8 +260,8 @@
         });
 
         $('#add-ol-btn').click(function() {
-            var section=''+
-                '<div id="section-'+sectionCounter+'" class="div-table">'+
+            var section = '' +
+                '<div id="section-'+sectionCounter+'" class="div-table sections">'+
                     '<div class="div-row">'+
                         AddSection(3)+
                     '</div>'+
@@ -248,8 +288,10 @@
     }
 
     function RenumberSections() {
-        var arrayOfSections = $('.blog-content-wrapper').children();
+        var arrayOfSections = $('.blog-content-wrapper').children('.sections');
         var length = arrayOfSections.length;
+        if(!arrayOfSections[0])
+            return;
         if(arrayOfSections[0].id !== 'section-1') {
             var number = arrayOfSections[0].id.split('-')[1];
             var target = '#section-' + number;
@@ -331,6 +373,7 @@
                  === 1. Add a paragraph section
                  === 2. Add an unordered list section
                  === 3. Add a numbered list section
+                 === 4. Add an file upload (image/photo) section
     */
     function GetMainSectionType(option) {
         var formatButtons = '' +
@@ -373,6 +416,22 @@
                         formatButtons +
                     '</div>';
                 ++numberedlistCounter;
+                break;
+            case 4:
+                // photo
+                sectionType = '' +
+                    '<div class="div-col lg">' +
+                        '<h6 class="grey-text">Photo</h6>' +
+                        '<div class="file-field input-field">' +
+                            '<div class="btn">' +
+                                '<span>Photo</span>' +
+                                '<input type="file">' +
+                            '</div>' +
+                            '<div class="file-path-wrapper">' +
+                                '<input class="file-path validate" type="text">' +
+                            '</div>' +
+                        '</div>' +
+                    '</div>';
                 break;
             default:
                 // error
