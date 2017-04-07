@@ -55,7 +55,7 @@
                         </div>
                         <div class="div-col lg">
                             <h6 class="grey-text">Bullet List</h6>
-                            <ul id="bullet-list-1" class="browser-default lists list-js" contenteditable="true">
+                            <ul id="bullet-list-1" class="browser-default lists list-js" contenteditable="true" onkeydown="Append_li_Element(this);">
                                 <li class="list-item"></li>
                             </ul>
                             <div class="formatting-buttons">
@@ -76,12 +76,12 @@
                     <div class="div-row">
                         <div class="div-col sm center">
                             <a id="bump-up-btn-3"   class="bump-btn btn-floating btn-med waves-effect waves-light margin-bottom-10" onclick="BumpSectionUp(this.id)"><i class="material-icons">arrow_drop_up</i></a>
-                            <a id="bump-down-btn-3" class="bump-btn btn-floating btn-med waves-effect waves-light" onclick="BumpSectionUp(this.id)"><i class="material-icons">arrow_drop_down</i></a>
+                            <a id="bump-down-btn-3" class="bump-btn btn-floating btn-med waves-effect waves-light" onclick="BumpSectionDown(this.id)"><i class="material-icons">arrow_drop_down</i></a>
                         </div>
                         <div class="div-col lg">
                             <h6 class="grey-text">Numbered List</h6>
-                            <ol id="numbered-list-1" class="browser-default lists list-js" contenteditable="true">
-                                <li class="list-item"></li>
+                            <ol id="numbered-list-1" class="browser-default lists list-js" contenteditable="true" onkeydown="Append_li_Element(this);">
+                                <li></li>
                             </ol>
                             <div class="formatting-buttons">
                                 <button class="btn teal" type="button" onclick="document.execCommand('bold', false, null)"><i class="tiny material-icons">format_bold</i></button>
@@ -97,7 +97,7 @@
                 </div>
 
                 <!-- This layout is a better idea for mobile (smaller screens) -->
-                <div class="row hide-on-med-and-up">
+                <!--<div class="row hide-on-med-and-up">
                     <div class="center">
                         <a class="btn-floating btn-med waves-effect waves-light"><i class="material-icons">arrow_drop_up</i></a>
                         &nbsp;&nbsp;
@@ -109,7 +109,8 @@
                         <textarea id="paragraph-1" class="materialize-textarea"></textarea>
                         <label for="paragraph-1">Paragraph 1</label>
                     </div>
-                </div>
+                </div>-->
+
             </div>
             <!-- Add Paragraph/Image/List buttons -->
             <div class="row padding-left-10">
@@ -190,7 +191,7 @@
     .div-col.lg > h6 {
         width: inherit;
         margin: 0 auto;
-        padding-top: 10px;
+        padding-top: 20px;
         padding-bottom: 5px;
     }
     
@@ -261,14 +262,15 @@
         $('.formatting-buttons > .btn').click(function() {
             $(this).toggleClass('darken-3');
         });
-
-        $('.list-js').keydown(function(e) {
-            var innerHTML = $(this).html();
-            if(innerHTML === '' || innerHTML === '<br>') {
-                $(this).append('<li></li>');
-            }
-        });
     });
+
+    function Append_li_Element(element) {
+        console.log('element:',element.id);
+        var innerHTML = $('#'+element.id).html();
+        if(innerHTML === '' || innerHTML === '<br>') {
+            $('#'+element.id).append('<li></li>');
+        }
+    }
 
     function RemoveSection(id) {
         var number = id.split('-')[2];
@@ -292,13 +294,10 @@
             $(target).attr('id', 'section-1');
         }
 
-        console.log(arrayOfSections);
         for(var i = 0, j = i+1; i < length && j < length; ++i, ++j) {
             var number = parseInt(arrayOfSections[i].id.split('-')[1]);
             var nextNumber = parseInt(arrayOfSections[j].id.split('-')[1]);
-            console.log('number:', number, 'next number:', nextNumber);
             var difference = nextNumber - number;
-            console.log('difference:', difference);
             if(difference === 1)
                 continue;
             else {
@@ -307,7 +306,6 @@
                 var target2 = target + ' > .div-row > .div-col.sm > #bump-up-btn-'+nextNumber;
                 var target3 = target + ' > .div-row > .div-col.sm > #bump-down-btn-'+nextNumber;
                 var target4 = target + ' > .div-row > .div-col.sm > #remove-section-'+nextNumber;
-                console.log('target:', target);
                 $(target2).attr('id', 'bump-up-btn-'+iPlusOne);
                 $(target3).attr('id', 'bump-down-btn-'+iPlusOne);
                 $(target4).attr('id', 'remove-section-'+iPlusOne);
@@ -317,6 +315,10 @@
     }
 
     function BumpSectionUp(id) {
+        if(id.split('-')[3] === '1') {
+            console.log('trying to swap the top with null');
+            return;
+        }
         var number = id.split('-')[3];
         var numberAbove = parseInt(number) - 1;
         var target = '#section-'+number+' > .div-row > .div-col.lg';
@@ -327,6 +329,11 @@
     }
 
     function BumpSectionDown(id) {
+        var arrayOfSections = $('.blog-content-wrapper').children();
+        if(id.split('-')[3] === arrayOfSections.length.toString()) {
+            console.log('trying to swap the bottom with null');
+            return;
+        }
         var number = id.split('-')[3];
         var numberAbove = parseInt(number) + 1;
         var target = '#section-'+number+' > .div-row > .div-col.lg';
