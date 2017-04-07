@@ -274,6 +274,46 @@
         var number = id.split('-')[2];
         var target = '#section-'+number;
         $(target).remove();
+        RenumberSections();
+    }
+
+    function RenumberSections() {
+        var arrayOfSections = $('.blog-content-wrapper').children();
+        var length = arrayOfSections.length;
+        if(arrayOfSections[0].id !== 'section-1') {
+            var number = arrayOfSections[0].id.split('-')[1];
+            var target = '#section-' + number;
+            var target2 = target + ' > .div-row > .div-col.sm > #bump-up-btn-'+number;
+            var target3 = target + ' > .div-row > .div-col.sm > #bump-down-btn-'+number;
+            var target4 = target + ' > .div-row > .div-col.sm > #remove-section-'+number;
+            $(target2).attr('id', 'bump-up-btn-'+1);
+            $(target3).attr('id', 'bump-down-btn-'+1);
+            $(target4).attr('id', 'remove-section-'+1);
+            $(target).attr('id', 'section-1');
+        }
+
+        console.log(arrayOfSections);
+        for(var i = 0, j = i+1; i < length && j < length; ++i, ++j) {
+            var number = parseInt(arrayOfSections[i].id.split('-')[1]);
+            var nextNumber = parseInt(arrayOfSections[j].id.split('-')[1]);
+            console.log('number:', number, 'next number:', nextNumber);
+            var difference = nextNumber - number;
+            console.log('difference:', difference);
+            if(difference === 1)
+                continue;
+            else {
+                var iPlusOne = number + 1;
+                var target = '#section-'+nextNumber;
+                var target2 = target + ' > .div-row > .div-col.sm > #bump-up-btn-'+nextNumber;
+                var target3 = target + ' > .div-row > .div-col.sm > #bump-down-btn-'+nextNumber;
+                var target4 = target + ' > .div-row > .div-col.sm > #remove-section-'+nextNumber;
+                console.log('target:', target);
+                $(target2).attr('id', 'bump-up-btn-'+iPlusOne);
+                $(target3).attr('id', 'bump-down-btn-'+iPlusOne);
+                $(target4).attr('id', 'remove-section-'+iPlusOne);
+                $(target).attr('id', 'section-'+ iPlusOne);
+            }
+        }
     }
 
     function BumpSectionUp(id) {
