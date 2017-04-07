@@ -95,7 +95,7 @@
     </div>
 </div>
 
-<div class="preview-div"><i class="exit-icon small material-icons right">close</i><div class="white-bar z-depth-5"><span>Blog Preview</span></div><br><div class="preview-content container"></div></div>
+<div class="preview-div"><i class="exit-icon small material-icons right">close</i><div class="white-bar z-depth-5"><span>Blog Preview</span></div><br><div class="preview-content container z-depth-5"></div></div>
 
 <style>
     .outer-card {
@@ -235,6 +235,10 @@
         -webkit-transform: translate(-50%, 50%);
     }
 
+    .preview-content.container {
+        padding: 50px;
+    }
+
     .preview-expand {
         width: 100%;
         height: 100%;
@@ -299,6 +303,7 @@
         paragraphCounter = 1,
         bulletlistCounter = 1,
         numberedlistCounter = 1;
+    var previewIsOpen = false;
 
     $(document).ready(function() {
         $('.datepicker').pickadate({
