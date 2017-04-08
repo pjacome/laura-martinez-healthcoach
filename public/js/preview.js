@@ -10,7 +10,7 @@ $(document).keyup(function (e) {
 });
 
 function PreviewBlog(blogContent) {
-    var headers = ConacatenateHeaders($('#title').val(), $('#subheading').val(), $('.datepicker').val());
+    var headers = ConcatenateHeaders($('#title').val(), $('#subheading').val(), $('.datepicker').val());
     var sectionsArray = blogContent.children('.sections');
     var sampleBlogText = ConcatenateSections(sectionsArray);
 
@@ -43,19 +43,24 @@ function ConcatenateSections(sectionsArray) {
     }
 
     var sections = '';
+    var target = '';
     console.log('sections array:', sectionsArray);
     $.each(sectionsArray, function(index, element) {
         console.log(index + ': ', element);
-        var id = '#' + value.id;
-        var target = id + ' .paragraphs';
-        sections += $(target).html();
-        if(element.hasClass('images')) {
-            //
-        } else if($(target).hasClass('paragraphs')) {
-            //
-        } else if($(target).hasClass('list-js')) {
-            //
+        var id = '#' + element.id;
+        var temp1 = id + ' .paragraphs',
+            temp2 = id + ' .list-js';
+        if($(id).hasClass('images')) {
+            console.log('images class found', id);
+            //target = id + ' .paragraphs';
+        } else if($(temp1).hasClass('paragraphs')) {
+            console.log('paragraphs class found', id);
+            target = id + ' .paragraphs';
+        } else if($(temp2).hasClass('list-js')) {
+            console.log('list-js class found', id);
+            target = id + ' .list-js';
         }
+        sections += $(target).html();
     });
     return sections;
 }
