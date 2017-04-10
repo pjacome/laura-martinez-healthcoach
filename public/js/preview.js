@@ -16,7 +16,7 @@ function PreviewBlog(blogContent) {
 
 
     $('.preview-div .preview-content').append(sampleBlogText);
-
+    FixWidth();
 
 
     $('.preview-div').removeClass('preview-close');
@@ -37,30 +37,64 @@ function ConcatenateHeaders(title, subheading, date) {
 }
 
 function ConcatenateSections(sectionsArray) {
-    console.log('Length:',sectionsArray.length);
     if(sectionsArray.length === 0) {
         return 'Nothing to display';
     }
 
     var sections = '';
     var target = '';
-    console.log('sections array:', sectionsArray);
     $.each(sectionsArray, function(index, element) {
-        console.log(index + ': ', element);
         var id = '#' + element.id;
         var temp1 = id + ' .paragraphs',
             temp2 = id + ' .list-js';
         if($(id).hasClass('images')) {
             console.log('images class found', id);
-            //target = id + ' .paragraphs';
+            // special case
         } else if($(temp1).hasClass('paragraphs')) {
-            console.log('paragraphs class found', id);
             target = id + ' .paragraphs';
+            sections += '<p>' + $(target).html() + '</p>';
         } else if($(temp2).hasClass('list-js')) {
-            console.log('list-js class found', id);
             target = id + ' .list-js';
+            var listID = $(temp2)[0].id.split('-');
+            var typeOfList = listID[0] + '-' + listID[1]
+            if(typeOfList === 'numbered-list') {
+                sections += '' +
+                    '<hr>' +
+                    '<div class="list-wrapper">' +
+                        '<ol class="browser-default preview-list">' +
+                            $(target).html() +
+                        '</ol>' +
+                    '</div>' +
+                    '<hr>';
+            } else if(typeOfList === 'bullet-list') {
+                sections += '' +
+                    '<hr>' +
+                    '<div class="list-wrapper">' +
+                        '<ul class="browser-default preview-list">' +
+                            $(target).html() +
+                        '</ul>' +
+                    '</div>' +
+                    '<hr>';
+            }
         }
-        sections += $(target).html();
     });
     return sections;
+}
+
+function FixWidth() {
+    var listsArray = $('.preview-content.container > .list-wrapper').children('.preview-list');
+    var magicNumber = 14;
+    $.each(listsArray, function(index, value) {
+        var maxWidth = 0;
+        $.each($(value).children('li'), function(index, li) {
+            var length = $(li).html().length;
+            maxWidth = length * magicNumber;
+            console.log('new width: ' + length + ' x 14 =', maxWidth);
+        });
+        var ulWidth = $(value).css('width').split('px');
+        var currentWidth = parseInt(ulWidth[0]);
+        console.log('current width of ul:', currentWidth);
+        if(maxWidth > currentWidth)
+            $(value).css('width', (maxWidth+80) + 'px');
+    });
 }

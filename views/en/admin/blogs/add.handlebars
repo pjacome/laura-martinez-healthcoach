@@ -68,7 +68,7 @@
             </div>--}}
 
             <div style="position: relative; height: 70px;">
-                <div class="fixed-action-btn horizontal" style="position: absolute; display: inline-block; right: 24px;">
+                <div class="fixed-action-btn horizontal click-to-toggle" style="position: absolute; display: inline-block; right: 24px;">
                     <a class="btn-floating btn-large green">
                         <i class="large material-icons">add</i>
                     </a>
@@ -95,7 +95,7 @@
     </div>
 </div>
 
-<div class="preview-div"><i class="exit-icon small material-icons right">close</i><div class="white-bar z-depth-5"><span>Blog Preview</span></div><br><div class="preview-content container z-depth-5"></div></div>
+<div class="preview-div"><i class="exit-icon small material-icons right">close</i><div class="white-bar z-depth-5"><span>Blog Preview</span></div><br><div class="preview-content container z-depth-5 flow-text"></div></div>
 
 <style>
     .outer-card {
@@ -219,8 +219,9 @@
         position: fixed;
         width: 1px;
         height: 1px;
-        z-index: -10000;
         opacity: 0;
+        overflow-y: auto;
+        z-index: -10000;
         top: 50%; left: 50%;
         transform: translate(-50%, -50%);
         -webkit-transform: translate(-50%, -50%);
@@ -231,12 +232,26 @@
         position: absolute;
         right: 0;
         top: 0;
+        cursor: pointer;
+        cursor: hand;
         transform: translate(-50%, 50%);
         -webkit-transform: translate(-50%, 50%);
     }
 
     .preview-content.container {
         padding: 50px;
+    }
+
+    .preview-content.container > .list-wrapper {
+        margin: 0 auto;
+    }
+
+    .preview-content.container .preview-list {
+        width: 10%;
+        max-width: 55%;
+        margin: 0 auto;
+        display: block;
+        word-wrap: break-word;
     }
 
     .preview-expand {
@@ -378,7 +393,6 @@
     /* Helpers */
     function Append_li_Element(element) {
         var innerHTML = $('#'+element.id).html();
-        console.log(innerHTML);
         if(innerHTML === '' || innerHTML === '<br>' || innerHTML === null || innerHTML === undefined) {
             $('#'+element.id).append('<li></li>');
         }
@@ -528,7 +542,7 @@
             case 3: // numbered list
                 sectionType = '' +
                     '<div class="div-col lg">' +
-                        '<h6 class="grey-text">Bullet List</h6>' +
+                        '<h6 class="grey-text">Numbered List</h6>' +
                         '<ol id="numbered-list-'+numberedlistCounter+'" class="browser-default lists list-js" contenteditable="true" onkeydown="Append_li_Element(this);">' +
                             '<li></li>' +
                         '</ol>' +
