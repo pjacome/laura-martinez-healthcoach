@@ -3,7 +3,7 @@
     For previewing blogs
 */
 
-$(document).keyup(function (e) {
+$(document).keyup(function(e) {
     if(previewIsOpen && e.keyCode === 27) {
         CloseBlog();
     }
@@ -14,7 +14,7 @@ function PreviewBlog(blogContent) {
     var sectionsArray = blogContent.children('.sections');
     var sampleBlogText = ConcatenateSections(sectionsArray);
 
-
+    $('.preview-div .preview-content').append(headers);
     $('.preview-div .preview-content').append(sampleBlogText);
     FixWidth();
 
@@ -33,7 +33,18 @@ function CloseBlog() {
 }
 
 function ConcatenateHeaders(title, subheading, date) {
-    return title + subheading + date;
+    var titleString = '<h3 class="lmhc-main-title-font">' + title + '</h3>';
+    var subheadingString = (subheading) ? '<h5 class="grey-text">' + subheading + '</h5>' : '';
+    var wrapper = '' +
+        '<div class="center" style="position: relative;">' +
+            '<h6><i class="grey-text" style="position: absolute; top: 20px; right: 0;">' +
+                date +
+            '</i></h6>' +
+            titleString +
+            subheadingString +
+        '</div>';
+    //+ '<span class="right" style="top:0;">' + date + '</span>'
+    return wrapper;
 }
 
 function ConcatenateSections(sectionsArray) {
