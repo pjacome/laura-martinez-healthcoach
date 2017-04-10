@@ -83,18 +83,23 @@ function ConcatenateSections(sectionsArray) {
 
 function FixWidth() {
     var listsArray = $('.preview-content.container > .list-wrapper').children('.preview-list');
-    var magicNumber = 14;
     $.each(listsArray, function(index, value) {
         var maxWidth = 0;
         $.each($(value).children('li'), function(index, li) {
             var length = $(li).html().length;
-            maxWidth = length * magicNumber;
-            console.log('new width: ' + length + ' x 14 =', maxWidth);
+            if(maxWidth < length)
+                maxWidth = length;
+
+            var canvas = document.createElement('canvas');
+            var ctx = canvas.getContext('2d');
+            ctx.font = '24px Roboto, sans-serif';
+            var li_width = ctx.measureText($(li).html()).width;
+            if(maxWidth < li_width)
+                maxWidth = li_width;
         });
         var ulWidth = $(value).css('width').split('px');
         var currentWidth = parseInt(ulWidth[0]);
-        console.log('current width of ul:', currentWidth);
         if(maxWidth > currentWidth)
-            $(value).css('width', (maxWidth+80) + 'px');
+            $(value).css('width', (40+maxWidth+40) + 'px');
     });
 }
