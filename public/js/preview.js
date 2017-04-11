@@ -10,12 +10,12 @@ $(document).keyup(function(e) {
 });
 
 function PreviewBlog(blogContent) {
-    var headers = ConcatenateHeaders($('#title').val(), $('#subheading').val(), $('.datepicker').val());
+    var mainImage = ReadURL($('#main-image')[0]);
+    ConcatenateHeaders();
+
     var sectionsArray = blogContent.children('.sections');
     var sampleBlogText = ConcatenateSections(sectionsArray);
-
-    $('.preview-div .preview-content').append(headers);
-    $('.preview-div .preview-content').append(sampleBlogText);
+    $('.preview-sections').append(sampleBlogText);
     FixWidth();
 
 
@@ -25,29 +25,22 @@ function PreviewBlog(blogContent) {
 }
 
 function CloseBlog() {
-    $('.preview-div .preview-content').empty();
+    $('.preview-sections').empty();
 
     $('.preview-div').addClass('preview-close');
     $('.preview-div').removeClass('preview-expand');
     previewIsOpen = false;
 }
 
-function ConcatenateHeaders(title, subheading, date) {
-    var titleString = '<h3 class="lmhc-main-title-font">' + title + '</h3>';
-    var subheadingString = (subheading) ? '<h5 class="center grey-text" style="width: 80%; margin: 0 auto;">' + subheading + '</h5>' : '';
-    var dateString = '<h6><i class="grey-text" style="position: absolute; bottom: 0; right: 0;">' + date + '</i></h6>';
-    var wrapper = '' +
-        '<div class="center" style="position: relative;">' +
-            dateString +
-            titleString +
-            subheadingString +
-        '</div>';
-    return wrapper;
+function ConcatenateHeaders() {
+    $('#preview-date').html($('.datepicker').val());
+    $('#preview-title').html($('#title').val());
+    $('#preview-subheading').html($('#subheading').val());
 }
 
 function ConcatenateSections(sectionsArray) {
     if(sectionsArray.length === 0) {
-        return 'Nothing to display';
+        return 'No body to display.';
     }
 
     var sections = '';
@@ -58,7 +51,10 @@ function ConcatenateSections(sectionsArray) {
             temp2 = id + ' .list-js';
         if($(id).hasClass('images')) {
             console.log('images class found', id);
-            // special case
+            var input = $(id + ' .btn input');
+            var idNumber = parseInt(element.id.split('-')[1]);
+            sections += '<div id="image-wrapper-' + idNumber + '" class="div-wrapping-sections-img"></div>'
+            SectionsImagePreview(input[0], idNumber);
         } else if($(temp1).hasClass('paragraphs')) {
             target = id + ' .paragraphs';
             sections += '<p>' + $(target).html() + '</p>';
@@ -88,6 +84,31 @@ function ConcatenateSections(sectionsArray) {
         }
     });
     return sections;
+}
+
+function ReadURL(input) {
+    console.log('nuthin but 1s! 11111111111111111', input);
+    if(input.files && input.files[0]) {
+        var reader = new FileReader();
+        reader.onload = function(e) {
+            console.log('in inside this bitch');
+            $('#main-img-holder').attr('src', e.target.result);
+        }
+        reader.readAsDataURL(input.files[0]);
+    }
+}
+
+function SectionsImagePreview(input, number) {
+    console.log('nuthin but 2s! 22222222222222222', input);
+    if(input.files && input.files[0]) {
+        var reader = new FileReader();
+        reader.onload = function(e) {
+            console.log('inside this bitch');
+            var str = '<img class="scale" src="'+e.target.result+'">';
+            $('#image-wrapper-'+number).append(str);
+        }
+        reader.readAsDataURL(input.files[0]);
+    }
 }
 
 function FixWidth() {

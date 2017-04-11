@@ -31,7 +31,7 @@
                             <div class="file-field input-field">
                                 <div class="btn">
                                     <span>File</span>
-                                    <input type="file">
+                                    <input id="main-image" type="file">
                                 </div>
                                 <div class="file-path-wrapper">
                                     <input class="file-path validate" type="text">
@@ -95,7 +95,20 @@
     </div>
 </div>
 
-<div class="preview-div"><i class="exit-icon small material-icons right">close</i><div class="white-bar z-depth-5"><span>Blog Preview</span></div><br><div class="preview-content container z-depth-5 flow-text"></div></div>
+<div class="preview-div"><i class="exit-icon small material-icons right">close</i>
+    <div class="white-bar z-depth-5"><span>Blog Preview</span></div>
+    <br>
+    <div class="preview-content container z-depth-5 flow-text">
+        <div class="center" style="position: relative;">
+            <h6><i id="preview-date" class="grey-text" style="position: absolute; bottom: 0; right: 0;"></i></h6>
+            <h3 id="preview-title" class="lmhc-main-title-font"></h3>
+            <h5 id="preview-subheading" class="center grey-text" style="width: 80%; margin: 0 auto;"></h5>
+        </div>
+        <br>
+        <div class="div-wrapping-main-img center"><img id="main-img-holder" src=""></div>
+        <div class="preview-sections"></div>
+    </div>
+</div>
 
 <style>
     .outer-card {
@@ -240,6 +253,20 @@
 
     .preview-content.container {
         padding: 50px;
+    }
+
+    .preview-content.container .div-wrapping-main-img {
+        width: 100%;
+    }
+
+    .preview-content.container .scale,
+    .preview-content.container #main-img-holder {
+        width: inherit;
+        min-height: 100%;
+    }
+
+    .preview-content.container .div-wrapping-sections-img {
+        width: 100%;
     }
 
     .preview-content.container > .list-wrapper {
