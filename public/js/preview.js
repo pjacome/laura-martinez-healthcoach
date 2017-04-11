@@ -34,16 +34,14 @@ function CloseBlog() {
 
 function ConcatenateHeaders(title, subheading, date) {
     var titleString = '<h3 class="lmhc-main-title-font">' + title + '</h3>';
-    var subheadingString = (subheading) ? '<h5 class="grey-text">' + subheading + '</h5>' : '';
+    var subheadingString = (subheading) ? '<h5 class="center grey-text" style="width: 80%; margin: 0 auto;">' + subheading + '</h5>' : '';
+    var dateString = '<h6><i class="grey-text" style="position: absolute; bottom: 0; right: 0;">' + date + '</i></h6>';
     var wrapper = '' +
         '<div class="center" style="position: relative;">' +
-            '<h6><i class="grey-text" style="position: absolute; top: 20px; right: 0;">' +
-                date +
-            '</i></h6>' +
+            dateString +
             titleString +
             subheadingString +
         '</div>';
-    //+ '<span class="right" style="top:0;">' + date + '</span>'
     return wrapper;
 }
 
