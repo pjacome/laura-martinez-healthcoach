@@ -8,8 +8,8 @@
     <div class="lmhc-blog-wrapper">
         <div class="single-result lmhc-table">
             <div class="lmhc-row">
-                <div class="lmhc-col left">thumbnail</div>
-                <div class="lmhc-col right">right</div>
+                <div class="lmhc-col thumbnails"></div>
+                <div class="lmhc-col text"></div>
             </div>
         </div>
     </div>
@@ -46,56 +46,21 @@
     }
 
     .lmhc-table .lmhc-row .lmhc-col {
-        display: inline-block;
-        border: 1px black solid;
-        height: 50%;
+        display: table-cell;
+        width: 50%;
+        height: 100%;
+        background-color: pink;
     }
 
-    .lmhc-col.left,
-    .lmhc-col.right {
-        width: 100%;
-    }
-
-    @media (max-width: 768px) and (orientation: landscape) {
-        body {background-color: black;}
-        
-        .lmhc-table {
-            height: 150px;
-        }
-        
-        .lmhc-table .lmhc-row .lmhc-col {
-            display: table-cell;
-            height: 100%;
-        }
-
-        .lmhc-col.left {
-            width: 30%;
-        }
-
-        .lmhc-col.right {
-            width: 70%;
-        }
-    }
+    .lmhc-col.thumbnails {background-color:pink;}
+    .lmhc-col.text       {background-color:chartreuse;}
 
     /* small */
     @media (min-width: 768px) {
         body {background-color: red;}
 
         .lmhc-table {
-            height: 180px;
-        }
-
-        .lmhc-table .lmhc-row .lmhc-col {
-            display: table-cell;
-            height: 100%;
-        }
-
-        .lmhc-col.left {
-            width: 30%;
-        }
-
-        .lmhc-col.right {
-            width: 70%;
+            height: 200px;
         }
 
         /*@media (orientation: portrait) {
@@ -118,14 +83,6 @@
 
         .lmhc-table {
             height: 250px;
-        }
-
-        .lmhc-col.left {
-            width: 25%;
-        }
-
-        .lmhc-col.right {
-            width: 75%;
         }
     }
 
