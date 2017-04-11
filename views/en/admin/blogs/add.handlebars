@@ -95,6 +95,7 @@
     </div>
 </div>
 
+<!-- Preview Div -->
 <div class="preview-div"><i class="exit-icon small material-icons right">close</i>
     <div class="white-bar z-depth-5"><span>Blog Preview</span></div>
     <br>
@@ -434,6 +435,22 @@
         $('.exit-icon').click(function() {
             CloseBlog();
         });
+
+        $('#submit-btn').click(function() {
+            var data = {
+                title: $('#title').val(),
+                subheading: $('#subheading').val(),
+                date: $('.datepicker').val(),
+                sections: [
+                    $('#main-image').val(), // index 0 is the main image
+                ]
+            };
+            GetSectionData(data);
+
+            /*$.ajax({
+
+            });*/
+        });
     });
 
     /* Helpers */
@@ -617,6 +634,23 @@
                 break;
         }
         return sectionType;
+    }
+
+    function GetSectionData(data) {
+        $.each($('.blog-content-wrapper').children('.sections'), function(index, section) {
+            var num = index+1;
+            console.log('section-'+num, section);
+            if($('#' + section.id + ' *').hasClass('paragraphs')) {
+                var p = $('#' + section.id + ' .paragraphs').html();
+                console.log('p:', p);
+            } else if($('#' + section.id + ' *').hasClass('list-js')) {
+                var l = $('#' + section.id + ' .list-js').html();
+                console.log('l:', l);
+            } else if($('#' + section.id).hasClass('images')) {
+                var i = $('#' + section.id + ' .btn > input').val();
+                console.log('i:', i);
+            }
+        });
     }
 </script>
 

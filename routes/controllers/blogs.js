@@ -6,6 +6,7 @@ var ObjectID = require('mongodb').ObjectID;
 module.exports.obj_Blogs = {};
 
 module.exports.POST = function(req, res) {
+    console.log(req.body);
     res.sendStatus(400);
 };
 
