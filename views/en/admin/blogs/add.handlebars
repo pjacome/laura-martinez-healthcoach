@@ -641,7 +641,8 @@
             var num = index+1;
             console.log('section-'+num, section);
             if($('#' + section.id + ' *').hasClass('paragraphs')) {
-                var p = $('#' + section.id + ' .paragraphs').html();
+                var content = $('#' + section.id + ' .paragraphs').html();
+                var p = '<p>' + content + '</p>';
                 console.log('p:', p);
             } else if($('#' + section.id + ' *').hasClass('list-js')) {
                 var l = $('#' + section.id + ' .list-js').html();
