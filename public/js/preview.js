@@ -87,11 +87,9 @@ function ConcatenateSections(sectionsArray) {
 }
 
 function ReadURL(input) {
-    console.log('nuthin but 1s! 11111111111111111', input);
     if(input.files && input.files[0]) {
         var reader = new FileReader();
         reader.onload = function(e) {
-            console.log('in inside this bitch');
             $('#main-img-holder').attr('src', e.target.result);
         }
         reader.readAsDataURL(input.files[0]);
@@ -99,11 +97,9 @@ function ReadURL(input) {
 }
 
 function SectionsImagePreview(input, number) {
-    console.log('nuthin but 2s! 22222222222222222', input);
     if(input.files && input.files[0]) {
         var reader = new FileReader();
         reader.onload = function(e) {
-            console.log('inside this bitch');
             var str = '<img class="scale" src="'+e.target.result+'">';
             $('#image-wrapper-'+number).append(str);
         }
@@ -112,14 +108,10 @@ function SectionsImagePreview(input, number) {
 }
 
 function FixWidth() {
-    var listsArray = $('.preview-content.container > .list-wrapper').children('.preview-list');
+    var listsArray = $('.preview-content.container  .list-wrapper').children('.preview-list');
     $.each(listsArray, function(index, value) {
         var maxWidth = 0;
         $.each($(value).children('li'), function(index, li) {
-            var length = $(li).html().length;
-            if(maxWidth < length)
-                maxWidth = length;
-
             var canvas = document.createElement('canvas');
             var ctx = canvas.getContext('2d');
             ctx.font = '24px Roboto, sans-serif';
