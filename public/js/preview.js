@@ -53,7 +53,7 @@ function ConcatenateSections(sectionsArray) {
             console.log('images class found', id);
             var input = $(id + ' .btn input');
             var idNumber = parseInt(element.id.split('-')[1]);
-            sections += '<div id="image-wrapper-' + idNumber + '" class="div-wrapping-sections-img"></div>'
+            sections += '<div id="image-wrapper-' + idNumber + '" class="div-wrapping-sections-img center"></div>'
             SectionsImagePreview(input[0], idNumber);
         } else if($(temp1).hasClass('paragraphs')) {
             target = id + ' .paragraphs';
