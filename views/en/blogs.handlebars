@@ -3,7 +3,36 @@
     <div class="center lmhc-logo-wrapper">
         <img class="responsive-img" src="images/logo-600x600.jpg">
     </div>
-    <br>
+
+    <!-- subscribe section -->
+    <div class="hide-on-small-only subscribe-wrapper green lighten-3 z-depth-5">
+        <div class="flow-text center">Subscribe to my email list to get updates on recipes, latest blogs, events and more!</div>
+        <form>
+            <div class="row">
+                <div class="input-field col s4">
+                    <input id="firstName" class="validate" type="text" required>
+                    <label for="firstName">First Name</label>
+                </div>
+                <div class="input-field col s4">
+                    <input id="email" class="validate" type="email" required>
+                    <label for="email">First Name</label>
+                </div>
+                <div class="input-field col s4 center">
+                    <a class="waves-effect waves-light btn">button</a>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="hide-on-med-and-up center">
+        <div class="flow-text">Subscribe to my email list to get updates on recipes, latest blogs, events and more!</div>
+        <br>
+        <button class="btn btn-flat waves-effect waves-light orange-text grey lighten-3">Subscribe!</button>
+        <br>
+        <br>
+        <hr>
+        <br>
+    </div>
+    <!-- end -->
 
     <div class="lmhc-blog-wrapper">
         <div class="single-result lmhc-table">
@@ -102,6 +131,23 @@
         text-align: center;
         font-size: 1.5em;
         color: dimgray;
+    }
+
+    .inner-table {
+        width: 100%;
+        height: 175px;
+    }
+
+    .inner-table-row.title,
+    .inner-table-row.readmore {
+        width: 100%;
+        height: 20%;
+    }
+
+    .inner-table-row.summary {
+        width: 100%;
+        height: 60%;
+        overflow: hidden;
     }
 
     @media (max-width: 768px) and (orientation: landscape) {
