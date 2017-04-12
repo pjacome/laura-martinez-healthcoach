@@ -14,7 +14,23 @@
                     </div>
                 </div>
                 <div class="lmhc-col right">
-                    <div>text</div>
+                    <div class="inner-table">
+                        <div class="inner-table-row title">
+                            <span class="lmhc-main-title-font title-font-size">My Very First Blog!</span>
+                        </div>
+                        <div class="inner-table-row summary flow-text">
+                            I welcome you to my new adventure and I want you to join me!
+                            What happens if the text gets longer and longer and longer ...
+                            Well there's only one real way of finding out and that's exactly what I am
+                            going to check right now. Oops. Still need a tiny bit more. Hah, I was short
+                            by just one word. Let's keep on adding words to test the overflow on the big screen.
+                            Something tells me it's buggy still, which will essentially just piss me the 
+                            fuck off.
+                        </div>
+                        <div class="inner-table-row readmore">
+                            <footer><a class="orange-text">Read more...</a></footer>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -66,6 +82,10 @@
         background-color: black;
     }
 
+    .lmhc-col.right {
+        padding: 0 5px;
+    }
+
     .thumbnail-wrapper {
         width: 100%;
         height: 175px;
@@ -76,6 +96,13 @@
         max-width: 100%;
         max-height: 100%;
         image-rendering: optimizeSpeed;
+    }
+
+    .lmhc-col.right .title-font-size {
+        display: block;
+        text-align: center;
+        font-size: 1.5em;
+        color: dimgray;
     }
 
     @media (max-width: 768px) and (orientation: landscape) {
@@ -100,6 +127,28 @@
 
         .thumbnail-wrapper {
             height: 150px;
+        }
+
+        .inner-table {
+            width: 100%;
+            height: 150px;
+        }
+
+        .inner-table-row.title,
+        .inner-table-row.readmore {
+            width: 100%;
+            height: 20%;
+        }
+
+        .inner-table-row.summary {
+            width: 100%;
+            height: 60%;
+            overflow: hidden;
+        }
+
+        .lmhc-col.right .title-font-size {
+            font-size: 1.6em;
+            display: initial;
         }
     }
 
@@ -136,6 +185,20 @@
         .thumbnail-wrapper {
             height: 180px;
         }
+
+        .inner-table {
+            height: 180px;
+        }
+
+        .inner-table-row.summary {
+            height: 60%;
+            overflow: hidden;
+        }
+
+        .lmhc-col.right .title-font-size {
+            font-size: 2.2em;
+            display: initial;
+        }
     }
 
     /* medium */
@@ -158,6 +221,8 @@
 
         .lmhc-table {
             height: 250px;
+            max-height: 250px;
+            overflow: hidden;
         }
 
         .lmhc-col.left {
@@ -167,10 +232,21 @@
 
         .lmhc-col.right {
             width: 75%;
+            max-height: 250px;
+            overflow: hidden;
         }
 
         .thumbnail-wrapper {
             height: 250px;
+        }
+
+        .inner-table {
+            height: 250px;
+        }
+
+        .lmhc-col.right .title-font-size {
+            font-size: 2.2em;
+            display: initial;
         }
     }
 
