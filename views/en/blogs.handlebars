@@ -3,38 +3,41 @@
     <div class="center lmhc-logo-wrapper">
         <img class="responsive-img" src="images/logo-600x600.jpg">
     </div>
+</div>
 
     <!-- subscribe section -->
-    <div class="hide-on-small-only subscribe-wrapper green lighten-3 z-depth-5">
-        <div class="flow-text center">Subscribe to my email list to get updates on recipes, latest blogs, events and more!</div>
-        <form>
+    <div class="hide-on-small-only subscribe-wrapper lg">
+        <form class="subscribe-form lg blue z-depth-5">
+            <div class="flow-text center">Subscribe to my email list to get updates on recipes, blogs, events and more!</div>
             <div class="row">
-                <div class="input-field col s4">
-                    <input id="firstName" class="validate" type="text" required>
-                    <label for="firstName">First Name</label>
+                <div class="input-field col s2 offset-s3">
+                    <input id="firstName" class="validate white-text" type="text" required>
+                    <label for="firstName" class="black-text">First Name</label>
                 </div>
-                <div class="input-field col s4">
-                    <input id="email" class="validate" type="email" required>
-                    <label for="email">First Name</label>
+                <div class="input-field col s2">
+                    <input id="email" class="validate white-text" type="email" required>
+                    <label for="email" class="black-text">Email</label>
                 </div>
-                <div class="input-field col s4 center">
-                    <a class="waves-effect waves-light btn">button</a>
+                <div class="input-field col s2 center">
+                    <a id="blog-subscribe-btn-lg" class="waves-effect waves-light btn">Subscribe</a>
                 </div>
             </div>
         </form>
     </div>
     <div class="hide-on-med-and-up center">
-        <div class="flow-text">Subscribe to my email list to get updates on recipes, latest blogs, events and more!</div>
+        <div class="flow-text">Subscribe to my email list to get updates on recipes, blogs, events and more!</div>
         <br>
-        <button class="btn btn-flat waves-effect waves-light orange-text grey lighten-3">Subscribe!</button>
+        <button id="blog-subscribe-btn-sm" class="btn btn-flat waves-effect waves-light orange-text grey lighten-3">Subscribe!</button>
         <br>
-        <br>
-        <hr>
         <br>
     </div>
     <!-- end -->
-
+    <br class="hide-on-small-only">
+<div class="container white outer">
+    <hr class="hide-on-med-and-up">
+    <br>
     <div class="lmhc-blog-wrapper">
+        <!-- Example result 1 -->
         <div class="single-result lmhc-table">
             <div class="lmhc-row">
                 <div class="lmhc-col left">
@@ -54,6 +57,37 @@
                             going to check right now. Oops. Still need a tiny bit more. Hah, I was short
                             by just one word. Let's keep on adding words to test the overflow on the big screen.
                             Something tells me it's buggy still, which will essentially just piss me the 
+                            fuck off.
+                        </div>
+                        <div class="inner-table-row readmore">
+                            <footer><a class="orange-text">Read more...</a></footer>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <hr>
+
+        <!-- Example result 1 -->
+        <div class="single-result lmhc-table">
+            <div class="lmhc-row">
+                <div class="lmhc-col left">
+                    <div class="thumbnail-wrapper">
+                        <img src="images/bellpepper-640x640.jpg">
+                    </div>
+                </div>
+                <div class="lmhc-col right">
+                    <div class="inner-table">
+                        <div class="inner-table-row title">
+                            <span class="lmhc-main-title-font title-font-size">My Very First Blog!</span>
+                        </div>
+                        <div class="inner-table-row summary flow-text">
+                            I welcome you to my new adventure and I want you to join me!
+                            What happens if the text gets longer and longer and longer ...
+                            Well there's only one real way of finding out and that's exactly what I am
+                            going to check right now. Oops. Still need a tiny bit more. Hah, I was short
+                            by just one word. Let's keep on adding words to test the overflow on the big screen.
+                            Something tells me it's buggy still, which will essentially just piss me the
                             fuck off.
                         </div>
                         <div class="inner-table-row readmore">
@@ -151,6 +185,10 @@
     }
 
     @media (max-width: 768px) and (orientation: landscape) {
+        .subscribe-form.lg {
+            /*TODO*/
+        }
+
         .lmhc-table {
             height: 150px;
         }
@@ -197,6 +235,28 @@
 
     /* small */
     @media (min-width: 768px) {
+        .subscribe-wrapper.lg {
+            /*padding-top: 15px;
+            padding-bottom: 2px;
+            border-top: 1px grey solid;
+            border-bottom: 1px grey solid;*/
+        }
+
+        .subscribe-form.lg {
+            width: 50%;
+            height: 100%;
+            margin: 0 auto;
+            padding-top: 10px;
+        }
+
+        .subscribe-form.lg .flow-text {
+            font-weight: bold;
+        }
+
+        .subscribe-form.lg input {
+            border-bottom: 1px black solid;
+        }
+
         .lmhc-logo-wrapper {
             height: 300px;
         }
