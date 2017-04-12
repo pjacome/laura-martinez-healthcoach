@@ -8,8 +8,14 @@
     <div class="lmhc-blog-wrapper">
         <div class="single-result lmhc-table">
             <div class="lmhc-row">
-                <div class="lmhc-col left">thumbnail</div>
-                <div class="lmhc-col right">right</div>
+                <div class="lmhc-col left">
+                    <div class="thumbnail-wrapper">
+                        <img src="images/bellpepper-640x640.jpg">
+                    </div>
+                </div>
+                <div class="lmhc-col right">
+                    <div>text</div>
+                </div>
             </div>
         </div>
     </div>
@@ -35,7 +41,6 @@
     .lmhc-table {
         width: inherit;
         height: 350px;
-        background-color: orange;
         display: table;
     }
 
@@ -47,13 +52,30 @@
 
     .lmhc-table .lmhc-row .lmhc-col {
         display: inline-block;
-        border: 1px black solid;
+        border: 1px black solid; /*delete this*/
         height: 50%;
     }
 
     .lmhc-col.left,
     .lmhc-col.right {
         width: 100%;
+    }
+
+    .lmhc-col.left {
+        margin: 0 auto;
+        background-color: black;
+    }
+
+    .thumbnail-wrapper {
+        width: 100%;
+        height: 175px;
+        text-align: center;
+    }
+
+    .thumbnail-wrapper > img {
+        max-width: 100%;
+        max-height: 100%;
+        image-rendering: optimizeSpeed;
     }
 
     @media (max-width: 768px) and (orientation: landscape) {
@@ -75,11 +97,24 @@
         .lmhc-col.right {
             width: 70%;
         }
+
+        .thumbnail-wrapper {
+            height: 150px;
+        }
     }
 
     /* small */
     @media (min-width: 768px) {
         body {background-color: red;}
+
+        .lmhc-logo-wrapper {
+            height: 300px;
+        }
+    
+        .lmhc-logo-wrapper > img {
+            width: 300px;
+            min-height: 100%;
+        }
 
         .lmhc-table {
             height: 180px;
@@ -98,13 +133,9 @@
             width: 70%;
         }
 
-        /*@media (orientation: portrait) {
-            body {background-color: red;}
+        .thumbnail-wrapper {
+            height: 180px;
         }
-
-        @media (orientation: landscape) {
-            body {background-color: blue;}
-        }*/
     }
 
     /* medium */
@@ -116,16 +147,30 @@
     @media (min-width: 1200px) {
         body {background-color: blue;}
 
+        .lmhc-logo-wrapper {
+            height: 350px;
+        }
+    
+        .lmhc-logo-wrapper > img {
+            width: 350px;
+            min-height: 100%;
+        }
+
         .lmhc-table {
             height: 250px;
         }
 
         .lmhc-col.left {
             width: 25%;
+            height: 100%;
         }
 
         .lmhc-col.right {
             width: 75%;
+        }
+
+        .thumbnail-wrapper {
+            height: 250px;
         }
     }
 
@@ -134,5 +179,6 @@
 
 <script type="text/javascript">
     $(document).ready(function(){
+        // no js logic quite yet
     });
 </script>
