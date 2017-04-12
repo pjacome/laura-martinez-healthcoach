@@ -19,7 +19,7 @@
                     <label for="email" class="black-text" style="text-align: initial;">Email</label>
                 </div>
                 <div class="input-field">
-                    <a id="blog-subscribe-btn-lg" class="waves-effect waves-light btn btn-flat grey lighten-2">Subscribe</a>
+                    <a id="blog-subscribe-btn-lg" class="waves-effect waves-light btn btn-flat white">Subscribe</a>
                 </div>
             </div>
             <div class="center social-icons">
@@ -120,7 +120,7 @@
         </div>
         <hr>
 
-        <!-- Example result 1 -->
+        <!-- Example result 2 -->
         <div class="single-result lmhc-table">
             <div class="lmhc-row">
                 <div class="lmhc-col left">
@@ -131,7 +131,7 @@
                 <div class="lmhc-col right">
                     <div class="inner-table">
                         <div class="inner-table-row title">
-                            <span class="lmhc-main-title-font title-font-size">My Very First Blog!</span>
+                            <span class="lmhc-main-title-font title-font-size">Running Potato Chip Rock</span>
                         </div>
                         <div class="inner-table-row summary flow-text">
                             I welcome you to my new adventure and I want you to join me!
@@ -149,6 +149,35 @@
                 </div>
             </div>
         </div>
+        <hr>
+
+        <!-- Example result 2 -->
+        {{#each blogResult}}
+        <div class="single-result lmhc-table">
+            <div class="lmhc-row">
+                <div class="lmhc-col left">
+                    <div class="thumbnail-wrapper">
+                        <img src="images/blog/{{image}}">
+                    </div>
+                </div>
+                <div class="lmhc-col right">
+                    <div class="inner-table">
+                        <div class="inner-table-row title">
+                            <span class="lmhc-main-title-font title-font-size">{{title}}</span>
+                        </div>
+                        <div class="inner-table-row summary flow-text">
+                            {{summary}}
+                        </div>
+                        <div class="inner-table-row readmore">
+                            <footer><a class="orange-text" href="blogs/{{_id}}">Read more...</a></footer>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <hr>
+        {{/each}}
+
     </div>
     <br>
 </div>
@@ -201,7 +230,7 @@
 
     .lmhc-col.left {
         margin: 0 auto;
-        background-color: black;
+        background-color: lightgrey;
     }
 
     .lmhc-col.right {
@@ -238,27 +267,51 @@
         height: 20%;
     }
 
+    .inner-table-row.title {
+        padding-top: 5px;
+    }
+
     .inner-table-row.summary {
         width: 100%;
         height: 60%;
         overflow: hidden;
     }
 
-    @media (max-width: 768px) and (orientation: landscape) {
-        .subscribe-wrapper.lg .row {
-            margin-bottom: 0;
-        }
+    .inner-table-row.readmore {
+        position: relative;
+    }
 
+    .inner-table-row.readmore footer {
+        position: absolute;
+        bottom: 0;
+        font-size: 1.2em;
+    }
+
+    @media (max-width: 768px) and (orientation: landscape) {
+        .lmhc-logo-wrapper {
+            height: 200px;
+        }
+    
+        .lmhc-logo-wrapper > img {
+            width: 200px;
+            min-height: 100%;
+        }
+        
         .subscribe-form.lg {
             height: 100%;
             margin: 0 auto;
             padding: 10px 5px 0px 5px;
             border-radius: 3px;
+            background-color: #f7f7f7;
+        }
+
+        .subscribe-wrapper.lg .row {
+            margin-bottom: 0;
         }
 
         .subscribe-form.lg .text {
-            font-weight: bold;
-            font-size: 1.2em;
+            font-variant-caps: small-caps;
+            font-size: 1.3em;
         }
 
         .subscribe-form.lg input {
@@ -297,6 +350,10 @@
             height: 20%;
         }
 
+        .inner-table-row.title {
+            padding-top: 0;
+        }
+
         .inner-table-row.summary {
             width: 100%;
             height: 60%;
@@ -311,20 +368,21 @@
 
     /* small */
     @media (min-width: 768px) {
-        .subscribe-wrapper.lg .row {
-            margin-bottom: 0;
-        }
-
         .subscribe-form.lg {
             height: 100%;
             margin: 0 auto;
             padding: 10px 5px 0px 5px;
             border-radius: 3px;
+            background-color: #f7f7f7;
+        }
+
+        .subscribe-wrapper.lg .row {
+            margin-bottom: 0;
         }
 
         .subscribe-form.lg .text {
-            font-weight: bold;
-            font-size: 1.2em;
+            font-variant-caps: small-caps;
+            font-size: 1.5em;
         }
 
         .subscribe-form.lg input {
@@ -363,6 +421,10 @@
 
         .inner-table {
             height: 180px;
+        }
+
+        .inner-table-row.title {
+            padding-top: 0;
         }
 
         .inner-table-row.summary {

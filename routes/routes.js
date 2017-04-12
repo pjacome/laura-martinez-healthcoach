@@ -83,11 +83,7 @@ router.post('/login', obj_Admin.POST);
 router.post('/logout', obj_Admin.ENDSESSION);
 // TODO: login route (below) requires a special layout
 router.get('/en/admin/login', IsLoggedIn, function(req, res) {res.render('en/admin/login');});
-    // TODO: routes below are placeholders for files being rendered. files being rendered should be renamed/deleted
-    router.get('/en/admin/blog/add', Authenticate, function(req, res) {res.render('en/admin/ablogadd');});
-    router.get('/en/admin/blog/edit', Authenticate, function(req, res) {res.render('en/admin/ablogedit');});
-        router.get('/en/admin/blog/edit/exedit', function(req, res) {res.render('en/admin/exedit');});
-
+router.get('/en/admin', function(req, res) {res.redirect('en/admin/login');});
 router.get('/en/admin/:dashboard', Authenticate, obj_Admin.GET);
 router.get('/en/admin/:dashboard/:operation', Authenticate, obj_Admin.GET);
 
