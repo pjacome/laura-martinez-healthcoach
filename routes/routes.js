@@ -83,7 +83,7 @@ router.post('/login', obj_Admin.POST);
 router.post('/logout', obj_Admin.ENDSESSION);
 // TODO: login route (below) requires a special layout
 router.get('/en/admin/login', IsLoggedIn, function(req, res) {res.render('en/admin/login');});
-router.get('/en/admin', function(req, res) {res.redirect('en/admin/login');});
+router.get('/en/admin', function(req, res) {res.redirect('admin/login');});
 router.get('/en/admin/:dashboard', Authenticate, obj_Admin.GET);
 router.get('/en/admin/:dashboard/:operation', Authenticate, obj_Admin.GET);
 
@@ -95,24 +95,20 @@ router.get('/en/admin/:dashboard/:operation', Authenticate, obj_Admin.GET);
 /////////////////// recipes ////////////////////
 // client-side rendering
 router.get('/en/recipes/search', function (req, res) { res.render('en/comingsoon'); });
+//recipes
+// CRUD operations
 router.get('/en/recipes/:category', obj_Recipes.GET);
 router.get('/en/recipes/:category/:id', obj_Recipes.GET);
-// CRUD operations
 router.post  ('/admin/recipes', Authenticate, obj_Recipes.POST);
 router.put   ('/admin/recipes', Authenticate, obj_Recipes.PUT);
 router.delete('/admin/recipes', Authenticate, obj_Recipes.DELETE);
 
 //blogs
- router.get   ('/admin/blogs', Authenticate, obj_Blogs.GET);
- router.post  ('/admin/blogs', Authenticate, obj_Blogs.POST);
- router.put   ('/admin/blogs', Authenticate, obj_Blogs.PUT);
- router.delete('/admin/blogs', Authenticate, obj_Blogs.DELETE);
-
-//recipes
-//router.get   ('/en/recipes/read/all', obj_Recipes.GET);
-//router.post  ('/en/recipes/create',   obj_Recipes.POST);
-//router.put   ('/en/recipes/edit/:id', obj_Recipes.PUT);
-//router.delete('/en/recipes/edit/:id', obj_Recipes.DELETE);
+router.get   ('/admin/blogs', Authenticate, obj_Blogs.GET);
+router.get('/admin/blogs/:id', Authenticate, obj_Blogs.GET);
+router.post  ('/admin/blogs', Authenticate, obj_Blogs.POST);
+router.put   ('/admin/blogs', Authenticate, obj_Blogs.PUT);
+router.delete('/admin/blogs', Authenticate, obj_Blogs.DELETE);
 
 //forms
 // router.get   ('/en/read/all', obj_Forms.GET);

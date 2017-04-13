@@ -19,6 +19,13 @@
                     <label for="date">Date</label>
                 </div>
             </div>
+            <!-- summary textbox -->
+            <div class="row">
+                <div class="input-field col s12">
+                    <textarea id="summary" class="materialize-textarea" placeholder="This is what people will read when they view your blog list" required></textarea>
+                    <label for="summary">Summary (optional)</label>
+                </div>
+            </div>
 
             <!-- Blog Content Wrapper -->
             <div class="blog-content-wrapper z-depth-5">
@@ -441,11 +448,14 @@
                 title: $('#title').val(),
                 subheading: $('#subheading').val(),
                 date: $('.datepicker').val(),
+                summary: $('#summary').val(),
                 sections: [
                     $('#main-image').val(), // index 0 is the main image
                 ]
             };
             GetSectionData(data);
+            console.log('data:', data);
+
 
             /*$.ajax({
 
@@ -638,15 +648,23 @@
 
     function GetSectionData(data) {
         $.each($('.blog-content-wrapper').children('.sections'), function(index, section) {
-            var num = index+1;
+            var num = index+1,
+                content = '';
             console.log('section-'+num, section);
             if($('#' + section.id + ' *').hasClass('paragraphs')) {
-                var content = $('#' + section.id + ' .paragraphs').html();
+                content = $('#' + section.id + ' .paragraphs').html();
                 var p = '<p>' + content + '</p>';
-                console.log('p:', p);
+                data.sections.push(p);
             } else if($('#' + section.id + ' *').hasClass('list-js')) {
-                var l = $('#' + section.id + ' .list-js').html();
-                console.log('l:', l);
+                var listElement = $('#' + section.id + ' .list-js');
+                content = $('#' + section.id + ' .list-js').html();
+                if(listElement.is('ul')) {
+                    var ul = '<ul>' + content + '</ul>';
+                    data.sections.push(ul);
+                } else {
+                    var ol = '<ol>' + content + '</ol>';
+                    data.sections.push(ol);
+                }
             } else if($('#' + section.id).hasClass('images')) {
                 var i = $('#' + section.id + ' .btn > input').val();
                 console.log('i:', i);
