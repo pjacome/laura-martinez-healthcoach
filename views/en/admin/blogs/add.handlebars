@@ -670,7 +670,7 @@
                 elementWrapper = $('#' + section.id + ' *');
             if(elementWrapper.hasClass('paragraphs')) {
                 content = $('#' + section.id + ' .paragraphs').html();
-                var p = '<p>' + content + '</p>';
+                var p = '<p class="flow-text">' + content + '</p>';
                 data.sections.push(p);
             } else if(elementWrapper.hasClass('list-js')) {
                 var listElement = $('#' + section.id + ' .list-js');
@@ -687,7 +687,7 @@
                 var src = PostImage(id);
                 var i = '' +
                     '<div class="div-wrapping-sections-img center">' +
-                        '<img class="scale" src="images/uploads/'+src+'">' +
+                        '<img class="scale" src="/images/uploads/'+src+'">' +
                     '</div>';
                 data.sections.push(i);
             }
@@ -719,7 +719,7 @@
             contentType: false,
             url: '/admin/photos/upload'
         }).done(function(data) {
-            Materialize.toast(word + ' Upload Succesful!', 4000, 'green');
+            Materialize.toast('Photo Upload Succesful!', 4000, 'green');
         }).fail(function(jqXHR, textStatus, errorThrown) {
             var statusCode = (jqXHR.status.toString()).split('');
             var statusText = jqXHR.statusText;
