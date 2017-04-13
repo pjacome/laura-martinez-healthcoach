@@ -28,7 +28,7 @@ router.get('/en/about', function(req, res) {res.render('en/about');});
 router.get('/en/recipes', function(req, res) {res.render('en/recipes/recipes');});
 router.get('/en/healthcoaching', function(req, res) {res.render('en/healthcoaching');});
 router.get('/en/events', function(req, res) {res.render('en/events');});
-router.get('/en/blogs', function(req, res) {res.render('en/blogs');});
+//router.get('/en/blogs', function(req, res) {res.render('en/blogs');});
 router.get('/en/contact', function(req, res) {res.render('en/contact');});
 
 
@@ -93,10 +93,10 @@ router.get('/en/admin/:dashboard/:operation', Authenticate, obj_Admin.GET);
 // ###########################################################################
 
 /////////////////// recipes ////////////////////
-// client-side rendering
+//TODO - a 'search result' page
 router.get('/en/recipes/search', function (req, res) { res.render('en/comingsoon'); });
+
 //recipes
-// CRUD operations
 router.get('/en/recipes/:category', obj_Recipes.GET);
 router.get('/en/recipes/:category/:id', obj_Recipes.GET);
 router.post  ('/admin/recipes', Authenticate, obj_Recipes.POST);
@@ -104,8 +104,8 @@ router.put   ('/admin/recipes', Authenticate, obj_Recipes.PUT);
 router.delete('/admin/recipes', Authenticate, obj_Recipes.DELETE);
 
 //blogs
-router.get   ('/admin/blogs', Authenticate, obj_Blogs.GET);
-router.get('/admin/blogs/:id', Authenticate, obj_Blogs.GET);
+router.get   ('/en/blogs',     obj_Blogs.GET);
+router.get   ('/en/blogs/:id', obj_Blogs.GET);
 router.post  ('/admin/blogs', Authenticate, obj_Blogs.POST);
 router.put   ('/admin/blogs', Authenticate, obj_Blogs.PUT);
 router.delete('/admin/blogs', Authenticate, obj_Blogs.DELETE);

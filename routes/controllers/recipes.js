@@ -51,7 +51,7 @@ module.exports.GET = function(req, res) {
             var categoryCapitalized = category.charAt(0).toUpperCase() + category.slice(1);
             var options = {
                 layout: 'recipepages.handlebars',
-                categoryTitle: 'Breakfast',
+                categoryTitle: categoryCapitalized,
                 recipeResult: docs
             };
             res.render('en/recipes/list', options);

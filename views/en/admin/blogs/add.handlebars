@@ -368,7 +368,8 @@
 </style>
 
 <script>
-    var sectionCounter = 1,
+    var imageCounter = 1,
+        sectionCounter = 1,
         paragraphCounter = 1,
         bulletlistCounter = 1,
         numberedlistCounter = 1;
@@ -450,16 +451,31 @@
                 date: $('.datepicker').val(),
                 summary: $('#summary').val(),
                 sections: [
-                    $('#main-image').val(), // index 0 is the main image
+                    PostImage('main-image'), // index 0 is the main image
                 ]
             };
             GetSectionData(data);
             console.log('data:', data);
 
-
-            /*$.ajax({
-
-            });*/
+            $.ajax({
+                method: 'POST',
+                data: data,
+                url: '/admin/blogs'
+            }).done(function(data) {
+                var subject = window.location.pathname.split('/')[3];
+                Materialize.toast('Recipe Upload Succesful!', 4000, 'green');
+                Materialize.toast('Redirecting to ' + subject + ' dashboard in&nbsp;<span id="timer">3<span>', 3000, 'blue');
+            }).fail(function(jqXHR, textStatus, errorThrown) {
+                var statusCode = (jqXHR.status.toString()).split('');
+                var statusText = jqXHR.statusText;
+                if(statusCode[0] === 5 || statusText.match(/Internal Server Error/)) {
+                    // server-side error - contact pablo
+                    Materialize.toast('Server-side Error. Contact Pablo if problem persists.', 5000, 'red');
+                } else if(statusCode[0] === 4 || statusText.match(/Bad Request/)) {
+                    // client-side error - try again in a few moments
+                    Materialize.toast('Failed to Upload Recipe!<br>Try again in a few moments.', 5000, 'red');
+                }
+            });
         });
     });
 
@@ -630,13 +646,14 @@
                         '<div class="file-field input-field">' +
                             '<div class="btn">' +
                                 '<span>Photo</span>' +
-                                '<input type="file">' +
+                                '<input id="upload-image-'+imageCounter+'" type="file">' +
                             '</div>' +
                             '<div class="file-path-wrapper">' +
                                 '<input class="file-path validate" type="text">' +
                             '</div>' +
                         '</div>' +
                     '</div>';
+                ++imageCounter;
                 break;
             default:
                 // error
@@ -649,27 +666,73 @@
     function GetSectionData(data) {
         $.each($('.blog-content-wrapper').children('.sections'), function(index, section) {
             var num = index+1,
-                content = '';
-            console.log('section-'+num, section);
-            if($('#' + section.id + ' *').hasClass('paragraphs')) {
+                content = '',
+                elementWrapper = $('#' + section.id + ' *');
+            if(elementWrapper.hasClass('paragraphs')) {
                 content = $('#' + section.id + ' .paragraphs').html();
                 var p = '<p>' + content + '</p>';
                 data.sections.push(p);
-            } else if($('#' + section.id + ' *').hasClass('list-js')) {
+            } else if(elementWrapper.hasClass('list-js')) {
                 var listElement = $('#' + section.id + ' .list-js');
                 content = $('#' + section.id + ' .list-js').html();
                 if(listElement.is('ul')) {
-                    var ul = '<ul>' + content + '</ul>';
+                    var ul = '<div class="list-wrapper"><ul class="browser-default preview-list">' + content + '</ul></div>';
                     data.sections.push(ul);
                 } else {
-                    var ol = '<ol>' + content + '</ol>';
+                    var ol = '<div class="list-wrapper"><ol class="browser-default preview-list">' + content + '</ol></div>';
                     data.sections.push(ol);
                 }
             } else if($('#' + section.id).hasClass('images')) {
-                var i = $('#' + section.id + ' .btn > input').val();
-                console.log('i:', i);
+                var id = $('#' + section.id + ' .btn > input')[0].id;
+                var src = PostImage(id);
+                var i = '' +
+                    '<div class="div-wrapping-sections-img center">' +
+                        '<img class="scale" src="images/uploads/'+src+'">' +
+                    '</div>';
+                data.sections.push(i);
             }
         });
+    }
+
+    /*
+        @selector: id of input[type=file]
+        returns (String): file name of file that is uploaded
+    */
+    function PostImage(selector) {
+        if(!selector)
+            return undefined;
+
+        var formData = new FormData();
+        var file = document.getElementById(selector).files[0];
+        if(!file)
+            return undefined;
+
+        if(!file.type.match('image.*'))
+            return undefined;
+
+        formData.append('photos[]', file, file.name);
+        
+        $.ajax({
+            method: 'POST',
+            data: formData,
+            processData: false,
+            contentType: false,
+            url: '/admin/photos/upload'
+        }).done(function(data) {
+            Materialize.toast(word + ' Upload Succesful!', 4000, 'green');
+        }).fail(function(jqXHR, textStatus, errorThrown) {
+            var statusCode = (jqXHR.status.toString()).split('');
+            var statusText = jqXHR.statusText;
+            if(statusCode[0] === 5 || statusText.match(/Internal Server Error/)) {
+                // server-side error - contact pablo
+                Materialize.toast('Server-side Error. Contact Pablo if problem persists.', 5000, 'red');
+            } else if(statusCode[0] === 4 || statusText.match(/Bad Request/)) {
+                // client-side error - try again in a few moments
+                Materialize.toast('Failed to Upload photo.<br>Try again in a few moments.', 5000, 'red');
+            }
+        });
+
+        return file.name;
     }
 </script>
 

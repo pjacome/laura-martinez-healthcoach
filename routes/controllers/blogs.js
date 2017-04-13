@@ -22,7 +22,17 @@ module.exports.POST = function(req, res) {
 };
 
 module.exports.GET = function(req, res) {
-    res.sendStatus(400);
+    console.log('requesting ALL blogs');
+    db.client.collection('blogs').find({}).toArray(function(err, docs) {
+        if(err) {
+            console.error(err);
+            res.sendStatus(400);
+        } else {
+            console.log(docs);
+            var options = { blogResult: docs };
+            res.render('en/blogs', options);
+        }
+    });
 };
 
 module.exports.PUT = function(req, res) {
