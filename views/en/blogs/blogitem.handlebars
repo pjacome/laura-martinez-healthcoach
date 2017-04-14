@@ -3,7 +3,7 @@
 <div class="custom-container">
     <div class="outer-table">
         <div class="outer-table-row">
-            <div class="outer-table-col l">col1</div>
+            <div class="outer-table-col l"></div>
             <div class="outer-table-col c">
                 <h3 class="blog-title lmhc-main-title-font center">{{title}}</h3>
                 {{#if subheading}}
@@ -26,7 +26,7 @@
                     {{/each}}
                 </div>
             </div>
-            <div class="outer-table-col r">col3</div>
+            <div class="outer-table-col r"></div>
         </div>
     </div>
 </div>
@@ -55,49 +55,88 @@
     }
 
     .outer-table-col.c {
-        width: 80%;
+        width: 100%;
+        padding: 0 20px;
         background-color: green;
     }
 
     .outer-table-col.l,
     .outer-table-col.r {
-        width: 10% !important;
+        /* remove left & right columns for mobile portrait */
+        width: 0%;
         background-color: red;
     }
 
     /* center column css */
-    .main-image-wrapper {
+    .main-image-wrapper,
+    .div-wrapping-sections-img {
         width: 100%;
-        height: 140px;
+        /*height: 140px;*/
     }
 
-    .main-image-wrapper > img {
-        max-width: 70%;
+    .main-image-wrapper > img,
+    .div-wrapping-sections-img > img {
+        max-width: 100%;
         max-height: 100%;
     }
 
     /* galaxy s6: landscape*/
     @media(max-width: 768px) and (orientation: landscape) {
+        .outer-table-col {
+            height: 100%;
+            display: table-cell;
+        }
 
+        .outer-table-col.c {
+            width: 80%;
+            background-color: green;
+        }
+
+        /* center column css */
+        .main-image-wrapper {
+            height: 325px;
+        }
+
+        .div-wrapping-sections-img {
+            height: 400px;
+        }
     }
 
     /* small */
     @media(min-width: 768px) {
+        .outer-table-col {
+            height: 100%;
+            display: table-cell;
+        }
+
+        .outer-table-col.c {
+            width: 80%;
+            background-color: green;
+        }
+
+        /* center column css */
         .main-image-wrapper {
             height: 325px;
+        }
+
+        .div-wrapping-sections-img {
+            height: 400px;
         }
     }
 
     /* medium */
     @media(min-width: 992px) {
-        .main-image-wrapper {
-            /*height: 100%;*/
-        }
     }
 
     /* large */
     @media(min-width: 1200px) {
+        .main-image-wrapper {
+            height: 450px;
+        }
 
+        .div-wrapping-sections-img {
+            height: 600px;
+        }
     }
 
     /* helper classes */
