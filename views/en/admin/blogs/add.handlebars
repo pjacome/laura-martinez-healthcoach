@@ -676,10 +676,10 @@
                 var listElement = $('#' + section.id + ' .list-js');
                 content = $('#' + section.id + ' .list-js').html();
                 if(listElement.is('ul')) {
-                    var ul = '<div class="list-wrapper"><ul class="browser-default preview-list">' + content + '</ul></div>';
+                    var ul = '<div class="list-wrapper"><ul class="browser-default preview-list flow-text">' + content + '</ul></div>';
                     data.sections.push(ul);
                 } else {
-                    var ol = '<div class="list-wrapper"><ol class="browser-default preview-list">' + content + '</ol></div>';
+                    var ol = '<div class="list-wrapper"><ol class="browser-default preview-list flow-text">' + content + '</ol></div>';
                     data.sections.push(ol);
                 }
             } else if($('#' + section.id).hasClass('images')) {
