@@ -84,7 +84,7 @@
     }
 
     .preview-list {
-        width: 10%;
+        width: 1px;
         max-width: 80%;
         margin: 0 auto;
         display: block;
@@ -155,8 +155,7 @@
             });
             var ulWidth = $(value).css('width').split('px');
             var currentWidth = parseInt(ulWidth[0]);
-            if(maxWidth > currentWidth)
-                $(value).css('width', (maxWidth+40) + 'px');
+            $(value).css('width', (maxWidth+40+10) + 'px');
         });
     }
 </script>
