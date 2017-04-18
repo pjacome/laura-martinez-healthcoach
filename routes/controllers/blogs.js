@@ -52,7 +52,7 @@ module.exports.GET = function(req, res) {
                 console.log('requesting ALL blogs');
                 console.log(docs);
                 var options = { blogResult: docs };
-                res.render('en/blogs/list', options);
+                res.render('en/blogs/list2', options);
             }
         });
     }
