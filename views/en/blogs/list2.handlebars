@@ -67,55 +67,15 @@
         <div class="tile-table">
             <div class="tile-table-row">
 
-                <div class="single-tile hoverable">
-                    <div class="img-wrapper"><img src="images/acai-bowl-751x950.jpg"></div>
-                    <span class="flow-text">Running up to Potato Chip Rock</span>
-                </div>
-                <div class="single-tile hoverable">
-                    <div class="img-wrapper"><img src="images/avocado-toast-0x0.jpg"></div>
-                    <span class="flow-text">Second attempt to a Diet!</span>
-                </div>
-
-
+                <!-- Template -->
+                {{#each blogResult}}
                 <div class="single-tile">
-                    <div class="img-wrapper"><img src="images/breakfast-1280x923.jpg"></div>
-                    <span class="flow-text">First Blog Ever!</span>
+                    <a href="blogs/{{_id}}">
+                        <div class="img-wrapper"><img src="images/uploads/{{sections.[0]}}"></div>
+                        <span class="flow-text">{{title}}</span>
+                    </a>
                 </div>
-                
-                <div class="single-tile">
-                    <div class="img-wrapper"><img src="images/dessert-1-1080x1080.jpg"></div>
-                    <span class="flow-text">Why being a dog owner is the best choice I ever made</span>
-                </div>
-
-                <div class="single-tile">
-                    <div class="img-wrapper"><img src="images/guacamole-snack-464x303.png"></div>
-                    <span class="flow-text">Family Matters</span>
-                </div>
-
-                <div class="single-tile hoverable">
-                    <div class="img-wrapper"><img src="images/uploads/city.jpg"></div>
-                    <span class="flow-text">Running up to Potato Chip Rock</span>
-                </div>
-                <div class="single-tile hoverable">
-                    <div class="img-wrapper"><img src="images/uploads/surf.jpg"></div>
-                    <span class="flow-text">Second attempt to a Diet!</span>
-                </div>
-
-
-                <div class="single-tile">
-                    <div class="img-wrapper"><img src="images/uploads/bellpepper-640x640.jpg"></div>
-                    <span class="flow-text">First Blog Ever!</span>
-                </div>
-
-                <div class="single-tile">
-                    <div class="img-wrapper"><img src="images/uploads/client-1-100x100.jpg"></div>
-                    <span class="flow-text">Why being a dog owner is the best choice I ever made</span>
-                </div>
-
-                <div class="single-tile">
-                    <div class="img-wrapper"><img src="images/uploads/laura-martinez-3.jpeg"></div>
-                    <span class="flow-text">Family Matters</span>
-                </div>
+                {{/each}}
 
             </div>
         </div>
@@ -140,7 +100,6 @@
     .logo-table { display: table; width: inherit; height: inherit; border-bottom: 1px black solid; }
     .logo-table-row { display: table-row; width: inherit; height: inherit; }
     .logo-table-cell { display: table-cell; width: inherit; height: inherit; }
-
     .logo-table-cell.left { width: 100px; }
     .logo-table-cell.left > img { width: 100px; height: 100px; }
 
@@ -157,6 +116,9 @@
         top: 50%;
         left: 50%;
         transform: translate(-50%, -50%);
+        -webkit-transform: translate(-50%, -50%);
+        -moz-transform: translate(-50%, -50%);
+        -ms-transform: translate(-50%, -50%);
     }
     /* logo - end */
 
@@ -181,14 +143,16 @@
         padding: 5px;
     }
 
-    .single-tile > span { text-align: center; display: block; }
+    .single-tile span { text-align: center; display: block; color: black; }
 
     .single-tile .img-wrapper img {
         width: 100%;
         height: auto;
+        image-rendering: pixelated;
     }
     /* tiles - end */
 
+    /* mobile: landscape */
     @media (max-width: 768px) and (orientation: landscape) {
         .subscribe-form.lg {
             height: 100%;
@@ -247,6 +211,18 @@
         .subscribe-form.lg input {
             border-bottom: 1px black solid;
         }
+
+        /* logo */
+        .lmhc-logo-wrapper { height: 150px; }
+        .logo-table-cell.left { width: 150px; }
+        .logo-table-cell.left > img { width: 150px; height: 150px; }
+        .logo-table-cell.right { width: calc(100% - 150px); }
+
+        .logo-table-cell.right {
+            width: calc(100% - 150px);
+            font-size: 4rem;
+        }
+        /* logo - end */
     }
 
     /* medium */

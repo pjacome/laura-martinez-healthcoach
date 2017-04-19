@@ -3,12 +3,12 @@
     <div class="outer-table">
         <div class="outer-table-row">
             <div class="outer-table-col l"></div>
-            <div class="outer-table-col c">
+            <div class="outer-table-col c z-depth-5">
                 <h3 class="blog-title lmhc-main-title-font center">{{title}}</h3>
                 {{#if subheading}}
                 <h5 class="blog-subheading grey-text center">{{subheading}}</h5>
                 {{/if}}
-                <h5 class="blog-date grey-text center">{{date}}</h5>
+                <h6 class="blog-date grey-text center">{{date}}</h6>
 
                 {{#if sections.[0]}}
                 <div class="main-image-wrapper center">
@@ -16,7 +16,7 @@
                 </div>
                 {{/if}}
 
-                <div class="blog-sections">
+                <div class="blog-sections flow-text">
                     {{#each sections}}
                         {{#if @first}}
                         {{else}}
@@ -26,7 +26,19 @@
                     {{/each}}
                 </div>
             </div>
-            <div class="outer-table-col r"></div>
+            <div class="outer-table-col r">
+                <div class="side subscribe-wrapper hide-on-med-and-down">
+                    <h5 class="center">Subscribe to receive updates!</h5>
+                    <form>
+                        <div class="row">
+                            <div class="input-field">
+                                <input id="side-firstName" class="validate" name="firstName" type="text">
+                                <label for="side-firstName">First Name</label>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
         </div>
     </div>
 </div>
@@ -39,16 +51,8 @@
         height: 100%;
     }
 
-    .outer-table {
-        display: table;
-        background-color: yellow;
-    }
-
-    .outer-table-row {
-        display: table-row;
-        background-color: blue;
-    }
-
+    .outer-table     { display: table; }
+    .outer-table-row { display: table-row; }
     .outer-table-col {
         height: 100%;
         display: table-cell;
@@ -57,17 +61,15 @@
     .outer-table-col.c {
         width: 100%;
         padding: 0 20px;
-        background-color: green;
     }
 
     .outer-table-col.l,
     .outer-table-col.r {
-        /* remove left, right columns for mobile portrait */
+        /* remove left, right columns for mobile: portrait */
         width: 0%;
-        background-color: red;
     }
 
-    /* center column css */
+    /* center column content css */
     .main-image-wrapper,
     .div-wrapping-sections-img {
         width: 100%;
@@ -79,9 +81,7 @@
         max-height: 100%;
     }
 
-    .list-wrapper {
-        margin: 0 auto;
-    }
+    .list-wrapper { margin: 0 auto; }
 
     .preview-list {
         width: 1px;
@@ -91,7 +91,7 @@
         word-wrap: break-word;
     }
 
-    /* galaxy s6: landscape*/
+    /* mobile: landscape*/
     @media(max-width: 768px) and (orientation: landscape) {
         .outer-table-col {
             height: 100%;
@@ -100,10 +100,13 @@
 
         .outer-table-col.c {
             width: 80%;
-            background-color: green;
         }
 
-        /* center column css */
+        .outer-table-col.l,
+        .outer-table-col.r {
+            width: 10%;
+        }
+
         .preview-list {
             max-width: 70%;
         }
@@ -118,18 +121,49 @@
 
         .outer-table-col.c {
             width: 80%;
-            background-color: green;
+        }
+        .outer-table-col.l,
+        .outer-table-col.r {
+            width: 10%;
         }
     }
 
     /* medium */
     @media(min-width: 992px) {
+        .outer-table-col.c { width: 50%; }
+        .outer-table-col.l { width: 20%; }
+        .outer-table-col.r {
+            width: 30%;
+            padding-left: 20px;
+            position: relative;
+        }
+
+        .side.subscribe-wrapper {
+            background-color: yellow;
+            position: fixed;
+            width: 250px;
+        }
+
+        .side.subscribe-wrapper form {
+            background-color: cyan;
+            margin: 0 20px;
+        }
     }
 
     /* large */
     @media(min-width: 1200px) {
         .preview-list {
             max-width: 60%;
+        }
+
+        .outer-table-col.l { width: 20%; }
+        .outer-table-col.c { width: 40%; }
+        .outer-table-col.r {
+            width: 40%;
+        }
+
+        .side.subscribe-wrapper {
+            width: 350px;
         }
     }
 
