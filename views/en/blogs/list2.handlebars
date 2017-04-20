@@ -219,7 +219,6 @@
         .logo-table-cell.right { width: calc(100% - 150px); }
 
         .logo-table-cell.right {
-            width: calc(100% - 150px);
             font-size: 4rem;
         }
         /* logo - end */
@@ -231,6 +230,21 @@
 
     /* desktop */
     @media (min-width: 1200px) {
+        /* logo */
+        .lmhc-logo-wrapper { height: 200px; }
+        .logo-table-cell.left { width: 200px; }
+        .logo-table-cell.left > img { width: 200px; height: 200px; }
+        .logo-table-cell.right { width: calc(100% - 200px); }
+
+        .logo-table-cell.right {
+            font-size: 5rem;
+        }
+
+        .logo-table-cell.right > div {
+            padding-right: 150px;
+        }
+        /* logo - end */
+        
         .tile-table-row .single-tile { 
             width: 20%; max-width: 20%;
         }
