@@ -27,16 +27,30 @@
                 </div>
             </div>
             <div class="outer-table-col r">
-                <div class="side subscribe-wrapper hide-on-med-and-down">
-                    <h5 class="center">Subscribe to receive updates!</h5>
-                    <form>
+                <div class="side subscribe-wrapper hide-on-med-and-down green lighten-2 z-depth-1">
+                    <h5 class="center white-text">Subscribe!</h5>
+                    <h6 class="center white-text">Receive updates on latest Blogs, Recipes, Events and more!</h6>
+                    <form class="z-depth-1">
                         <div class="row">
                             <div class="input-field">
                                 <input id="side-firstName" class="validate" name="firstName" type="text">
                                 <label for="side-firstName">First Name</label>
                             </div>
                         </div>
+                        <div class="row">
+                            <div class="input-field">
+                                <input id="side-email" class="validate" name="email" type="email">
+                                <label for="side-email">Email</label>
+                            </div>
+                        </div>
+                        <div class="center row side-submit">
+                            <button id="side-submit-btn" class="btn">
+                                Submit
+                            </button>
+                        </div>
                     </form>
+                    <h5>Follow me on Social Media</h5>
+                    <p>Here goes the social media icons</p>
                 </div>
             </div>
         </div>
@@ -139,14 +153,18 @@
         }
 
         .side.subscribe-wrapper {
-            background-color: yellow;
             position: fixed;
             width: 250px;
         }
 
         .side.subscribe-wrapper form {
-            background-color: cyan;
-            margin: 0 20px;
+            background-color: white;
+            margin: 0 0.75rem;
+            padding: 10px 20px 0 10px;
+        }
+
+        .side.subscribe-wrapper form .side-submit {
+            padding-bottom: 20px;
         }
     }
 
@@ -156,10 +174,10 @@
             max-width: 60%;
         }
 
-        .outer-table-col.l { width: 20%; }
-        .outer-table-col.c { width: 40%; }
+        .outer-table-col.l { width: 25%; }
+        .outer-table-col.c { width: 45%; }
         .outer-table-col.r {
-            width: 40%;
+            width: 30%;
         }
 
         .side.subscribe-wrapper {
@@ -173,7 +191,38 @@
 <script type="text/javascript">
     $(document).ready(function() {
         FixWidth();
+        FixHeightOfRightCol();
+        $('#side-submit-btn').click(function(e) {
+            e.preventDefault();
+        });
     });
+
+    $(window).scroll(function() {
+        var subscribeWrapper = $('.side.subscribe-wrapper'),
+            u = subscribeWrapper.offset().top + subscribeWrapper.height();
+        var outerTableCenterCol = $('.outer-table-col.c'),
+            f = outerTableCenterCol.offset().top + outerTableCenterCol.height();
+        if(u >= f) {
+            var footerOffset = $('.page-footer').height();
+            subscribeWrapper.css('position', 'absolute');
+            subscribeWrapper.css('bottom', 0);
+        }
+
+        var scrollTop = $(window).scrollTop(),
+            elementOffset = subscribeWrapper.offset().top,
+            offsetFromTopOfWindow = (scrollTop - elementOffset);
+        var initialOffset = -1 * $('.outer-table-col.c').offset().top;
+        if(offsetFromTopOfWindow < initialOffset) {
+            subscribeWrapper.css('position', 'fixed');
+            subscribeWrapper.css('bottom', 'initial');
+        }
+    });
+
+    function FixHeightOfRightCol() {
+        var centerColHeight = $('.outer-table-col.c').height();
+        $('.outer-table-col.r').css('height', centerColHeight+'px');
+        console.log('height fixed:', $('.outer-table-col.r').height());
+    }
 
     function FixWidth() {
         var listsArray = $('.list-wrapper').children('.preview-list');
