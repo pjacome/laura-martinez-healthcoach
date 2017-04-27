@@ -1,28 +1,89 @@
 ﻿'use strict'
 
 /* admin crud routes */
+var bcrypt = require('bcrypt');
 var db = require('../../db');
 var ObjectID = require('mongodb').ObjectID;
 var obj_Recipes = require('./recipes');
 module.exports.obj_Admin = {};
+
+// create admin account
+module.exports.CREATE = function (req, res) {
+    // TODO: first check if admin collection size is greater than 0
+    //      if |true| then send a 404. no more admins may be created
+    //      else create admin
+    const saltRounds = 10;
+    const plaintextPassword = req.body.password;
+    bcrypt.hash(plaintextPassword, saltRounds, function(err, hash) {
+        var newAdmin = {
+            firstName: req.body.firstName,
+            lastName: req.body.lastName,
+            email: req.body.email,
+            password: hash
+        };
+
+        db.client.collection('admin').insertOne(newAdmin, function(err, result) {
+            if(err) {
+                console.log('error creating new admin');
+                console.log(err);
+                res.sendStatus(500);
+            } else {
+                console.log('success. new admin created.');
+                res.sendStatus(200);
+            }
+        });
+    });
+};
+
+// check if admin account exists already
+module.exports.CHECK_IF_ADMIN_EXISTS = function(req, res) {
+    // call a helper function here
+};
 
 // login route
 module.exports.POST = function(req, res) {
     var email = req.body.email,
         password = req.body.password,
         remember = req.body.remember;
-    if(email === 'p@p.c' && password === 'pj') {
-        console.log('>>> Authenticating ...');
-        req.session.isAuthenticated = true;
-        console.log('>>> You have now been Authenticated. <<<\n', req.session);
-        console.log('>>> Redirecting ...');
-        res.status(302).redirect('/en/admin/dashboard');
-    } else {
-        console.log('>>> Incorrect credentials. Authentication denied. <<<');
-        console.log(email, ' |', password, ' |', remember);
-        console.log('isAuth:', req.session.isAuthenticated);
-        res.sendStatus(404);
-    }
+    console.log('email:',email);
+
+    db.client.collection('admin').findOne({email: email}, function(err, document) {
+        if(err) {
+            console.log('error searching for admin in database', err);
+            res.sendStatus(500);
+        } else if(!document) {
+            console.log('no admin found by the email name of \''+email+'\' in database:', document);
+            res.sendStatus(404);
+        } else {
+            const hash = document.password;
+            bcrypt.compare(password, hash, function(err, result) {
+                console.log('result =', result);
+                if (result) {
+                    req.session.isAuthenticated = true;
+                    res.sendStatus(200);
+                    // redirect happens on client-side
+                } else {
+                    console.log('>>> Incorrect credentials. Authentication denied. <<<');
+                    console.log(email, ' |', password, ' |', remember);
+                    console.log('isAuth:', req.session.isAuthenticated);
+                    res.sendStatus(404);
+                }
+            });
+        }
+    });
+
+    //if(email === 'p@p.c' && password === 'pj') {
+    //    console.log('>>> Authenticating ...');
+    //    req.session.isAuthenticated = true;
+    //    console.log('>>> You have now been Authenticated. <<<\n', req.session);
+    //    console.log('>>> Redirecting ...');
+    //    res.status(302).redirect('/en/admin/dashboard');
+    //} else {
+    //    console.log('>>> Incorrect credentials. Authentication denied. <<<');
+    //    console.log(email, ' |', password, ' |', remember);
+    //    console.log('isAuth:', req.session.isAuthenticated);
+    //    res.sendStatus(404);
+    //}
 }
 
 // logout route

@@ -1,0 +1,65 @@
+﻿<form>
+    <div class="row">
+        <div class="input-field col s12 m6">
+            <input id="admin-firstName" type="text">
+            <label for="admin-firstName">First Name</label>
+        </div>
+        <div class="input-field col s12 m6">
+            <input id="admin-lastName" type="text">
+            <label for="admin-lastName">last Name</label>
+        </div>
+    </div>
+    <div class="row">
+        <div class="input-field col s12">
+            <input id="admin-email" type="email">
+            <label for="admin-email">Email</label>
+        </div>
+    </div>
+    <div class="row">
+        <div class="input-field col s12 m6">
+            <input id="admin-password" type="password">
+            <label for="admin-password">Password</label>
+        </div>
+        <div class="input-field col s12 m6">
+            <input id="admin-confirmPassword" type="password">
+            <label for="admin-confirmPassword">Confirm Password</label>
+        </div>
+    </div>
+    <div class="row">
+        <div class="input-field center">
+            <button id="create-admin-btn" class="btn">Submit</button>
+        </div>
+    </div>
+</form>
+
+<script type="text/javascript">
+    $(document).ready(function() {
+        if(AdminAlreadyExists()) {
+            alert('Cannot create Admin.');
+        }
+
+        $('#create-admin-btn').click(function(e) {
+            e.preventDefault();
+            var adminObject = {
+                firstName: $('#admin-firstName').val(),
+                lastName: $('#admin-lastName').val(),
+                email: $('#admin-email').val(),
+                password: $('#admin-password').val()
+            };
+
+            $.ajax({
+                method: 'POST',
+                data: adminObject,
+                url: '/en/admin/create'
+            });
+        });
+    });
+
+    function AdminAlreadyExists() {
+        console.log('checking ... ');
+        //$.ajax({
+        //    //
+        //});
+        return false;
+    }
+</script>
