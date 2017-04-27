@@ -17,16 +17,16 @@ function PreviewBlog(blogContent) {
     var sampleBlogText = ConcatenateSections(sectionsArray);
     $('.preview-sections').append(sampleBlogText);
     FixWidth();
-
-    /*window.setTimeout(function() {
+    //window.setTimeout(FixImageOrientation, 1000);
+    window.setTimeout(function() {
         $('.preview-div').removeClass('preview-close');
         $('.preview-div').addClass('preview-expand');
         previewIsOpen = true;
-    }, 2000);*/
+    }, 2000);
 
-    $('.preview-div').removeClass('preview-close');
-    $('.preview-div').addClass('preview-expand');
-    previewIsOpen = true;
+    //$('.preview-div').removeClass('preview-close');
+    //$('.preview-div').addClass('preview-expand');
+    //previewIsOpen = true;
 }
 
 /**
@@ -77,6 +77,7 @@ function ConcatenateSections(sectionsArray) {
             // append section
             sections += '<div id="image-wrapper-' + idNumber + '" class="div-wrapping-sections-img center"></div>'
             SectionsImagePreview(input[0], idNumber);
+            setTimeout(FixImageOrientation2('#blog-image-' + idNumber), 500);
         } else if($(temp1).hasClass('paragraphs')) {
             target = id + ' .paragraphs';
             sections += '<p>' + $(target).html() + '</p>';
@@ -128,47 +129,59 @@ function SectionsImagePreview(input, number) {
     if(input.files && input.files[0]) {
         var reader = new FileReader();
         reader.onload = function(e) {
-            var str = '<img id="testID" class="scale" src="'+e.target.result+'">';
+            var str = '<img id="blog-image-'+number+'" class="scale" src="'+e.target.result+'">';
             $('#image-wrapper-' + number).append(str);
-
-            // fix rotation/orientation of image
-            console.log('1');
-            var imgTest = document.getElementById('testID');
-            console.log('2', imgTest);
-            EXIF.getData(imgTest, function() {
-                console.log('3', this);
-                //var exif = EXIF.readFromBinaryFile(new BinaryFile(this));
-                var exif = EXIF.getTag(this, 'Orientation');
-                console.log('4');
-                switch (exif) {
-                    case 2:
-                        alert('rotate 2');
-                        break;
-                    case 3:
-                        alert('rotate 3');
-                        break;
-                    case 4:
-                        alert('rotate 4');
-                        break;
-                    case 5:
-                        alert('rotate 5');
-                        break;
-                    case 6:
-                        console.log(exif.pretty);
-                        this.rotate(0.5 * Math.PI);
-                        break;
-                    case 7:
-                        alert('rotate 7');
-                        break;
-                    case 8:
-                        alert('rotate 8');
-                        break;
-                }
-                console.log('5');
-            });
         }
         reader.readAsDataURL(input.files[0]);
     }
+}
+
+/**
+ *  FixImageOrientation
+ *  Fixes the Orientation of the photos that are served in the incorrect orientation
+ */
+function FixImageOrientation() {
+    // fix rotation/orientation of image
+    var imageWrappers = $('.preview-sections').children('.div-wrapping-sections-img');
+    var l = imageWrappers.length;
+    console.log('1:', l);
+    $.each(imageWrappers, function (index, imageWrapper) {
+        var number = imageWrapper.id.split('-')[2];
+        var image = $('#blog-image-' + number)[0];
+        console.log('2a:', $('#blog-image-' + number));
+        console.log('2b:', image);
+        EXIF.getData(image, function() {
+            console.log('3');
+            var orientation = EXIF.getTag(this, 'Orientation');
+            switch(orientation) {
+                case 6:
+                    console.log('4: case 6');
+                    $(this).addClass('rotate90');
+                    break;
+            }
+            console.log('5');
+        });
+        console.log('6');
+    });
+    console.log('7');
+}
+
+function FixImageOrientation2(id) {
+    var image = $(id)[0];
+    console.log('1a:', $(id));
+    console.log('1b:', image);
+    EXIF.getData(image, function () {
+        console.log('2');
+        var orientation = EXIF.getTag(this, 'Orientation');
+        switch (orientation) {
+            case 6:
+                console.log('3: case 6');
+                $(this).addClass('rotate90');
+                break;
+        }
+        console.log('4');
+    });
+    console.log('5');
 }
 
 /**
