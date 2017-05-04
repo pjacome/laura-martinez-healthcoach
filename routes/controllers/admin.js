@@ -9,13 +9,10 @@ module.exports.obj_Admin = {};
 
 // create admin account
 module.exports.CREATE = function (req, res) {
-    // TODO: first check if admin collection size is greater than 0
-    //      if |true| then send a 404. no more admins may be created
-    //      else create admin
     CheckSizeOfAdminCollection(req, res, function() {
         const saltRounds = 10;
         const plaintextPassword = req.body.password;
-        bcrypt.hash(plaintextPassword, saltRounds, function (err, hash) {
+        bcrypt.hash(plaintextPassword, saltRounds, function(err, hash) {
             var newAdmin = {
                 firstName: req.body.firstName,
                 lastName: req.body.lastName,
@@ -23,14 +20,25 @@ module.exports.CREATE = function (req, res) {
                 password: hash
             };
 
-            db.client.collection('admin').insertOne(newAdmin, function (err, result) {
-                if (err) {
-                    console.log('error creating new admin');
-                    console.log(err);
+            db.client.collection('admin').find({email: newAdmin.email}).toArray(function(err, docs) {
+                if(err) {
+                    console.log('Error while looking up admin with email \'' + newAdmin.email + '\'');
                     res.sendStatus(500);
+                } else if(docs.length > 0) {
+                    // email already exists. must choose new email
+                    res.status(200).send('email already exists');
                 } else {
-                    console.log('success. new admin created.');
-                    res.sendStatus(200);
+                    // create new admin account
+                    db.client.collection('admin').insertOne(newAdmin, function(err, result) {
+                        if (err) {
+                            console.log('error creating new admin');
+                            console.log(err);
+                            res.sendStatus(500);
+                        } else {
+                            console.log('success. new admin created.');
+                            res.sendStatus(200);
+                        }
+                    });
                 }
             });
         });

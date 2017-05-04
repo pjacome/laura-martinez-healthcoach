@@ -75,7 +75,16 @@
                     data: adminObject,
                     url: '/en/admin/create'
                 }).done(function(data) {
-                    $('#redirectToLogin-Modal').modal('open');
+                    // check what data returns
+                    // if data === email already exists
+                    //    then email must be changed
+                    // else continue
+                    if(data) {
+                        $('#admin-email').removeClass('valid').addClass('invalid');
+                        alert('Email already in use.');
+                    } else {
+                        $('#redirectToLogin-Modal').modal('open');
+                    }
                 }).fail(function(jqXHR, textStatus, errorThrown) {
                     var statusCode = (jqXHR.status.toString()).split('');
                     var statusText = jqXHR.statusText;
