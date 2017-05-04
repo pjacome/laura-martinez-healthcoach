@@ -26,7 +26,7 @@ module.exports.CREATE = function (req, res) {
                     res.sendStatus(500);
                 } else if(docs.length > 0) {
                     // email already exists. must choose new email
-                    res.status(200).send('email already exists');
+                    res.status(200).send('Email already in use');
                 } else {
                     // create new admin account
                     db.client.collection('admin').insertOne(newAdmin, function(err, result) {

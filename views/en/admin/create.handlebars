@@ -75,13 +75,9 @@
                     data: adminObject,
                     url: '/en/admin/create'
                 }).done(function(data) {
-                    // check what data returns
-                    // if data === email already exists
-                    //    then email must be changed
-                    // else continue
-                    if(data) {
+                    if(data.match('Email already in use')) {
                         $('#admin-email').removeClass('valid').addClass('invalid');
-                        alert('Email already in use.');
+                        alert(data);
                     } else {
                         $('#redirectToLogin-Modal').modal('open');
                     }
