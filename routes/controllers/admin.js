@@ -187,6 +187,18 @@ function DisplayOperation(req, res) {
                     console.log('>>> docs:', doc[0]);
                     console.log('>>> Opening file for editing ...');
                     options.data = doc[0];
+                    options.helpers = {
+                        testing: function (arg, options) {
+                            console.log('the options:', options);
+                            var hasP = arg.substring(0,3);
+                            console.log('testing helper function in each block:', hasP);
+                            if(hasP.match('<p>')) {
+                                return true;
+                            } else {
+                                return false;
+                            }
+                        }
+                    };
                     res.render('en/admin/blogs/edit', options);
                 });
                 break;

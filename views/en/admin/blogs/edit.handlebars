@@ -64,6 +64,31 @@
                     </div>
                 </div>--}}
 
+                {{#each data.sections}}
+                    <div class="div-col sm center">
+                        <a id="bump-up-btn-{{@index}}" class="bump-btn btn-floating btn-med waves-effect waves-light margin-bottom-10" onclick="BumpSectionUp(this.id)"><i class="material-icons">arrow_drop_up</i></a>
+                        <a id="bump-down-btn-{{@index}}" class="bump-btn btn-floating btn-med waves-effect waves-light" onclick="BumpSectionDown(this.id)"><i class="material-icons">arrow_drop_down</i></a>
+                    </div>
+                    {{#testing this}}
+                    <span>true</span>
+                    {{else}}
+                    <span>false</span>
+                    {{/testing}}
+                    <div class="div-col lg">
+                        <h6 class="grey-text">Paragraph</h6>
+                        <div id="paragraph-{{@index}}" class="paragraphs" contenteditable="true">{{this}}</div>
+                        <div class="formatting-buttons">
+                            <button class="btn teal" type="button" onclick="document.execCommand('bold', false, null)"><i class="tiny material-icons">format_bold</i></button>&nbsp;
+                            <button class="btn teal" type="button" onclick="document.execCommand('italic', false, null)"><i class="tiny material-icons">format_italic</i></button>&nbsp;
+                            <button class="btn teal" type="button" onclick="document.execCommand('underline', false, null)"><i class="tiny material-icons">format_underlined</i></button>
+                        </div>
+                    </div>
+                    <div class="div-col sm center">
+                        <a id="remove-section-{{@index}}" class="btn-floating btn-med waves-effect waves-light red remove-section" onclick="RemoveSection(this.id)"><i class="material-icons">delete</i></a>
+                    </div>
+                    <br>
+                {{/each}}
+
             </div>
             <!-- Add Paragraph/Image/List buttons -->
             {{!--<div class="row padding-left-10">
