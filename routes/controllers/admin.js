@@ -12,32 +12,34 @@ module.exports.CREATE = function (req, res) {
     // TODO: first check if admin collection size is greater than 0
     //      if |true| then send a 404. no more admins may be created
     //      else create admin
-    const saltRounds = 10;
-    const plaintextPassword = req.body.password;
-    bcrypt.hash(plaintextPassword, saltRounds, function(err, hash) {
-        var newAdmin = {
-            firstName: req.body.firstName,
-            lastName: req.body.lastName,
-            email: req.body.email,
-            password: hash
-        };
+    CheckSizeOfAdminCollection(req, res, function() {
+        const saltRounds = 10;
+        const plaintextPassword = req.body.password;
+        bcrypt.hash(plaintextPassword, saltRounds, function (err, hash) {
+            var newAdmin = {
+                firstName: req.body.firstName,
+                lastName: req.body.lastName,
+                email: req.body.email,
+                password: hash
+            };
 
-        db.client.collection('admin').insertOne(newAdmin, function(err, result) {
-            if(err) {
-                console.log('error creating new admin');
-                console.log(err);
-                res.sendStatus(500);
-            } else {
-                console.log('success. new admin created.');
-                res.sendStatus(200);
-            }
+            db.client.collection('admin').insertOne(newAdmin, function (err, result) {
+                if (err) {
+                    console.log('error creating new admin');
+                    console.log(err);
+                    res.sendStatus(500);
+                } else {
+                    console.log('success. new admin created.');
+                    res.sendStatus(200);
+                }
+            });
         });
     });
 };
 
 // check if admin account exists already
 module.exports.CHECK_IF_ADMIN_EXISTS = function(req, res) {
-    // call a helper function here
+    CheckSizeOfAdminCollection(req, res, function() {});
 };
 
 // login route
@@ -45,7 +47,6 @@ module.exports.POST = function(req, res) {
     var email = req.body.email,
         password = req.body.password,
         remember = req.body.remember;
-    console.log('email:',email);
 
     db.client.collection('admin').findOne({email: email}, function(err, document) {
         if(err) {
@@ -71,19 +72,6 @@ module.exports.POST = function(req, res) {
             });
         }
     });
-
-    //if(email === 'p@p.c' && password === 'pj') {
-    //    console.log('>>> Authenticating ...');
-    //    req.session.isAuthenticated = true;
-    //    console.log('>>> You have now been Authenticated. <<<\n', req.session);
-    //    console.log('>>> Redirecting ...');
-    //    res.status(302).redirect('/en/admin/dashboard');
-    //} else {
-    //    console.log('>>> Incorrect credentials. Authentication denied. <<<');
-    //    console.log(email, ' |', password, ' |', remember);
-    //    console.log('isAuth:', req.session.isAuthenticated);
-    //    res.sendStatus(404);
-    //}
 }
 
 // logout route
@@ -217,4 +205,21 @@ function DisplayOperation(req, res) {
                 break;
         }
     }
+}
+
+function CheckSizeOfAdminCollection(req, res, cont) {
+    db.client.collection('admin').find().toArray(function(err, docs) {
+        if(err) {
+            console.log('Error while retrieving all admin accounts', err);
+            res.sendStatus(500);
+        } else if(docs.length > 1) {
+            console.log('No more admins may be created.');
+            res.sendStatus(400);
+        } else {
+            console.log('Enough space to create a new admin');
+            if(cont !== undefined || cont !== null) {
+                cont();
+            }
+        }
+    });
 }

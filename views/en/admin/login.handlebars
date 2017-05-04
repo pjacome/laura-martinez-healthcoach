@@ -1,44 +1,41 @@
-<br>
-<div class="container">
-    <div class="outer-card z-depth-2 blue lighten-100">
-        <h5 class="white-text center">Login</h5>
-        <form class="white">
-            <div class="row">
-                <div class="input-field col s12">
-                    <input id="email" name="email" type="email" class="validate">
-                    <label for="email">Email</label>
-                </div>
-            </div>
-            <div class="row">
-                <div class="input-field col s12">
-                    <input id="password" name="password" type="password" class="validate">
-                    <label for="password">Password</label>
-                </div>
-            </div>
-            <p>
-                <input type="checkbox" name="remember" class="filled-in" id="remember">
-                <label for="remember">Remember me</label>
-            </p>
-            <button class="btn waves-effect waves-light login" type="submit" name="action">
-                Submit
-                <i class="material-icons right">send</i>
-            </button>
-        </form>
+<h5 class="center">Login</h5>
+<form class="white">
+    <div class="row">
+        <div class="input-field col s12">
+            <input id="email" name="email" type="email" class="validate">
+            <label for="email">Email</label>
+        </div>
+        <div class="input-field col s12">
+            <input id="password" name="password" type="password" class="validate">
+            <label for="password">Password</label>
+        </div>
     </div>
-</div>
+    <div class="row">
+        <p>
+            <input type="checkbox" name="remember" class="filled-in" id="remember">
+            <label for="remember">Remember me</label>
+
+            <a class="right">Forgot Password</a>
+        </p>
+    </div>
+    <div class="row">
+        <div class="input-field center">
+            <button class="btn waves-effect waves-light login">Submit</button>
+        </div>
+    </div>
+</form>
 
 <style>
-    .outer-card {
-        width: 95%;
-        padding: 20px;
-        margin: 0 auto;
-    }
-
     .outer-card form {
         padding-top: 10px;
         padding-left: 10px;
         padding-right: 10px;
         padding-bottom: 40px;
+    }
+
+    p > a.right {
+        text-decoration: line-through;
+        color: grey !important;
     }
 
     /* small */
@@ -51,9 +48,6 @@
 
     /* desktop */
     @media (min-width: 1200px) {
-        .outer-card {
-            width: 400px;
-        }
     }
 </style>
 

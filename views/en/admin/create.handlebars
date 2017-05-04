@@ -1,0 +1,163 @@
+﻿<form id="newAdminForm">
+    <div class="row">
+        <div class="input-field col s12 m6">
+            <input id="admin-firstName" class="validate" type="text" required>
+            <label for="admin-firstName">First Name</label>
+        </div>
+        <div class="input-field col s12 m6">
+            <input id="admin-lastName" class="validate" type="text" required>
+            <label for="admin-lastName">last Name</label>
+        </div>
+        <div class="input-field col s12">
+            <input id="admin-email" class="validate" type="email" required>
+            <label for="admin-email">Email</label>
+        </div>
+        <div class="input-field col s12 m6">
+            <input id="admin-password" class="validate" type="password" required>
+            <label for="admin-password">Password</label>
+        </div>
+        <div class="input-field col s12 m6">
+            <input id="admin-confirmPassword" class="validate" type="password" required>
+            <label for="admin-confirmPassword">Confirm Password</label>
+        </div>
+    </div>
+    <div class="row">
+        <div class="input-field center">
+            <button id="create-admin-btn" class="btn waves-effect waves-light">Submit</button>
+        </div>
+    </div>
+</form>
+
+<!-- Modal Structure -->
+<div id="fixTheFollowingFields-Modal" class="modal">
+    <div class="modal-content">
+        <h5>Fix the following fields:</h5>
+        <ul class="browser-default"></ul>
+    </div>
+    <div class="modal-footer">
+        <button class="modal-action modal-close waves-effect waves-green btn-flat">Okay</button>
+    </div>
+</div>
+
+<div id="redirectToLogin-Modal" class="modal">
+    <div class="modal-content">
+        <h5>Created new Admin account!</h5>
+        <p class="flow-text">Redirecting to login</p>
+    </div>
+    <div class="modal-footer">
+        <button id="redirectToLogin-btn" class="modal-action modal-close waves-effect waves-green btn-flat">Okay</button>
+    </div>
+</div>
+
+<script type="text/javascript">
+    $(document).ready(function() {
+        $('#fixTheFollowingFields-Modal').modal();
+        $('#redirectToLogin-Modal').modal({dismissible: false});
+        $('#redirectToLogin-btn').click(RedirectToLogin);
+
+        if(AdminAlreadyExists()) {
+            alert('Cannot create Admin.');
+            return;
+        }
+
+        $('#create-admin-btn').click(function(e) {
+            e.preventDefault();
+            var adminObject = {
+                firstName: $('#admin-firstName').val(),
+                lastName: $('#admin-lastName').val(),
+                email: $('#admin-email').val(),
+                password: $('#admin-password').val()
+            };
+            
+            if(!InputsAreWrong() && PasswordsDoNotMatch()) {
+                $.ajax({
+                    method: 'POST',
+                    data: adminObject,
+                    url: '/en/admin/create'
+                }).done(function(data) {
+                    $('#redirectToLogin-Modal').modal('open');
+                }).fail(function(jqXHR, textStatus, errorThrown) {
+                    var statusCode = (jqXHR.status.toString()).split('');
+                    var statusText = jqXHR.statusText;
+                    if(statusCode[0] === 5 || statusText.match(/Internal Server Error/)) {
+                        // server-side error - contact pablo
+                        Materialize.toast('Server-side Error. Try again momentarily.', 5000, 'red');
+                    } else if(statusCode[0] === 4 || statusText.match(/Bad Request/)) {
+                        // client-side error - try again in a few moments
+                        DisableAndRedirect();
+                    }
+                });
+            }
+
+
+        });
+    });
+
+    function AdminAlreadyExists() {
+        console.log('checking ... ');
+        $.ajax({
+            method: 'POST',
+            data: '',
+            url: '/en/admin/exists'
+        }).done(function(data) {
+            //
+        }).fail(function(jqXHR, textStatus, errorThrown) {
+            var statusCode = (jqXHR.status.toString()).split('');
+            var statusText = jqXHR.statusText;
+            if(statusCode[0] === 5 || statusText.match(/Internal Server Error/)) {
+                // server-side error - contact pablo
+                Materialize.toast('Server-side Error. Try again momentarily.', 5000, 'red');
+            } else if(statusCode[0] === 4 || statusText.match(/Bad Request/)) {
+                // client-side error - try again in a few moments
+                DisableAndRedirect();
+            }
+        });
+        return false;
+    }
+
+    function InputsAreWrong() {
+        var array = $('#newAdminForm').find('input');
+        // clear the current list inside modal
+        $('#fixTheFollowingFields-Modal ul').empty();
+        $.each(array, function(i, val) {
+            if(!$(val).hasClass('valid')) {
+                // then append the fields that need fixing
+                $('#fixTheFollowingFields-Modal ul').append('<li>'+$(val).next()[0].innerHTML+'</li>');
+                // add class 'invalid' to wrong fields
+                $(val).addClass('invalid');
+                $('#fixTheFollowingFields-Modal').modal('open');
+                return true;
+            }
+        });
+
+        return false;
+    }
+
+    function PasswordsDoNotMatch() {
+        var pass1 = $('#admin-password').val(),
+            pass2 = $('#admin-confirmPassword').val();
+
+        console.log('Do the passwords match?');
+        if(pass1.match(pass2)) {
+            console.log('> The passwords do match! :)');
+            return true;
+        }
+
+        $('#fixTheFollowingFields-Modal ul').empty();
+        $('#fixTheFollowingFields-Modal ul').append('<li>Passwords do not match</li>');
+        $('#fixTheFollowingFields-Modal').modal('open');
+        console.log('No, the passwords do not match.');
+        return false;
+    }
+
+    function RedirectToLogin() {
+        window.location.href = '/en/admin/login';
+    }
+
+    function DisableAndRedirect() {
+        $('#create-admin-btn').addClass('disabled');
+        $('#newAdminForm input').attr('disabled', true);
+        alert('No new admins may be created.\nRedirecting.');
+        window.location.href = '/';
+    }
+</script>

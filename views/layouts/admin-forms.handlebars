@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {{>head}}
+    <title>Laura Martinez - Health Coach - Admin</title>
+</head>
+<body>
+    {{>blank-nav}}
+    <main>
+        <br>
+        <div id="logo-wrapper" class="center"><a href="/"><img src="/images/logo-600x600.jpg"></a></div>
+        <div class="form-wrapper">{{{body}}}</div>
+    </main>
+    {{>en/admin-footer}}
+    <style type="text/css">
+        main #logo-wrapper {
+            height: 175px;
+            width: 100%;
+        }
+
+        main #logo-wrapper img {
+            height: 175px;
+            max-width: 100%;
+        }
+
+        .form-wrapper {
+            width: 90%;
+            margin: 0 auto;
+        }
+
+        /* small */
+        @media (min-width: 768px) {
+            main #logo-wrapper,
+            main #logo-wrapper img {
+                height: 225px;
+            }
+
+            .form-wrapper {
+                width: 60%;
+            }
+        }
+
+        /* medium */
+        @media (min-width: 992px) {
+        }
+
+        /* desktop */
+        @media (min-width: 1200px) {
+            .outer-card {
+                width: 100%;
+            }
+
+            .form-wrapper {
+                width: 30%;
+            }
+        }
+    </style>
+</body>
+</html>

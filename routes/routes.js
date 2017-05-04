@@ -82,9 +82,10 @@ var Authenticate = function(req, res, next) {
 router.post('/login', obj_Admin.POST);
 router.post('/logout', obj_Admin.ENDSESSION);
 router.post('/en/admin/create', obj_Admin.CREATE);
+router.post('/en/admin/exists', obj_Admin.CHECK_IF_ADMIN_EXISTS);
 // TODO: login route (below) requires a special layout
-router.get('/en/admin/login', IsLoggedIn, function(req, res) {res.render('en/admin/login');});
-router.get('/en/admin/create', function(req, res) {res.render('en/admin/admin-create');});
+router.get('/en/admin/login', IsLoggedIn, function(req, res) {res.render('en/admin/login', {layout: 'admin-forms.handlebars'});});
+router.get('/en/admin/create', function(req, res) {res.render('en/admin/create', {layout: 'admin-forms.handlebars'});});
 router.get('/en/admin', function(req, res) {res.redirect('admin/login');});
 router.get('/en/admin/:dashboard', Authenticate, obj_Admin.GET);
 router.get('/en/admin/:dashboard/:operation', Authenticate, obj_Admin.GET);
