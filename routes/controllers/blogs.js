@@ -67,3 +67,36 @@ module.exports.DELETE = function(req, res) {
     // TODO: validation
     res.sendStatus(400);
 };
+
+module.exports.SEARCH = function(callback) {
+    db.client.collection('blogs').find({}, function(err, cursor) {
+        if(err) {
+            console.log(err);
+            return;
+        }
+        cursor.toArray(function(err, docs) {
+            if (err) {
+                console.log('Error converting cursor to Array', err);
+                return;
+            }
+            callback(docs);
+        });
+    });
+};
+
+module.exports.SEARCH_BY_ID = function(id, callback) {
+    var obj_ID = new ObjectID(id);
+    db.client.collection('blogs').find({'_id': obj_ID}, function(err, cursor) {
+        if(err) {
+            console.log('Error searching for ID', err);
+            return;
+        }
+        cursor.toArray(function(err, doc) {
+            if(err) {
+                console.log('Error converting cursor to Array', err);
+                return;
+            }
+            callback(doc);
+        });
+    });
+};

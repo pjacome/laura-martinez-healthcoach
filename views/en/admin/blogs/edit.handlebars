@@ -1,0 +1,747 @@
+﻿<br>
+<div class="container">
+    <div class="outer-card z-depth-2 blue">
+        <h5 class="white-text center">New Blog</h5>
+        <form class="white">
+            <div class="row">
+                <div class="input-field col s12">
+                    <input id="title" type="text" class="validate" value="{{data.title}}" required>
+                    <label for="title">Title</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="input-field col s12 m6">
+                    <input id="subheading" type="text" class="validate" value="{{data.subheading}}">
+                    <label for="subheading">Subheading (Optional)</label>
+                </div>
+                <div class="input-field col s12 m6">
+                    <input type="date" class="datepicker">
+                    <label for="date">Date</label>
+                </div>
+            </div>
+            <!-- summary textbox -->
+            <div class="row">
+                <div class="input-field col s12">
+                    <textarea id="summary" class="materialize-textarea" placeholder="This is what people will read when they view your blog list" required>{{data.summary}}</textarea>
+                    <label for="summary">Summary (optional)</label>
+                </div>
+            </div>
+
+            <!-- Blog Content Wrapper -->
+            <div class="blog-content-wrapper z-depth-5">
+
+                <div class="div-table main-image-table">
+                    <div class="div-row">
+                        <div class="div-col sm"></div>
+                        <div class="div-col lg">
+                            <h6 class="grey-text">Main Photo</h6>
+                            <div class="file-field input-field">
+                                <div class="btn">
+                                    <span>File</span>
+                                    <input id="main-image" type="file">
+                                </div>
+                                <div class="file-path-wrapper">
+                                    <input class="file-path validate" type="text">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="div-col sm"></div>
+                    </div>
+                </div>
+
+                <!-- This layout is a better idea for mobile (smaller screens) -->
+                {{!--<div class="row hide-on-med-and-up">
+                    <div class="center">
+                        <a class="btn-floating btn-med waves-effect waves-light"><i class="material-icons">arrow_drop_up</i></a>
+                        &nbsp;&nbsp;
+                        <a class="btn-floating btn-med waves-effect waves-light"><i class="material-icons">arrow_drop_down</i></a>
+                        &nbsp;&nbsp;
+                        <a class="btn-floating btn-med waves-effect waves-light red"><i class="material-icons">delete</i></a>
+                    </div>
+                    <div class="input-field col s12">
+                        <textarea id="paragraph-1" class="materialize-textarea"></textarea>
+                        <label for="paragraph-1">Paragraph 1</label>
+                    </div>
+                </div>--}}
+
+            </div>
+            <!-- Add Paragraph/Image/List buttons -->
+            {{!--<div class="row padding-left-10">
+                <a id="add-paragraph-btn" class="btn-floating btn-med waves-effect waves-light"><i class="material-icons">subject</i></a>
+                <a id="add-image-btn" class="btn-floating btn-med waves-effect waves-light"><i class="material-icons">photo</i></a>
+                <a id="add-ul-btn" class="btn-floating btn-med waves-effect waves-light"><i class="material-icons">format_list_bulleted</i></a>
+                <a id="add-ol-btn" class="btn-floating btn-med waves-effect waves-light"><i class="material-icons">format_list_numbered</i></a>
+                <a id="preview-blog-btn" class="btn-floating btn-med waves-effect waves-light blue"><i class="material-icons">help_outline</i></a>
+            </div>--}}
+
+            <div style="position: relative; height: 70px;">
+                <div class="fixed-action-btn horizontal click-to-toggle" style="position: absolute; display: inline-block; right: 24px;">
+                    <a class="btn-floating btn-large green">
+                        <i class="large material-icons">add</i>
+                    </a>
+                    <ul>
+                        <li><a id="help-btn" class="btn-floating waves-effect waves-light materialize-class-1 blue"><i class="material-icons">help_outline</i></a></li>
+                        <li><a id="add-paragraph-btn" class="btn-floating waves-effect waves-light materialize-class-1 yellow darken-2"><i class="material-icons">subject</i></a></li>
+                        <li><a id="add-ul-btn" class="btn-floating waves-effect waves-light materialize-class-1 blue"><i class="material-icons">format_list_bulleted</i></a></li>
+                        <li><a id="add-ol-btn" class="btn-floating waves-effect waves-light materialize-class-1 green"><i class="material-icons">format_list_numbered</i></a></li>
+                        <li><a id="add-image-btn" class="btn-floating waves-effect waves-light materialize-class-1 red"><i class="material-icons">photo</i></a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Form Buttons -->
+            <button id="submit-btn" class="btn waves-effect waves-light" type="button" name="action">
+                Submit
+                <i class="material-icons right">send</i>
+            </button>
+            <button id="preview-btn" class="btn waves-effect waves-light" type="button" name="action">
+                Preview
+                <i class="material-icons right">view_day</i>
+            </button>
+        </form>
+    </div>
+</div>
+
+<!-- Preview Div -->
+<div class="preview-div">
+    <i class="exit-icon small material-icons right">close</i>
+    <div class="white-bar z-depth-5"><span>Blog Preview</span></div>
+    <br>
+    <div class="preview-content container z-depth-5 flow-text">
+        <div class="center" style="position: relative;">
+            <h6><i id="preview-date" class="grey-text" style="position: absolute; bottom: 0; right: 0;"></i></h6>
+            <h3 id="preview-title" class="lmhc-main-title-font"></h3>
+            <h5 id="preview-subheading" class="center grey-text" style="width: 80%; margin: 0 auto;"></h5>
+        </div>
+        <br>
+        <div class="div-wrapping-main-img center"><img id="main-img-holder" src="" alt="main-image"></div>
+        <div class="preview-sections"></div>
+    </div>
+</div>
+
+<style>
+    .outer-card {
+        width: 300px;
+        padding: 20px;
+        margin: 0 auto;
+    }
+
+        .outer-card form {
+            padding-top: 10px;
+            padding-left: 10px;
+            padding-right: 10px;
+            padding-bottom: 40px;
+        }
+
+    .blog-content-wrapper {
+        padding-top: 30px;
+        margin-bottom: 20px;
+        overflow-y: auto;
+        border: 1px grey solid;
+    }
+
+    .main-image-table {
+        height: 75px !important;
+    }
+
+        .main-image-table .lg {
+            background-color: unset !important;
+            background-color: transparent !important; /* for Edge */
+        }
+
+        .main-image-table h6 {
+            margin: unset !important;
+            margin: initial !important; /* for Safari */
+            padding-top: unset !important;
+            padding-top: initial !important; /* for Safari */
+        }
+
+    .images {
+        height: 75px !important;
+    }
+
+        .images .lg {
+            padding-left: 4.5% !important;
+            padding-right: 4.5% !important;
+        }
+
+        .images h6 {
+            margin: unset !important;
+            margin: initial !important; /* for Safari */
+            padding-bottom: unset !important;
+            padding-bottom: initial !important; /* for Safari */
+        }
+
+    .div-table {
+        width: 100%;
+        height: 125px;
+        display: table;
+        overflow: hidden;
+        word-wrap: break-word;
+    }
+
+    .div-row {
+        display: table-row;
+        width: inherit;
+        height: inherit;
+    }
+
+    .div-col {
+        display: table-cell;
+    }
+
+        .div-col.lg {
+            width: 90%;
+            max-width: 90%;
+            height: inherit;
+            overflow-y: auto;
+            overflow-x: hidden;
+            word-wrap: break-word;
+            background-color: lightgray;
+        }
+
+            .div-col.lg > h6 {
+                width: inherit;
+                margin: 0 auto;
+                padding-top: 20px;
+                padding-bottom: 5px;
+            }
+
+        .div-col.sm {
+            width: 5%;
+            min-width: 5%;
+            height: inherit;
+            vertical-align: middle;
+        }
+
+    .formatting-buttons {
+        width: inherit;
+        margin: 0 auto;
+        padding-top: 10px;
+        padding-bottom: 20px;
+    }
+
+        .formatting-buttons > .btn {
+            padding-left: 10px;
+            padding-right: 10px;
+        }
+
+    .paragraphs, .lists {
+        border: 1px black solid;
+        margin: 0 auto;
+        min-height: 1.5rem; /* fixes styling issue on FF */
+        max-height: 300px;
+        max-width: inherit;
+        overflow-y: auto;
+        overflow-x: hidden;
+        word-wrap: break-word;
+    }
+
+    .preview-div {
+        position: fixed;
+        width: 1px;
+        height: 1px;
+        opacity: 0;
+        overflow-y: auto;
+        z-index: -10000;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        -webkit-transform: translate(-50%, -50%);
+        background-color: white;
+    }
+
+        .preview-div .exit-icon {
+            position: absolute;
+            right: 0;
+            top: 0;
+            cursor: pointer;
+            cursor: hand;
+            transform: translate(-50%, 50%);
+            -webkit-transform: translate(-50%, 50%);
+        }
+
+    .preview-content.container {
+        padding: 50px;
+    }
+
+        .preview-content.container .div-wrapping-main-img,
+        .preview-content.container .div-wrapping-sections-img {
+            width: 100%;
+            height: 250px;
+            overflow-y: hidden;
+            margin-top: 10px;
+            margin-bottom: 10px;
+            text-align: center;
+            line-height: 250px;
+        }
+
+        .preview-content.container .scale,
+        .preview-content.container #main-img-holder {
+            width: 70%;
+            min-height: 100%;
+            vertical-align: middle;
+        }
+
+        .preview-content.container > .list-wrapper {
+            margin: 0 auto;
+        }
+
+        .preview-content.container .preview-list {
+            width: 10%;
+            max-width: 55%;
+            margin: 0 auto;
+            display: block;
+            word-wrap: break-word;
+        }
+
+    .preview-expand {
+        width: 100%;
+        height: 100%;
+        opacity: 1;
+        z-index: 10000;
+        transition: width 1s, height 1s, opacity 1s;
+        -webkit-transition: width 1s, height 1s, opacity 1s, z-index 0s;
+    }
+
+    .preview-close {
+        width: 1px;
+        height: 1px;
+        opacity: 0;
+        transition: width 1s, height 1s, opacity 1s;
+        -webkit-transition: width 1s, height 1s, opacity 1s, z-index 0s;
+    }
+
+    .white-bar {
+        width: 100%;
+        height: 64px;
+        background-color: white;
+        text-align: center;
+        font-family: 'Times New Roman';
+        font-variant-caps: small-caps;
+        font-size: 2.25rem;
+        padding-top: 8px;
+    }
+
+    /* small */
+    @media (min-width: 768px) {
+        .outer-card {
+            width: 100%;
+        }
+
+        @media (orientation: portrait) {
+        }
+
+        @media (orientation: landscape) {
+            .preview-content.container .div-wrapping-main-img,
+            .preview-content.container .div-wrapping-sections-img {
+                height: 325px;
+            }
+        }
+    }
+
+    /* medium */
+    @media (min-width: 992px) {
+    }
+
+    /* desktop */
+    @media (min-width: 1200px) {
+        .preview-content.container .div-wrapping-main-img,
+        .preview-content.container .div-wrapping-sections-img {
+            height: 100%;
+        }
+    }
+
+    /* helpers */
+    .padding-left-10 {
+        padding-left: 10px;
+    }
+
+    .margin-bottom-10 {
+        margin-bottom: 10px;
+    }
+
+    .materialize-class-1 {
+        transform: scaleY(0.4) scaleX(0.4) translateY(0px) translateX(40px);
+        -webkit-transform: scaleY(0.4) scaleX(0.4) translateY(0px) translateX(40px);
+        opacity: 0;
+    }
+
+    .rotate90 {
+        transform: rotate(90deg);
+    }
+</style>
+
+<script type="text/javascript" src="/js/exif.js"></script>
+<script type="text/javascript">
+    var imageCounter = 1,
+        sectionCounter = 1,
+        paragraphCounter = 1,
+        bulletlistCounter = 1,
+        numberedlistCounter = 1;
+    var previewIsOpen = false;
+
+    $(document).ready(function() {
+        var $input = $('.datepicker').pickadate({
+            selectMonths: true, // Creates a dropdown to control month
+            selectYears: 15, // Creates a dropdown of 15 years to control year
+        });
+        var picker = $input.pickadate('picker');
+        picker.set('select', '{{data.date}}');
+
+        $('.formatting-buttons > .btn').click(function() {
+            $(this).toggleClass('darken-3');
+        });
+
+        $('#add-paragraph-btn').click(function() {
+            var section = '' +
+                '<div id="section-'+sectionCounter+'" class="div-table sections">' +
+                    '<div class="div-row">' +
+                        AddSection(1) +
+                    '</div>'+
+                    '<br>'+
+                '</div>';
+            $('.blog-content-wrapper').append(section);
+            $('#section-'+sectionCounter+' .paragraphs').focus();
+            ++sectionCounter;
+        });
+
+        $('#add-ul-btn').click(function() {
+            var section = '' +
+                '<div id="section-'+sectionCounter+'" class="div-table sections">'+
+                    '<div class="div-row">'+
+                        AddSection(2)+
+                    '</div>'+
+                    '<br>'+
+                '</div>';
+            $('.blog-content-wrapper').append(section);
+            $('#section-'+sectionCounter+' .list-js').focus();
+            ++sectionCounter;
+        });
+
+        $('#add-ol-btn').click(function() {
+            var section = '' +
+                '<div id="section-'+sectionCounter+'" class="div-table sections">'+
+                    '<div class="div-row">'+
+                        AddSection(3)+
+                    '</div>'+
+                    '<br>'+
+                '</div>';
+            $('.blog-content-wrapper').append(section);
+            $('#section-'+sectionCounter+' .list-js').focus();
+            ++sectionCounter;
+        });
+
+        $('#add-image-btn').click(function() {
+            var section = '' +
+                '<div id="section-'+sectionCounter+'" class="div-table sections images">'+
+                    '<div class="div-row">'+
+                        AddSection(4) +
+                    '</div>'+
+                    '<br>'+
+                '</div>';
+            $('.blog-content-wrapper').append(section);
+            ++sectionCounter;
+        });
+
+        $('#preview-btn').click(function() {
+            PreviewBlog($('.blog-content-wrapper'));
+        });
+
+        $('.exit-icon').click(function() {
+            CloseBlog();
+        });
+
+        $('#submit-btn').click(function() {
+            var data = {
+                title: $('#title').val(),
+                subheading: $('#subheading').val(),
+                date: $('.datepicker').val(),
+                summary: $('#summary').val(),
+                sections: [
+                    PostImage('main-image'), // index 0 is the main image
+                ]
+            };
+            GetSectionData(data);
+            console.log('data:', data);
+
+            $.ajax({
+                method: 'POST',
+                data: data,
+                url: '/admin/blogs'
+            }).done(function(data) {
+                var subject = window.location.pathname.split('/')[3];
+                Materialize.toast('Recipe Upload Succesful!', 4000, 'green');
+                Materialize.toast('Redirecting to ' + subject + ' dashboard in&nbsp;<span id="timer">3<span>', 3000, 'blue');
+            }).fail(function(jqXHR, textStatus, errorThrown) {
+                var statusCode = (jqXHR.status.toString()).split('');
+                var statusText = jqXHR.statusText;
+                if(statusCode[0] === 5 || statusText.match(/Internal Server Error/)) {
+                    // server-side error - contact pablo
+                    Materialize.toast('Server-side Error. Contact Pablo if problem persists.', 5000, 'red');
+                } else if(statusCode[0] === 4 || statusText.match(/Bad Request/)) {
+                    // client-side error - try again in a few moments
+                    Materialize.toast('Failed to Upload Recipe!<br>Try again in a few moments.', 5000, 'red');
+                }
+            });
+        });
+    });
+
+    /* Helpers */
+    function Append_li_Element(element) {
+        var innerHTML = $('#'+element.id).html();
+        if(innerHTML === '' || innerHTML === '<br>' || innerHTML === null || innerHTML === undefined) {
+            $('#'+element.id).append('<li></li>');
+        }
+    }
+
+    function RemoveSection(id) {
+        var number = id.split('-')[2];
+        var target = '#section-'+number;
+        $(target).remove();
+        RenumberSections();
+    }
+
+    function RenumberSections() {
+        var arrayOfSections = $('.blog-content-wrapper').children('.sections');
+        var length = arrayOfSections.length;
+        if(!arrayOfSections[0])
+            return;
+        if(arrayOfSections[0].id !== 'section-1') {
+            var number = arrayOfSections[0].id.split('-')[1];
+            var target = '#section-' + number;
+            var target2 = target + ' > .div-row > .div-col.sm > #bump-up-btn-'+number;
+            var target3 = target + ' > .div-row > .div-col.sm > #bump-down-btn-'+number;
+            var target4 = target + ' > .div-row > .div-col.sm > #remove-section-'+number;
+            $(target2).attr('id', 'bump-up-btn-'+1);
+            $(target3).attr('id', 'bump-down-btn-'+1);
+            $(target4).attr('id', 'remove-section-'+1);
+            $(target).attr('id', 'section-1');
+        }
+
+        for(var i = 0, j = i+1; i < length && j < length; ++i, ++j) {
+            var number = parseInt(arrayOfSections[i].id.split('-')[1]);
+            var nextNumber = parseInt(arrayOfSections[j].id.split('-')[1]);
+            var difference = nextNumber - number;
+            if(difference === 1)
+                continue;
+            else {
+                var iPlusOne = number + 1;
+                var target = '#section-'+nextNumber;
+                var target2 = target + ' > .div-row > .div-col.sm > #bump-up-btn-'+nextNumber;
+                var target3 = target + ' > .div-row > .div-col.sm > #bump-down-btn-'+nextNumber;
+                var target4 = target + ' > .div-row > .div-col.sm > #remove-section-'+nextNumber;
+                $(target2).attr('id', 'bump-up-btn-'+iPlusOne);
+                $(target3).attr('id', 'bump-down-btn-'+iPlusOne);
+                $(target4).attr('id', 'remove-section-'+iPlusOne);
+                $(target).attr('id', 'section-'+ iPlusOne);
+            }
+        }
+    }
+
+    function BumpSectionUp(id) {
+        if(id.split('-')[3] === '1') {
+            console.log('trying to swap the top with null');
+            return;
+        }
+        var number = id.split('-')[3];
+        var numberAbove = parseInt(number) - 1;
+        var target = '#section-'+number+' > .div-row > .div-col.lg';
+        var targetAbove = '#section-'+numberAbove+' > .div-row > .div-col.lg';
+        var temp = $(target).html();
+        if($('#section-'+number).hasClass('images') && $('#section-'+numberAbove).hasClass('images')) {
+            // do nothing
+        } else if($('#section-'+number).hasClass('images')) {
+            $('#section-'+number).removeClass('images');
+            $('#section-'+numberAbove).addClass('images');
+        } else if(!$('#section-'+number).hasClass('images') && $('#section-'+numberAbove).hasClass('images')) {
+            $('#section-'+number).addClass('images');
+            $('#section-'+numberAbove).removeClass('images');
+        }
+        $(target).html($(targetAbove).html());
+        $(targetAbove).html(temp);
+    }
+
+    function BumpSectionDown(id) {
+        var arrayOfSections = $('.blog-content-wrapper').children('.sections');
+        if(id.split('-')[3] === arrayOfSections.length.toString()) {
+            console.log('trying to swap the bottom with null');
+            return;
+        }
+        var number = id.split('-')[3];
+        var numberBelow = parseInt(number) + 1;
+        var target = '#section-'+number+' > .div-row > .div-col.lg';
+        var targetBelow = '#section-'+numberBelow+' > .div-row > .div-col.lg';
+        var temp = $(target).html();
+        if($('#section-'+number).hasClass('images') && $('#section-'+numberBelow).hasClass('images')) {
+            // do nothing
+        } else if($('#section-'+number).hasClass('images')) {
+            $('#section-'+number).removeClass('images');
+            $('#section-'+numberBelow).addClass('images');
+        } else if(!$('#section-'+number).hasClass('images') && $('#section-'+numberBelow).hasClass('images')) {
+            $('#section-'+number).addClass('images');
+            $('#section-'+numberBelow).removeClass('images');
+        }
+        $(target).html($(targetBelow).html());
+        $(targetBelow).html(temp);
+    }
+
+    function AddSection(option) {
+        var bumpButtons = '' +
+            '<div class="div-col sm center">' +
+                '<a id="bump-up-btn-'+sectionCounter+'"   class="bump-btn btn-floating btn-med waves-effect waves-light margin-bottom-10" onclick="BumpSectionUp(this.id)"><i class="material-icons">arrow_drop_up</i></a>' +
+                '<a id="bump-down-btn-'+sectionCounter+'" class="bump-btn btn-floating btn-med waves-effect waves-light" onclick="BumpSectionDown(this.id)"><i class="material-icons">arrow_drop_down</i></a>' +
+            '</div>';
+        var sectionType = GetMainSectionType(option);
+        var deleteButton = '' +
+            '<div class="div-col sm center">' +
+                '<a id="remove-section-'+sectionCounter+'" class="btn-floating btn-med waves-effect waves-light red remove-section" onclick="RemoveSection(this.id)"><i class="material-icons">delete</i></a>' +
+            '</div>';
+
+        return bumpButtons + sectionType + deleteButton;
+    }
+
+    /*
+        @option: selects what kind of section to add
+                 === 1. Add a paragraph section
+                 === 2. Add an unordered list section
+                 === 3. Add a numbered list section
+                 === 4. Add an file upload (image/photo) section
+    */
+    function GetMainSectionType(option) {
+        var formatButtons = '' +
+            '<div class="formatting-buttons">' +
+                '<button class="btn teal" type="button" onclick="document.execCommand(\'bold\', false, null)"><i class="tiny material-icons">format_bold</i></button>&nbsp;' +
+                '<button class="btn teal" type="button" onclick="document.execCommand(\'italic\', false, null)"><i class="tiny material-icons">format_italic</i></button>&nbsp;'+
+                '<button class="btn teal" type="button" onclick="document.execCommand(\'underline\', false, null)"><i class="tiny material-icons">format_underlined</i></button>' +
+            '</div>';
+        switch(option) {
+            case 1: // paragraph
+                sectionType = '' +
+                    '<div class="div-col lg">' +
+                        '<h6 class="grey-text">Paragraph</h6>' +
+                        '<div id="paragraph-'+paragraphCounter+'" class="paragraphs" contenteditable="true"></div>' +
+                        formatButtons +
+                    '</div>';
+                ++paragraphCounter;
+                break;
+            case 2: // bullet list
+                sectionType = '' +
+                    '<div class="div-col lg">' +
+                        '<h6 class="grey-text">Bullet List</h6>' +
+                        '<ul id="bullet-list-'+bulletlistCounter+'" class="browser-default lists list-js" contenteditable="true" onkeydown="Append_li_Element(this);">' +
+                            '<li></li>' +
+                        '</ul>' +
+                        formatButtons +
+                    '</div>';
+                ++bulletlistCounter;
+                break;
+            case 3: // numbered list
+                sectionType = '' +
+                    '<div class="div-col lg">' +
+                        '<h6 class="grey-text">Numbered List</h6>' +
+                        '<ol id="numbered-list-'+numberedlistCounter+'" class="browser-default lists list-js" contenteditable="true" onkeydown="Append_li_Element(this);">' +
+                            '<li></li>' +
+                        '</ol>' +
+                        formatButtons +
+                    '</div>';
+                ++numberedlistCounter;
+                break;
+            case 4: // photo
+                sectionType = '' +
+                    '<div class="div-col lg">' +
+                        '<h6 class="grey-text">Photo</h6>' +
+                        '<div class="file-field input-field">' +
+                            '<div class="btn">' +
+                                '<span>Photo</span>' +
+                                '<input id="upload-image-'+imageCounter+'" type="file">' +
+                            '</div>' +
+                            '<div class="file-path-wrapper">' +
+                                '<input class="file-path validate" type="text">' +
+                            '</div>' +
+                        '</div>' +
+                    '</div>';
+                ++imageCounter;
+                break;
+            default:
+                // error
+                sectionType = undefined;
+                break;
+        }
+        return sectionType;
+    }
+
+    function GetSectionData(data) {
+        $.each($('.blog-content-wrapper').children('.sections'), function(index, section) {
+            var num = index+1,
+                content = '',
+                elementWrapper = $('#' + section.id + ' *');
+            if(elementWrapper.hasClass('paragraphs')) {
+                content = $('#' + section.id + ' .paragraphs').html();
+                var p = '<p>' + content + '</p>';
+                data.sections.push(p);
+            } else if(elementWrapper.hasClass('list-js')) {
+                var listElement = $('#' + section.id + ' .list-js');
+                content = $('#' + section.id + ' .list-js').html();
+                if(listElement.is('ul')) {
+                    var ul = '<hr><div class="list-wrapper"><ul class="browser-default preview-list">' + content + '</ul></div><hr>';
+                    data.sections.push(ul);
+                } else {
+                    var ol = '<hr><div class="list-wrapper"><ol class="browser-default preview-list">' + content + '</ol></div><hr>';
+                    data.sections.push(ol);
+                }
+            } else if($('#' + section.id).hasClass('images')) {
+                var id = $('#' + section.id + ' .btn > input')[0].id;
+                var src = PostImage(id);
+                var i = '' +
+                    '<div class="div-wrapping-sections-img center">' +
+                        '<img class="scale" src="/images/uploads/'+src+'">' +
+                    '</div>';
+                data.sections.push(i);
+            }
+        });
+    }
+
+    /*
+        @selector: id of input[type=file]
+        returns (String): file name of file that is uploaded
+    */
+    function PostImage(selector) {
+        if(!selector)
+            return undefined;
+
+        var formData = new FormData();
+        var file = document.getElementById(selector).files[0];
+        if(!file)
+            return undefined;
+
+        if(!file.type.match('image.*'))
+            return undefined;
+
+        formData.append('photos[]', file, file.name);
+
+        $.ajax({
+            method: 'POST',
+            data: formData,
+            processData: false,
+            contentType: false,
+            url: '/admin/photos/upload'
+        }).done(function(data) {
+            Materialize.toast('Photo Upload Succesful!', 4000, 'green');
+        }).fail(function(jqXHR, textStatus, errorThrown) {
+            var statusCode = (jqXHR.status.toString()).split('');
+            var statusText = jqXHR.statusText;
+            if(statusCode[0] === 5 || statusText.match(/Internal Server Error/)) {
+                // server-side error - contact pablo
+                Materialize.toast('Server-side Error. Contact Pablo if problem persists.', 5000, 'red');
+            } else if(statusCode[0] === 4 || statusText.match(/Bad Request/)) {
+                // client-side error - try again in a few moments
+                Materialize.toast('Failed to Upload photo.<br>Try again in a few moments.', 5000, 'red');
+            }
+        });
+
+        return file.name;
+    }
+</script>
+
+<script type="text/javascript" src="/js/preview.js"></script>

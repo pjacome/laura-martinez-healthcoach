@@ -4,6 +4,9 @@
 var bcrypt = require('bcrypt');
 var db = require('../../db');
 var ObjectID = require('mongodb').ObjectID;
+var obj_Blogs   = require('./blogs');
+var obj_Events  = require('./events');
+var obj_Forms   = require('./forms');
 var obj_Recipes = require('./recipes');
 module.exports.obj_Admin = {};
 
@@ -136,12 +139,10 @@ function DisplayDashboard(req, res) {
             // make db call to populate 'options' with data to render on client
             switch (route) {
                 case 'blogs':
-                    // TODO
-                    // obj_Blogs.SEARCH(function(docs) {
-                    //     options.data = docs;
-                    //     res.render();
-                    //});
-                    res.render('en/admin/admin-dashboards', options);
+                     obj_Blogs.SEARCH(function(docs) {
+                        options.data = docs;
+                        res.render('en/admin/admin-dashboards', options);
+                    });
                     break;
                 case 'events':
                     res.render('en/admin/admin-dashboards', options);
@@ -171,43 +172,48 @@ function DisplayOperation(req, res) {
         console.log('>>> Incorrect URL: \'' + route + '\' <<<');
         res.sendStaus(400);
     } else if(route.match(/(add)/)) {
-        var options = {
-            layout: 'admin-main.handlebars'
-        };
+        // add
+        var options = { layout: 'admin-main.handlebars' };
         res.render('en/admin/'+dashboard+'/add', options);
     } else if(route.match(/(edit)/)) {
-        var options = {
-            layout: 'admin-main.handlebars'
-        };
+        // edit
+        var options = { layout: 'admin-main.handlebars' };
         switch(dashboard) {
             case 'blogs':
+                // render 'edit blog' here
+                console.log('I am supposed to be rendering something here');
+                var id = req.query.id;
+                obj_Blogs.SEARCH_BY_ID(id, function (doc) {
+                    console.log('>>> docs:', doc[0]);
+                    console.log('>>> Opening file for editing ...');
+                    options.data = doc[0];
+                    res.render('en/admin/blogs/edit', options);
+                });
                 break;
             case 'events':
+                // render 'edit event' here
+                console.log('I am supposed to be rendering something here');
                 break;
             case 'forms':
+                // render 'edit form' here
+                console.log('I am supposed to be rendering something here');
                 break;
             case 'recipes':
-                if(route.match(/add/)) {
-                    // add
-                    res.render('en/admin/recipes/add', options);
-                } else {
-                    // edit
-                    var id = req.query.id;
-                    console.log(id);
-                    obj_Recipes.SEARCH_BY_ID(id, function(doc) {
-                        console.log('>>> docs:', doc[0]);
-                        console.log('>>> Opening file for editing ...');
-                        options.data = doc[0];
-                        options.helpers = {
-                            select: function(theSelected, options) {
-                                return options.fn(this).replace(
-                                    new RegExp(' value=\"' + theSelected + '\"'), '$& selected="selected"'
-                                );
-                            }
-                        };
-                        res.render('en/admin/recipes/edit', options);
-                    });
-                }
+                var id = req.query.id;
+                console.log(id);
+                obj_Recipes.SEARCH_BY_ID(id, function(doc) {
+                    console.log('>>> docs:', doc[0]);
+                    console.log('>>> Opening file for editing ...');
+                    options.data = doc[0];
+                    options.helpers = {
+                        select: function(theSelected, options) {
+                            return options.fn(this).replace(
+                                new RegExp(' value=\"' + theSelected + '\"'), '$& selected="selected"'
+                            );
+                        }
+                    };
+                    res.render('en/admin/recipes/edit', options);
+                });
                 break;
             default:
                 break;
